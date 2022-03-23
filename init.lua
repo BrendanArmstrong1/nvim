@@ -6,6 +6,15 @@ vim.opt.softtabstop = 2
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.signcolumn = 'yes'
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.showbreak = "∵∴∵"
+vim.opt.undofile = true
+vim.opt.undolevels = 10000
+vim.opt.undodir = "undodir"
+vim.opt.shadafile = "viminfo"
+vim.opt.shada = "<800,'100,/50,:100,h"
+
 vim.opt.nu = true -- line numbers
 vim.opt.rnu = true -- relative numbering
 vim.opt.clipboard = 'unnamed' -- clipboard stuff
@@ -80,6 +89,7 @@ vim.g.sonokai_disable_italic_comment = 1
 vim.g.surround_no_mappings = 1
 vim.g.AutoPairsMapCh = 0
 vim.g.highlightedyank_highlight_duration = 400
+vim.g.background = dark
 vim.cmd [[
   syntax enable
   colorscheme sonokai
@@ -124,6 +134,7 @@ map("n", "[\\", "<CMD>bprevious<CR>", {silent= true})
 map("n", "]\\", "<CMD>bnext<CR>", {silent= true})
 map("n", "[_", "<CMD>previous<CR>", {silent= true})
 map("n", "]_", "<CMD>next<CR>", {silent= true})
+
 
 map("x", "z", "<Plug>VSurround")
 map("n", "yzz", "<Plug>Yssurround")
@@ -291,4 +302,3 @@ augroup dirvish_config
 
 augroup END
 ]])
-
