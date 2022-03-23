@@ -5,8 +5,11 @@ vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.splitright = true
 vim.opt.splitbelow = true
-vim.opt.nu = true
-vim.opt.rnu = true
+vim.opt.signcolumn = 'yes'
+vim.opt.nu = true -- line numbers
+vim.opt.rnu = true -- relative numbering
+vim.opt.clipboard = 'unnamed' -- clipboard stuff
+vim.opt.clipboard:append('unnamedplus')
 vim.g.mapleader = " "
 
 require('packer').startup(function()
@@ -14,35 +17,42 @@ require('packer').startup(function()
 
   use 'sainnhe/sonokai'
 
+  use 'junegunn/fzf.vim'
+  use 'stsewd/fzf-checkout.vim'
+
   use 'justinmk/vim-dirvish'
   use 'roginfarrer/vim-dirvish-dovish'
   use 'kristijanhusak/vim-dirvish-git'
-  use 'stsewd/fzf-checkout.vim'
+
   use 'machakann/vim-highlightedyank'
+
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
   use 'rhysd/git-messenger.vim'
   use 'airblade/vim-gitgutter'
   use 'junegunn/gv.vim'
+
   use 'haya14busa/vim-asterisk'
   use 'haya14busa/is.vim'
+
   use 'justinmk/vim-sneak'
+  use 'michaeljsmith/vim-indent-object'
+  use 'tpope/vim-commentary'
+  use {'andymass/vim-matchup', event = 'VimEnter'}
+  use 'AndrewRadev/splitjoin.vim'
+  use 'tpope/vim-surround'
+
   use 'dyng/ctrlsf.vim'
   use 'mg979/vim-visual-multi'
+
   use 'tpope/vim-endwise'
   use 'jiangmiao/auto-pairs'
   use 'tpope/vim-rsi'
 
-
   use 'sheerun/vim-polyglot'
   use 'tpope/vim-repeat'
-  use 'michaeljsmith/vim-indent-object'
-  use 'tpope/vim-commentary'
   use 'tpope/vim-unimpaired'
   use 'tpope/vim-scriptease'
-  use 'AndrewRadev/splitjoin.vim'
-  use 'tpope/vim-surround'
-  use {'andymass/vim-matchup', event = 'VimEnter'}
   use {
     'vimwiki/vimwiki',
     config = function()
@@ -61,13 +71,14 @@ require('packer').startup(function()
     end
   }
 
-  
+
 end)
 
 vim.g.sonokai_enable_italic = 1
 vim.g.sonokai_transparent_background = 1
 vim.g.sonokai_disable_italic_comment = 1
 vim.g.surround_no_mappings = 1
+vim.g.AutoPairsMapCh = 0
 vim.g.highlightedyank_highlight_duration = 400
 vim.cmd [[
   syntax enable
@@ -76,6 +87,7 @@ vim.cmd [[
 
 
 local map = vim.keymap.set
+local nore = {noremap = true}
 map("n", "<C-z>", "<NOP>", {})
 map("i", "<C-z>", "<NOP>", {})
 map("n", "<space>", "<NOP>", {})
@@ -93,7 +105,7 @@ map("n", "<c-w>k", "<c-w>K", {})
 
 map("n", "<c-w><c-q>", "ZQ", {})
 map("n", "<c-w><c-w>", "ZZ", {})
-map("n", "<c-w><c-w>", "<CMD>vs <cfile><CR>", {})
+map("n", "<c-w><c-f>", "<CMD>vs <cfile><CR>", {})
 map("i", "<c-w><c-q>", "<ESC>ZQ", {})
 map("i", "<c-w><c-w>", "<ESC>ZZ", {})
 
@@ -119,6 +131,24 @@ map("n", "yz",  "<Plug>Ysurround")
 map("n", "dz",  "<Plug>Dsurround")
 map("n", "cz",  "<Plug>Csurround")
 
+
+map('n', '<leader>gg', '<CMD>Git<CR>')
+map('n', '<leader>gl', '<CMD>Git log<CR>')
+map('n', '<leader>gb', '<CMD>Git blame<CR>')
+map('n', '<leader>gd', '<CMD>Gdiffsplit<CR>')
+map('n', '<leader>gD', '<CMD>Gdiffsplit!<CR>')
+map('n', '<leader>gP', '<CMD>Git push<CR>')
+map('n', '<leader>gv', '<CMD>GV<CR>')
+map('n', '<leader>gV', '<CMD>GV!<CR>')
+map('n', '<leader>go', '<CMD>diffget //3<CR>')
+map('n', '<leader>ga', '<CMD>diffget //2<CR>')
+map('n', '<leader>gs', '<Plug>(GitGutterStageHunk)')
+map('n', '<leader>gu', '<Plug>(GitGutterUndoHunk)')
+map('n', '<leader>gr', '<CMD>GBrowse<CR>')
+map('v', '<leader>gr',  ':GBrowse<CR>')
+map('v', '<leader>gR',  ':GBrowse!<CR>')
+map('n', 'gf', '<CMD>edit <cfile><CR>')
+map('n', 'gp', '`[v`]')
 
 --map("n", "<C-e>", repeat("<C-e>", 5), {noremap = true, expr = true})
 --map("n", "<C-y>", repeat("<C-y>", 5), {noremap = true, expr = true})
@@ -181,6 +211,49 @@ augroup standard_group
     endif
 augroup END
 ]])
+
+-- Git Messenger
+vim.cmd([[
+function! s:setup_git_messenger_popup() abort
+    " Your favorite configuration here
+
+    " For example, set go back/forward history to <C-o>/<C-i>
+    nmap <buffer><C-o> o
+    nmap <buffer><C-i> O
+endfunction
+autocmd FileType gitmessengerpopup call <SID>setup_git_messenger_popup()
+]])
+
+-- AutoPairs function
+vim.cmd([[
+function! s:tabout(dir) abort
+    let l:pair = '"[{(<>)}]' . "'"
+    let l:pos = col('.')-1
+    if a:dir
+        let l:lfor = getline('.')[l:pos:]
+        for i in l:lfor
+            let l:pos += 1
+            if stridx(l:pair, i) != -1
+                call cursor(0, l:pos+1)
+                return ""
+            endif
+        endfor
+    else
+        let l:lbac = getline('.')[:l:pos]
+        while l:pos > 0
+            let l:pos -= 1
+            if stridx(l:pair, l:lbac[l:pos]) != -1
+                call cursor(0, l:pos+1)
+                return ""
+            endif
+        endwhile
+    endif
+    return ""
+endfunction
+
+imap <silent> <C-l> <c-r>=<SID>tabout(1)<CR>
+imap <silent> <C-h> <C-r>=<SID>tabout(0)<CR>
+  ]])
 
 -- Dirvish
 vim.cmd([[
