@@ -1,6 +1,5 @@
 vim.opt.expandtab = true
 vim.opt.cursorline = false
-vim.opt.laststatus = 3
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.splitright = true
@@ -11,8 +10,7 @@ vim.opt.linebreak = true
 vim.opt.showbreak = "∵∴∵"
 vim.opt.undofile = true
 vim.opt.undolevels = 10000
-vim.opt.undodir = "undodir"
-vim.opt.shadafile = "viminfo"
+vim.opt.shadafile = "/home/brendan/.config/nvim/viminfo"
 vim.opt.shada = "<800,'100,/50,:100,h"
 vim.opt.nu = true -- line numbers
 vim.opt.rnu = true -- relative numbering
@@ -44,6 +42,7 @@ require('packer').startup(function()
   use 'rhysd/git-messenger.vim'
   use 'airblade/vim-gitgutter'
 
+  use 'williamboman/nvim-lsp-installer'
   use 'neovim/nvim-lspconfig'
   use 'nvim-lua/lsp_extensions.nvim'
   use 'hrsh7th/cmp-nvim-lsp'
@@ -67,9 +66,6 @@ require('packer').startup(function()
 
   use 'dyng/ctrlsf.vim'
   use 'mg979/vim-visual-multi'
-
-  use 'tpope/vim-endwise'
-  use 'jiangmiao/auto-pairs'
   use 'tpope/vim-rsi'
 
   use 'tpope/vim-repeat'
@@ -144,7 +140,6 @@ vim.g.sonokai_enable_italic = 1
 vim.g.sonokai_transparent_background = 1
 vim.g.sonokai_disable_italic_comment = 1
 vim.g.surround_no_mappings = 1
-vim.g.AutoPairsMapCh = 0
 vim.g.highlightedyank_highlight_duration = 400
 vim.g.background = 'dark'
 vim.cmd [[
@@ -302,7 +297,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'rust_analyzer', 'clangd'}
+local servers = { 'pyright', 'rust_analyzer', 'clangd', 'vimls'}
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup {
     on_attach = on_attach,
@@ -372,6 +367,7 @@ augroup standard_group
 augroup END
 syntax enable
 colorscheme sonokai
+set laststatus=3
 ]])
 
 -- CTRLSF
