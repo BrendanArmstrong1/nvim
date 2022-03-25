@@ -7,6 +7,8 @@ vim.opt.splitbelow = true
 vim.opt.signcolumn = 'yes'
 vim.opt.wrap = true
 vim.opt.linebreak = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 vim.opt.showbreak = "∵∴∵"
 vim.opt.undofile = true
 vim.opt.undolevels = 10000
@@ -18,7 +20,6 @@ vim.opt.clipboard = 'unnamed' -- clipboard stuff
 vim.opt.clipboard:append('unnamedplus')
 vim.g.mapleader = " "
 vim.g.completeopt = "menuone,noselect,noinsert,popup"
-
 
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
@@ -56,7 +57,6 @@ require('packer').startup(function()
   use 'nvim-treesitter/nvim-treesitter'
 
   use 'haya14busa/is.vim'
-
   use 'justinmk/vim-sneak'
   use 'michaeljsmith/vim-indent-object'
   use 'tpope/vim-commentary'
@@ -67,6 +67,7 @@ require('packer').startup(function()
   use 'dyng/ctrlsf.vim'
   use 'mg979/vim-visual-multi'
   use 'tpope/vim-rsi'
+  use 'windwp/nvim-autopairs'
 
   use 'tpope/vim-repeat'
   use 'tpope/vim-unimpaired'
@@ -131,6 +132,7 @@ require('lualine').setup {
   tabline = {},
   extensions = {}
 }
+require('nvim-autopairs').setup{}
 vim.g.UltiSnipsEditSplit="vertical"
 vim.g.UltiSnipsListSnippets = '<c-x><c-s>'
 vim.g.UltiSnipsRemoveSelectModeMappings = 0
@@ -143,6 +145,7 @@ vim.g.surround_no_mappings = 1
 vim.g.highlightedyank_highlight_duration = 400
 vim.g.background = 'dark'
 vim.cmd [[
+  let g:sneak#use_ic_scs = 1 " case sensitivity
   let g:UltiSnipsSnippetDirectories=[$HOME."/.config/nvim/UltiSnips"]
 ]]
 
@@ -193,8 +196,8 @@ map("n", "yz",  "<Plug>Ysurround")
 map("n", "dz",  "<Plug>Dsurround")
 map("n", "cz",  "<Plug>Csurround")
 
--- map("c", "<c-j>", "<c-n>")
--- map("c", "<c-k>", "<c-p>")
+map("c", "<c-j>", "<c-n>")
+map("c", "<c-k>", "<c-p>")
 map("c", "<c-l>", "<down>")
 map("c", "<c-h>", "<up>")
 
@@ -213,6 +216,9 @@ map('v', '<leader>gr',  ':GBrowse<CR>', nore)
 map('v', '<leader>gR',  ':GBrowse!<CR>', nore)
 map('n', 'gf', '<CMD>edit <cfile><CR>', nore)
 map('n', 'gp', '`[v`]', nore)
+
+map({'n','x','o'}, 's', '<Plug>Sneak_s', {})
+map({'n','x','o'}, 'S', '<Plug>Sneak_s', {})
 
 map({"n", "v"}, "<C-e>", "repeat('<C-e>', 5)", {noremap = true, expr = true})
 map({"n", "v"}, "<C-y>", "repeat('<C-y>', 5)", {noremap = true, expr = true})
@@ -297,16 +303,37 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'rust_analyzer', 'clangd', 'vimls'}
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local servers = { 'pyright', 'clangd', 'vimls'}
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup {
     on_attach = on_attach,
     flags = {
       -- This will be the default in neovim 0.7+
       debounce_text_changes = 150,
-    }
+    },
+    capabilities = capabilities,
   }
 end
+require('lspconfig').rust_analyzer.setup {
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = {
+        allFeatures = true,
+      },
+      completion = {
+	postfix = {
+	  enable = false,
+	},
+      },
+    },
+  },
+  capabilities = capabilities,
+}
 
 vim.cmd([[autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }
 set termguicolors
@@ -448,9 +475,6 @@ imap <silent> <C-h> <C-r>=<SID>tabout(0)<CR>
 vim.cmd([[
 let g:dirvish_relative_paths = 1
 let g:dirvish_mode = ':sort ,^.*[\/],'
-command! -nargs=? -complete=dir Explore Dirvish <args>
-command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
-command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 
 augroup dirvish_config
   autocmd!
@@ -514,6 +538,7 @@ nmap <leader>pt  <CMD>RgTODO<CR>
 " Files Prefix f
 nmap <leader>fL  :Locate ""<left>
 nmap <leader>fb  <CMD>Buffers<CR>
+nmap <leader>fB  <CMD>BD<CR>
 nmap <leader>ff  <CMD>ProjectFiles<CR>
 
 let $FZF_DEFAULT_COMMAND = "rg --files --no-ignore --hidden --follow --glob '!.git'"
@@ -587,13 +612,31 @@ endif
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
 " [[B]Commits] Customize the options used by 'git log':
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d
-            \ %s %C(cyan)%C(bold)%cr"'
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(cyan)%C(bold)%cr"'
 " [Tags] Command to generate tags file
 let g:fzf_tags_command = 'ctags -R'
 " [Commands] --expect expression for directly executing the command
 let g:fzf_commands_expect = 'enter'
 command! -bang ProjectFiles call fzf#vim#files('~/S', fzf#vim#with_preview(), <bang>0)
+
+"FZF Buffer Delete
+
+function! s:list_buffers()
+  redir => list
+  silent ls
+  redir END
+  return split(list, "\n")
+endfunction
+
+function! s:delete_buffers(lines)
+  execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+endfunction
+
+command! BD call fzf#run(fzf#wrap({
+  \ 'source': s:list_buffers(),
+  \ 'sink*': { lines -> s:delete_buffers(lines) },
+  \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+\ }))
 
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 
@@ -712,4 +755,7 @@ let g:fzf_tag_actions = {
       \   'confirm': v:true,
       \ },
       \}
+command! -nargs=? -complete=dir Explore Dirvish <args>
+command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
+command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 ]])
