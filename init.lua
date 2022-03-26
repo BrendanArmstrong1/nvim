@@ -111,12 +111,27 @@ require('lualine').setup {
     section_separators = { left = '', right = ''},
     disabled_filetypes = {},
     always_divide_middle = true,
-    globalstatus = false,
+    globalstatus = true,
   },
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
+    lualine_c = {
+        {
+          'filename',
+          file_status = true,      -- Displays file status (readonly status, modified status)
+          path = 2,                -- 0: Just the filename
+                                   -- 1: Relative path
+                                   -- 2: Absolute path
+          shorting_target = 40,    -- Shortens path to leave 40 spaces in the window
+                                   -- for other components. (terrible name, any suggestions?)
+          symbols = {
+            modified = '[+]',      -- Text to show when the file is modified.
+            readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
+            unnamed = '[No Name]', -- Text to show for unnamed buffers.
+          }
+        }
+    },
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
@@ -177,7 +192,9 @@ map("i", "<c-x><c-k>", "<c-x><c-k>", nore)
 map("x", "<", "<gv", {})
 map("x", ">", ">gv", {})
 
-map("t", "<c-z>", "<c-\\><c-n>", {})
+map("t", "<c-z>", "<c-\\><c-n>", nore)
+map("t", "<c-h>", "<c-\\><c-n><c-w>h", {})
+map("t", "<c-l>", "<c-\\><c-n><c-w>l", {})
 map("n", "<c-w><c-t>", "<CMD>vs term://zsh<CR>", {})
 
 
@@ -218,7 +235,7 @@ map('n', 'gf', '<CMD>edit <cfile><CR>', nore)
 map('n', 'gp', '`[v`]', nore)
 
 map({'n','x','o'}, 's', '<Plug>Sneak_s', {})
-map({'n','x','o'}, 'S', '<Plug>Sneak_s', {})
+map({'n','x','o'}, 'S', '<Plug>Sneak_S', {})
 
 map({"n", "v"}, "<C-e>", "repeat('<C-e>', 5)", {noremap = true, expr = true})
 map({"n", "v"}, "<C-y>", "repeat('<C-y>', 5)", {noremap = true, expr = true})
@@ -322,6 +339,13 @@ require('lspconfig').rust_analyzer.setup {
   },
   settings = {
     ["rust-analyzer"] = {
+      checkOnSave = {
+          allFeatures = true,
+          overrideCommand = {
+              'cargo', 'clippy', '--workspace', '--message-format=json',
+              '--all-targets', '--all-features'
+          }
+      },
       cargo = {
         allFeatures = true,
       },
