@@ -184,8 +184,8 @@ map("n", "<c-w>k", "<c-w>K", {})
 map("n", "<c-w><c-q>", "ZQ", {})
 map("n", "<c-w><c-w>", "ZZ", {})
 map("n", "<c-w><c-f>", "<CMD>vs <cfile><CR>", {})
-map("i", "<c-w><c-q>", "<ESC>ZQ", {})
-map("i", "<c-w><c-w>", "<ESC>ZZ", {})
+-- map("i", "<c-w><c-q>", "<ESC>ZQ", {})
+-- map("i", "<c-w><c-w>", "<ESC>ZZ", {})
 
 map("i", "<c-x><c-k>", "<c-x><c-k>", nore)
 
