@@ -10,6 +10,7 @@ vim.opt.linebreak = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.showbreak = "∵∴∵"
+vim.opt.swapfile = false
 vim.opt.undofile = true
 vim.opt.undolevels = 10000
 vim.opt.shadafile = "/home/brendan/.config/nvim/viminfo"
@@ -55,6 +56,10 @@ require('packer').startup(function()
   use  'SirVer/ultisnips'
 
   use 'nvim-treesitter/nvim-treesitter'
+
+  use 'superevilmegaco/Screenshot.nvim'
+  use 'JMcKiern/vim-shoot'
+  use 'twitvim/twitvim'
 
   use 'haya14busa/is.vim'
   use 'justinmk/vim-sneak'
@@ -162,6 +167,14 @@ vim.g.background = 'dark'
 vim.cmd [[
   let g:sneak#use_ic_scs = 1 " case sensitivity
   let g:UltiSnipsSnippetDirectories=[$HOME."/.config/nvim/UltiSnips"]
+  let g:shoot_save_path = '/home/brendan/Pictures/'
+  let twitvim_allow_multiline = 1
+  let twitvim_retweet_format = '%t (retweeted from %s)'
+  let twitvim_count = 75
+  let g:twitvim_force_ssl = 1
+  let g:twitvim_enable_python3 = 1
+  let g:twitvim_browser_cmd = 'google-chrome-stable'
+  let twitvim_token_file = "/home/brendan/.local/share/.twitvim.token"
 ]]
 
 local map = vim.keymap.set
@@ -233,6 +246,63 @@ map('v', '<leader>gr',  ':GBrowse<CR>', nore)
 map('v', '<leader>gR',  ':GBrowse!<CR>', nore)
 map('n', 'gf', '<CMD>edit <cfile><CR>', nore)
 map('n', 'gp', '`[v`]', nore)
+
+
+-- Prefix t (TwitVim mappings)
+-- <leader>tpp to send tweets in visual
+-- <leader>r starts a reply
+-- <leader><c-r> starts a reply-all
+-- <leader>q starts tweet with link to target
+-- <leader>R retweets target
+-- <leader>d starts dm
+-- <leader>g goto @user | Name(infobuffer) | #hash search | trending search
+-- <leader>e longer url (Broken)
+-- <leader>p user profile information
+-- <leader>@ retrieve tweet to which target is replying
+-- <leader>f add tweet to favorites
+-- <leader><c-f> remove tweet from favorites
+-- <C-i> / <C-o> jump forward/backward
+-- <leader><leader> refresh
+map('n', '<leader>tf', '<CMD>FriendsTwitter<CR><CR>', nore)
+map('n', '<leader>tt', '<CMD>TrendTwitter<CR><CR>', nore)
+map('n', '<leader>tP', ':<C-u>ProfileTwitter<Space>', nore)
+map('n', '<leader>ta', ':<C-U>FollowTwitter<Space>@<c-r><c-w><CR><CR>', nore)
+map('n', '<leader>tA', ':<C-U>UnfollowTwitter<Space>@<c-r><c-w><CR><CR>', nore)
+map('n', '<leader>te', ':<C-u>EnableRetweetsTwitter<Space>@<c-r><c-w><CR><CR>', nore)
+map('n', '<leader>tE', ':<C-u>DisableRetweetsTwitter<Space>@<c-r><c-w><CR><CR>', nore)
+map('n', '<leader>tu', '<CMD>UserTwitter<CR><CR>', nore)
+map('n', '<leader>tm', '<CMD>MentionsTwitter<CR><CR>', nore)
+map('n', '<leader>t@', '<CMD>RepliesTwitter<CR><CR>', nore)
+map('n', '<leader>td', '<CMD>DMTwitter<CR><CR>', nore)
+map('n', '<leader>tD', '<CMD>DMSentTwitter<CR><CR>', nore)
+map('n', '<leader>tr', '<CMD>RetweetedToMeTwitter<CR><CR>', nore)
+map('n', '<leader>tR', '<CMD>RetweetedByMeTwitter<CR><CR>', nore)
+map('n', '<leader>tv', '<CMD>FavTwitter<CR><CR>', nore)
+map('n', '<leader>tb', ':<C-U>BlockTwitter<Space>@<c-r><c-w>', nore)
+map('n', '<leader>tB', ':<C-U>UnblockTwitter<Space>@', nore)
+map('n', '<leader>tq', ':<C-U>MuteTwitter<Space>@<c-r><c-w>', nore)
+map('n', '<leader>tQ', ':<C-U>UnmuteTwitter<Space>@', nore)
+map('n', '<leader>tU', ':<C-u>UserTwitter<Space>@', nore)
+map('n', '<leader>tll', ':<C-u>ListTwitter<Space>', nore)
+map('n', '<leader>tla', ':<C-u>AddToListTwitter<Space>', nore)
+map('n', '<leader>tlA', ':<C-u>RemoveFromListTwitter<Space>', nore)
+map('n', '<leader>tlL', ':<C-u>ListInfoTwitter<Space>', nore)
+map('n', '<leader>tlf', ':<C-u>FollowListTwitter<Space>', nore)
+map('n', '<leader>tlF', ':<C-u>UnfollowListTwitter<Space>', nore)
+map('n', '<leader>tlm', ':<C-u>MembersOfListTwitter<Space>', nore)
+map('n', '<leader>tlM', ':<C-u>MemberListTwitter<Space>', nore)
+map('n', '<leader>tls', ':<C-u>SubsOfListTwitter<Space>', nore)
+map('n', '<leader>tlS', ':<C-u>SubsListTwitter<Space>', nore)
+map('n', '<leader>tlo', ':<C-u>OwnedListTwitter<Space>', nore)
+map('n', '<leader>tif', '<CMD>FollowingTwitter<CR><CR>', nore)
+map('n', '<leader>tiF', '<CMD>FollowersTwitter<CR><CR>', nore)
+map('n', '<leader>tio', '<CMD>OwnedListsTwitter<CR><CR>', nore)
+map('x', '<leader>tpp', '<Plug>TwitvimVisual', nore)
+map('n', '<leader>tpp', '<CMD>PosttoTwitter<CR><CR>', nore)
+map('n', '<leader>tpl', '<CMD>CPosttoTwitter<CR><CR>', nore)
+map('n', '<leader>tpb', '<CMD>BPosttoTwitter<CR><CR>', nore)
+map('n', '<leader>tpd', '<CMD>SendDMTwitter<CR><CR>', nore)
+
 
 map({'n','x','o'}, 's', '<Plug>Sneak_s', {})
 map({'n','x','o'}, 'S', '<Plug>Sneak_S', {})

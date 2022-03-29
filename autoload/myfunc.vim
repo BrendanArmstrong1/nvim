@@ -2,31 +2,48 @@ function! myfunc#ExecuteStuff(location) abort
     w
     let l:name=expand('%:p')
     let l:exte=expand('%:e')
+    let l:list = getbufinfo({'buflisted': 1, 'bufloaded': 1})
+    for item in l:list
+      if item.name =~ 'term://'
+        let l:id = item.variables.terminal_job_id
+        call chansend(l:id, "clear && compiler " . myfunc#Quoterepl(l:name) . "\n")
+        return
+      endif
+    endfor
     if !term_list()->len()
         if l:exte == 'tex' || l:exte == 'html' || l:exte == 'css'
-            ter ++hidden
+          call jobstart(["bash", "-c", "compiler " .. l:name])
+          return
         elseif l:exte == 'js'
             let l:path=expand('%:p:h')
             if glob(l:path . "/index.html") != ""
-                ter ++hidden
+              call jobstart(["bash", "-c", "compiler " .. l:name])
+              return
             else
                 if a:location == 'right'
-                    vert ter
+                    vs term://zsh
                 else
-                    ter
+                    sp term://zsh
                 endif
                 call feedkeys("\<C-w>h")
             endif
         else
             if a:location == 'right'
-                vert ter
+                vs term://zsh
             else
-                ter
+                sp term://zsh
             endif
             call feedkeys("\<C-w>h")
         endif
     endif
-    call term_sendkeys(term_list()[0], "clear && compiler " . myfunc#Quoterepl(l:name) . "\<CR>")
+    let l:list = getbufinfo({'buflisted': 1, 'bufloaded': 1})
+    for item in l:list
+      if item.name =~ 'term://'
+        let l:id = item.variables.terminal_job_id
+        call chansend(l:id, "clear && compiler " . myfunc#Quoterepl(l:name) . "\n")
+        return
+      endif
+    endfor
 endfunction
 
 function! myfunc#Quoterepl(name) abort
