@@ -247,6 +247,8 @@ map('v', '<leader>gR',  ':GBrowse!<CR>', nore)
 map('n', 'gf', '<CMD>edit <cfile><CR>', nore)
 map('n', 'gp', '`[v`]', nore)
 
+map('n', '<leader>en', '<CMD>call myfunc#ExecuteStuff("right")<CR>', {noremap = true, silent = true})
+map('n', '<leader>eh', '<CMD>call myfunc#ExecuteStuff("bot")<CR>', {noremap = true, silent = true})
 
 -- Prefix t (TwitVim mappings)
 -- <leader>tpp to send tweets in visual

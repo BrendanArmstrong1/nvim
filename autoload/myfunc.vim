@@ -10,30 +10,30 @@ function! myfunc#ExecuteStuff(location) abort
         return
       endif
     endfor
-    if !term_list()->len()
-        if l:exte == 'tex' || l:exte == 'html' || l:exte == 'css'
+    if l:exte == 'tex' || l:exte == 'html' || l:exte == 'css'
+      call jobstart(["bash", "-c", "compiler " .. l:name])
+      return
+    elseif l:exte == 'js'
+        let l:path=expand('%:p:h')
+        if glob(l:path . "/index.html") != ""
           call jobstart(["bash", "-c", "compiler " .. l:name])
           return
-        elseif l:exte == 'js'
-            let l:path=expand('%:p:h')
-            if glob(l:path . "/index.html") != ""
-              call jobstart(["bash", "-c", "compiler " .. l:name])
-              return
-            else
-                if a:location == 'right'
-                    vs term://zsh
-                else
-                    sp term://zsh
-                endif
-                call feedkeys("\<C-w>h")
-            endif
         else
             if a:location == 'right'
-                vs term://zsh
+              vs +te
+              call feedkeys("\<C-h>")
             else
-                sp term://zsh
+                sp +te
+                call feedkeys("\<C-k>")
             endif
-            call feedkeys("\<C-w>h")
+        endif
+    else
+        if a:location == 'right'
+            vs +te
+            call feedkeys("\<C-h>")
+        else
+            sp +te
+            call feedkeys("\<C-k>")
         endif
     endif
     let l:list = getbufinfo({'buflisted': 1, 'bufloaded': 1})
