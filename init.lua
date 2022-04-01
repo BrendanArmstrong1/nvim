@@ -249,6 +249,7 @@ map('n', 'gp', '`[v`]', nore)
 
 map('n', '<leader>en', '<CMD>call myfunc#ExecuteStuff("right")<CR>', {noremap = true, silent = true})
 map('n', '<leader>eh', '<CMD>call myfunc#ExecuteStuff("bot")<CR>', {noremap = true, silent = true})
+map('n', '<leader>qt', '<CMD>call myfunc#CloseTerm()<CR>', {noremap = true, silent = true})
 
 -- Prefix t (TwitVim mappings)
 -- <leader>tpp to send tweets in visual
@@ -725,7 +726,7 @@ function! s:list_buffers()
 endfunction
 
 function! s:delete_buffers(lines)
-  execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+  execute 'bwipeout!' join(map(a:lines, {_, line -> split(line)[0]}))
 endfunction
 
 command! BD call fzf#run(fzf#wrap({

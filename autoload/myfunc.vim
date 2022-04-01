@@ -46,6 +46,15 @@ function! myfunc#ExecuteStuff(location) abort
     endfor
 endfunction
 
+function! myfunc#CloseTerm() abort
+    let l:list = getbufinfo({'buflisted': 1, 'bufloaded': 1})
+    for item in l:list
+      if item.name =~ 'term://'
+        execute "bd! " .. item.name
+      endif
+    endfor
+endfunction
+
 function! myfunc#Quoterepl(name) abort
     let l:len=len(a:name)
     for i in range(l:len)
