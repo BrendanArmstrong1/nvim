@@ -1,0 +1,12 @@
+{
+  "catppuccin": { "branch": "main", "commit": "26e498db297607fe17a6206c5a28f0f4cb532954" },
+  "lazy.nvim": { "branch": "main", "commit": "a11a317a922d4a343e611bed6629fe5a11d2cb82" },
+  "nvim-autopairs": { "branch": "master", "commit": "03580d758231956d33c8dd91e2be195106a79fa4" },
+  "nvim-treesitter": { "branch": "master", "commit": "69388e84c34d40c3d5c7d2f310db13276f2179e1" },
+  "plenary.nvim": { "branch": "master", "commit": "4b7e52044bbb84242158d977a50c4cbcd85070c7" },
+  "telescope.nvim": { "branch": "0.1.x", "commit": "b79cd6c88b3d96b0f49cb7d240807cd59b610cd8" },
+  "tokyonight.nvim": { "branch": "main", "commit": "42cccfe663f36b91792a350164f0695b44a031d9" },
+  "vim-commentary": { "branch": "master", "commit": "34976d96b61d49cafce624cdd947317111c43bd8" },
+  "vim-fugitive": { "branch": "master", "commit": "96c1009fcf8ce60161cc938d149dd5a66d570756" },
+  "vim-surround": { "branch": "master", "commit": "aeb933272e72617f7c4d35e1f003be16836b948d" }
+}
