@@ -30,10 +30,8 @@ o.updatetime = 50
 
 
 
-o.autowrite = true -- enable auto write
 o.cmdheight = 1
-o.confirm = true -- confirm to save changes before exiting modified buffer
-o.cursorline = true -- Enable highlighting of the current line
+o.cursorline = false -- Enable highlighting of the current line
 o.formatoptions = "jcroqlnt" -- tcqj
 o.grepformat = "%f:%l:%c:%m"
 o.grepprg = "rg --vimgrep"
@@ -44,7 +42,6 @@ o.number = true -- Print line number
 o.pumblend = 10 -- Popup blend
 o.pumheight = 10 -- Maximum number of entries in a popup
 o.scrolloff = 4 -- Lines of context
-o.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 o.showmode = false -- dont show mode since we have a statusline
 o.sidescrolloff = 8 -- Columns of context
 o.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time

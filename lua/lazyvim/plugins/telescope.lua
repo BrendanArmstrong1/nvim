@@ -4,34 +4,26 @@ local M = {
   'nvim-telescope/telescope.nvim', branch = '0.1.x',
   dependencies = {
     {'nvim-lua/plenary.nvim'},
-    -- {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'},
+    {'nvim-telescope/telescope-fzf-native.nvim', build = 'make'},
   },
   cmd = { "Telescope", "Tel" }, -- lazy loads on these commands
   keys = {
     { "<leader>/", util.telescope("live_grep"), desc = "Find in Files (Grep)" },
-    { "<leader><space>", util.telescope("find_files"), desc = "Find Files" },
-    { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+    { "<leader>fg", util.telescope("git_files"), desc = "Find Git Files" },
     { "<leader>ff", util.telescope("find_files"), desc = "Find Files" },
+    { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+    { "<leader>fB", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-    { "<leader>gc", "<Cmd>Telescope git_commits<CR>", desc = "commits" },
-    { "<leader>gs", "<Cmd>Telescope git_status<CR>", desc = "status" },
-    { "<leader>ha", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
-    { "<leader>hc", "<cmd>Telescope commands<cr>", desc = "Commands" },
-    { "<leader>hf", "<cmd>Telescope filetypes<cr>", desc = "File Types" },
-    { "<leader>hh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
-    { "<leader>hk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
-    { "<leader>hm", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
-    { "<leader>ho", "<cmd>Telescope vim_options<cr>", desc = "Options" },
-    { "<leader>hs", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
-    { "<leader>ht", "<cmd>Telescope builtin<cr>", desc = "Telescope" },
-    { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
-    { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-    { "<leader>sg", util.telescope("live_grep"), desc = "Grep" },
-    { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
-    { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
-    { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+    { "<leader>fc", "<Cmd>Telescope git_commits<CR>", desc = "commits" },
+    { "<leader>fs", "<Cmd>Telescope git_status<CR>", desc = "status" },
+    { "<leader>fC", "<cmd>Telescope commands<cr>", desc = "Commands" },
+    { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
+    { "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+    { "<leader>fl", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
+    { "<leader>f;", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+    { "<leader>fm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
     {
-      "<leader>ss",
+      "<leader>fd",
       util.telescope("lsp_document_symbols", {
         symbols = {
           "Class",
@@ -134,17 +126,17 @@ function M.config()
       -- builtin picker
     },
     extensions = {
-      -- fzf = {
-      --   fuzzy = true,                    -- false will only do exact matching
-      --   override_generic_sorter = true,  -- override the generic sorter
-      --   override_file_sorter = true,     -- override the file sorter
-      --   case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-      --   -- the default case_mode is "smart_case"
-      -- },
+      fzf = {
+        fuzzy = true,                    -- false will only do exact matching
+        override_generic_sorter = true,  -- override the generic sorter
+        override_file_sorter = true,     -- override the file sorter
+        case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+        -- the default case_mode is "smart_case"
+      },
     },
   })
 
-  -- telescope.load_extension('fzf')
+  telescope.load_extension('fzf')
   local builtin = require('telescope.builtin')
   local map = vim.keymap.set
   map('n', '<leader>fg', builtin.git_files, {})
