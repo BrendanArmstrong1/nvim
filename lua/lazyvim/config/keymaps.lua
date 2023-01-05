@@ -1,6 +1,5 @@
 -- This file is automatically loaded by plugins.config
 
-
 -- disable troublesome keys
 vim.keymap.set("n", "<C-z>", "<nop>")
 vim.keymap.set("i", "<C-z>", "<nop>")
@@ -10,14 +9,13 @@ vim.keymap.set("i", "<C-l>", "<nop>")
 -- nice replace macro
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
-
 -- movement mappings
-vim.keymap.set({"n", "v"}, "<C-e>", "repeat('<C-e>', 5)", {noremap = true, expr = true})
-vim.keymap.set({"n", "v"}, "<C-y>", "repeat('<C-y>', 5)", {noremap = true, expr = true})
-vim.keymap.set({"n", "v"}, "<C-d>", "<C-d>zz", {noremap = true})
-vim.keymap.set({"n", "v"}, "<C-u>", "<C-u>zz", {noremap = true})
-vim.keymap.set({"n", "v"}, "n", "nzz", {noremap = true})
-vim.keymap.set({"n", "v"}, "N", "Nzz", {noremap = true})
+vim.keymap.set({ "n", "v" }, "<C-e>", "repeat('<C-e>', 5)", { noremap = true, expr = true })
+vim.keymap.set({ "n", "v" }, "<C-y>", "repeat('<C-y>', 5)", { noremap = true, expr = true })
+vim.keymap.set({ "n", "v" }, "<C-d>", "<C-d>zz", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-u>", "<C-u>zz", { noremap = true })
+vim.keymap.set({ "n", "v" }, "n", "nzz", { noremap = true })
+vim.keymap.set({ "n", "v" }, "N", "Nzz", { noremap = true })
 
 -- command line help
 vim.keymap.set("c", "<c-j>", "<nop>")
@@ -30,16 +28,14 @@ vim.keymap.set("i", "<C-z><C-g>", "<cmd>:w<cr><esc>")
 vim.keymap.set("n", "<C-z><C-g>", "<cmd>:w<cr><esc>")
 
 -- fast quit
-vim.keymap.set("n", "<c-z><c-q>", "<cmd>q!<CR>", {silent= true})
-vim.keymap.set("n", "<c-z><c-d>", "<cmd>wq!<CR>", {silent= true})
-
+vim.keymap.set("n", "<c-z><c-q>", "<cmd>q!<CR>", { silent = true })
+vim.keymap.set("n", "<c-z><c-d>", "<cmd>wq!<CR>", { silent = true })
 
 -- terminal commands
-vim.keymap.set("t", "<c-z>", "<c-\\><c-n>", {noremap = true})
+vim.keymap.set("t", "<c-z>", "<c-\\><c-n>", { noremap = true })
 vim.keymap.set("t", "<C-w><c-h>", "<c-\\><c-n><c-w>h", {})
 vim.keymap.set("t", "<C-w><c-l>", "<c-\\><c-n><c-w>l", {})
 vim.keymap.set("n", "<c-w><c-t>", "<CMD>vs term://zsh<CR>", {})
-
 
 -- Move to window using the <meta> movement keys
 vim.keymap.set("n", "<A-left>", "<C-w>h")
@@ -48,18 +44,18 @@ vim.keymap.set("n", "<A-up>", "<C-w>k")
 vim.keymap.set("n", "<A-right>", "<C-w>l")
 
 -- Resize window using <shift> arrow keys
-vim.keymap.set("n", "<S-Up>", "<cmd>resize +2<CR>",{silent = true})
-vim.keymap.set("n", "<S-Down>", "<cmd>resize -2<CR>",{silent = true})
-vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -2<CR>",{silent = true})
-vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +2<CR>",{silent = true})
+vim.keymap.set("n", "<S-Up>", "<cmd>resize +2<CR>", { silent = true })
+vim.keymap.set("n", "<S-Down>", "<cmd>resize -2<CR>", { silent = true })
+vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -2<CR>", { silent = true })
+vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +2<CR>", { silent = true })
 
 -- Move Lines
-vim.keymap.set("n", "<A-j>", ":m .+1<CR>==",{silent = true})
-vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv",{silent = true})
-vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi",{silent = true})
-vim.keymap.set("n", "<A-k>", ":m .-2<CR>==",{silent = true})
-vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv",{silent = true})
-vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi",{silent = true})
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { silent = true })
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { silent = true })
+vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { silent = true })
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { silent = true })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { silent = true })
+vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { silent = true })
 
 -- Switch buffers with <ctrl>
 vim.keymap.set("n", "<C-Left>", "<cmd>bprevious<cr>")
@@ -87,12 +83,9 @@ vim.keymap.set("i", ",", ",<c-g>u")
 vim.keymap.set("i", ".", ".<c-g>u")
 vim.keymap.set("i", ";", ";<c-g>u")
 
-
 -- better indenting
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
-
-
 
 -- highlights under cursor
 --vim.keymap.set("n", "<leader>hh", vim.show_pos, { desc = "Highlight Groups at cursor" })

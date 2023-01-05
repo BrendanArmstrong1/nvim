@@ -1,10 +1,17 @@
 return {
   -- Fugitive
   {
-    "tpope/vim-fugitive", 
+    "tpope/vim-fugitive",
     cmd = "G",
     keys = {
-      {"<leader>gg", "<cmd>G<cr>"}, 
+      { "<leader>gg", "<CMD>Git<CR>" },
+      { "<leader>gp", "<CMD>Git push<CR>" },
+      { "<leader>gl", "<CMD>Git log<CR>" },
+      { "<leader>gb", "<CMD>Git blame<CR>" },
+      { "<leader>gd", "<CMD>Gdiffsplit<CR>" },
+      { "<leader>gD", "<CMD>Gdiffsplit!<CR>" },
+      { "<leader>ga", "<CMD>diffget //3<CR>" },
+      { "<leader>gi", "<CMD>diffget //2<CR>" },
     },
   },
   -- git signs
@@ -12,7 +19,7 @@ return {
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
     config = function()
-      require('gitsigns').setup({
+      require("gitsigns").setup({
         signs = {
           add = { text = "▎" },
           change = { text = "▎" },
@@ -63,33 +70,45 @@ return {
           end
 
           -- Navigation
-          map('n', '[d', function()
-            if vim.wo.diff then return '[d' end
-            vim.schedule(function() gs.next_hunk() end)
-            return '<Ignore>'
-          end, {expr=true})
+          map("n", "[d", function()
+            if vim.wo.diff then
+              return "[d"
+            end
+            vim.schedule(function()
+              gs.next_hunk()
+            end)
+            return "<Ignore>"
+          end, { expr = true })
 
-          map('n', ']d', function()
-            if vim.wo.diff then return ']d' end
-            vim.schedule(function() gs.prev_hunk() end)
-            return '<Ignore>'
-          end, {expr=true})
+          map("n", "]d", function()
+            if vim.wo.diff then
+              return "]d"
+            end
+            vim.schedule(function()
+              gs.prev_hunk()
+            end)
+            return "<Ignore>"
+          end, { expr = true })
 
           -- Actions
-          map({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>')
-          map({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>')
-          map('n', '<leader>hS', gs.stage_buffer)
-          map('n', '<leader>hu', gs.undo_stage_hunk)
-          map('n', '<leader>hR', gs.reset_buffer)
-          map('n', '<leader>hp', gs.preview_hunk)
-          map('n', '<leader>hb', function() gs.blame_line{full=true} end)
-          map('n', '<leader>hl', gs.toggle_current_line_blame)
-          map('n', '<leader>hd', gs.diffthis)
-          map('n', '<leader>hD', function() gs.diffthis('~') end)
-          map('n', '<leader>td', gs.toggle_deleted)
+          map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
+          map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
+          map("n", "<leader>hS", gs.stage_buffer)
+          map("n", "<leader>hu", gs.undo_stage_hunk)
+          map("n", "<leader>hR", gs.reset_buffer)
+          map("n", "<leader>hp", gs.preview_hunk)
+          map("n", "<leader>hb", function()
+            gs.blame_line({ full = true })
+          end)
+          map("n", "<leader>hl", gs.toggle_current_line_blame)
+          map("n", "<leader>hd", gs.diffthis)
+          map("n", "<leader>hD", function()
+            gs.diffthis("~")
+          end)
+          map("n", "<leader>td", gs.toggle_deleted)
           -- Text object
-          map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
-        end
+          map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+        end,
       })
     end,
   },
