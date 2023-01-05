@@ -20,8 +20,8 @@ vim.keymap.set({"n", "v"}, "n", "nzz", {noremap = true})
 vim.keymap.set({"n", "v"}, "N", "Nzz", {noremap = true})
 
 -- command line help
-vim.keymap.set("c", "<c-j>", "<c-n>")
-vim.keymap.set("c", "<c-k>", "<c-p>")
+vim.keymap.set("c", "<c-j>", "<nop>")
+vim.keymap.set("c", "<c-k>", "<nop>")
 vim.keymap.set("c", "<c-l>", "<down>")
 vim.keymap.set("c", "<c-h>", "<up>")
 
