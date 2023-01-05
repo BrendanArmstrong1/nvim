@@ -2,7 +2,7 @@ local fn = vim.fn
 local o = vim.opt
 
 vim.g.completeopt = "popup,menuone,noselect,noinsert" -- A comma separated list of options for Insert mode completion
-o.mouse = 'a'
+o.mouse = "a"
 o.number = true -- show line numbers (or only the current one)
 o.relativenumber = true -- line numbers
 o.shiftwidth = 4
@@ -22,17 +22,13 @@ o.undofile = true -- enable/disable undo file creation
 o.shadafile = fn.stdpath("data") .. "/viminfo"
 o.shada = "<800,'100,/50,:100,h"
 o.wildignorecase = true -- When set case is ignored when completing file names and directories
-o.clipboard:append('unnamedplus') -- system clipboard
+o.clipboard:append("unnamedplus") -- system clipboard
 o.laststatus = 3 -- only one status bar
 o.updatetime = 50
 
-
-
-
-
 o.cmdheight = 1
 o.cursorline = false -- Enable highlighting of the current line
-o.formatoptions = "jcroqlnt" -- tcqj
+o.formatoptions = "jqlnt" -- tcqj
 o.grepformat = "%f:%l:%c:%m"
 o.grepprg = "rg --vimgrep"
 o.inccommand = "nosplit" -- preview incremental substitute
