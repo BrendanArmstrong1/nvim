@@ -1,5 +1,18 @@
 return {
 
+  -- auto rooting
+  {
+    "ahmedkhalf/project.nvim",
+    event = "BufReadPost",
+    config = function()
+      require("project_nvim").setup({
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      })
+    end,
+  },
+
   -- search/replace in multiple files
   {
     "windwp/nvim-spectre",

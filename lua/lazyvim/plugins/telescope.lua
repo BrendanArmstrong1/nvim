@@ -1,5 +1,3 @@
-local util = require("lazyvim.util")
-
 local M = {
   "nvim-telescope/telescope.nvim",
   commit = "0b1c41ad8052badca6e72eafa4bc5481152e483e",
@@ -10,12 +8,9 @@ local M = {
   },
   cmd = { "Telescope", "Tel" }, -- lazy loads on these commands
   keys = {
-    { "<leader>/", util.telescope("live_grep", { cwd = false }), desc = "RG (cwd)" },
-    { "<leader>?", util.telescope("live_grep"), desc = "RG (root)" },
-    { "<leader>fg", util.telescope("git_files", { cwd = false }), desc = "Find Git Files (cwd)" },
-    { "<leader>FG", util.telescope("git_files"), desc = "Find Git Files (root)" },
-    { "<leader>ff", util.telescope("find_files", { cwd = false }), desc = "Find Files (cwd)" },
-    { "<leader>FF", util.telescope("find_files"), desc = "Find Files (root)" },
+    { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "RG" },
+    { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Git Files" },
+    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
     { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
     { "<leader>FB", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
@@ -27,24 +22,6 @@ local M = {
     { "<leader>fl", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
     { "<leader>f;", "<cmd>Telescope command_history<cr>", desc = "Command History" },
     { "<leader>f'", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
-    {
-      "<leader>lb",
-      util.telescope("lsp_document_symbols", {
-        symbols = {
-          "Class",
-          "Function",
-          "Method",
-          "Constructor",
-          "Interface",
-          "Module",
-          "Struct",
-          "Trait",
-          "Field",
-          "Property",
-        },
-      }),
-      desc = "Goto Symbol",
-    },
   },
 }
 
@@ -144,6 +121,7 @@ function M.config()
     },
   })
 
+  require("telescope").load_extension("projects")
   telescope.load_extension("fzf")
 end
 

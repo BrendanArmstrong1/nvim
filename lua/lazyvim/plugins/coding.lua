@@ -147,18 +147,24 @@ return {
   -- surround
   {
     "echasnovski/mini.surround",
-    keys = { "gz", "dz", "fz", "FZ" },
+    keys = { "gz", "dz", "cz", "fz", "FZ", "vz" },
+    init = function()
+      -- Remap adding surrounding to Visual mode selection
+      vim.api.nvim_set_keymap("x", "Z", [[:<C-u>lua MiniSurround.add('visual')<CR>]], { noremap = true })
+      -- Make special mapping for "add surrounding for line"
+      vim.api.nvim_set_keymap("n", "gzz", "gz_", { noremap = false })
+    end,
     config = function()
       -- use gz mappings instead of s to prevent conflict with leap
       require("mini.surround").setup({
         mappings = {
           add = "gz", -- Add surrounding in Normal and Visual modes
           delete = "dz", -- Delete surrounding
-          find = "fz", -- Find surrounding (to the right)
-          find_left = "FZ", -- Find surrounding (to the left)
-          highlight = "hz", -- Highlight surrounding
+          find = "", -- Find surrounding (to the right)
+          find_left = "", -- Find surrounding (to the left)
+          highlight = "vz", -- Highlight surrounding
           replace = "cz", -- Replace surrounding
-          update_n_lines = "nz", -- Update `n_lines`
+          update_n_lines = "", -- Update `n_lines`
         },
       })
     end,
