@@ -26,13 +26,14 @@ vim.keymap.set("c", "<c-h>", "<up>")
 -- save in insert mode
 vim.keymap.set("i", "<C-z><C-g>", "<cmd>:w<cr><esc>")
 vim.keymap.set("n", "<C-z><C-g>", "<cmd>:w<cr><esc>")
-
 -- fast quit
 vim.keymap.set("n", "<c-z><c-q>", "<cmd>q!<CR>", { silent = true })
 vim.keymap.set("n", "<c-z><c-d>", "<cmd>wq!<CR>", { silent = true })
 
 -- terminal commands
 vim.keymap.set("t", "<c-z>", "<c-\\><c-n>", { noremap = true })
+vim.keymap.set("t", "<C-w><c-j>", "<c-\\><c-n><c-w>j", {})
+vim.keymap.set("t", "<C-w><c-k>", "<c-\\><c-n><c-w>k", {})
 vim.keymap.set("t", "<C-w><c-h>", "<c-\\><c-n><c-w>h", {})
 vim.keymap.set("t", "<C-w><c-l>", "<c-\\><c-n><c-w>l", {})
 vim.keymap.set("n", "<c-w><c-t>", "<CMD>vs term://zsh<CR>", {})
@@ -42,7 +43,6 @@ vim.keymap.set("n", "<A-left>", "<C-w>h")
 vim.keymap.set("n", "<A-down>", "<C-w>j")
 vim.keymap.set("n", "<A-up>", "<C-w>k")
 vim.keymap.set("n", "<A-right>", "<C-w>l")
-
 -- Resize window using <shift> arrow keys
 vim.keymap.set("n", "<S-Up>", "<cmd>resize +2<CR>", { silent = true })
 vim.keymap.set("n", "<S-Down>", "<cmd>resize -2<CR>", { silent = true })
@@ -58,8 +58,8 @@ vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { silent = true })
 vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { silent = true })
 
 -- Switch buffers with <ctrl>
-vim.keymap.set("n", "<C-Left>", "<cmd>bprevious<cr>")
-vim.keymap.set("n", "<C-Right>", "<cmd>bnext<cr>")
+vim.keymap.set("n", "<C-h>", "<cmd>bprevious<cr>")
+vim.keymap.set("n", "<C-s>", "<cmd>bnext<cr>")
 
 -- Easier pasting
 vim.keymap.set("n", "[p", ":pu!<cr>")
@@ -86,6 +86,3 @@ vim.keymap.set("i", ";", ";<c-g>u")
 -- better indenting
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
-
--- highlights under cursor
---vim.keymap.set("n", "<leader>hh", vim.show_pos, { desc = "Highlight Groups at cursor" })
