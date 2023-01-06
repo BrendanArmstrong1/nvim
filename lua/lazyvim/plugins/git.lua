@@ -3,15 +3,17 @@ return {
   {
     "tpope/vim-fugitive",
     cmd = "G",
+    init = function()
+      vim.api.nvim_set_keymap("n", "<leader>gp", "<CMD>Git push<CR>", {})
+      vim.api.nvim_set_keymap("n", "<leader>gd", "<CMD>Gdiffsplit<CR>", {})
+      vim.api.nvim_set_keymap("n", "<leader>gD", "<CMD>Gdiffsplit!<CR>", {})
+      vim.api.nvim_set_keymap("n", "<leader>ga", "<CMD>diffget //3<CR>", {})
+      vim.api.nvim_set_keymap("n", "<leader>gi", "<CMD>diffget //2<CR>", {})
+    end,
     keys = {
       { "<leader>gg", "<CMD>Git<CR>" },
-      { "<leader>gp", "<CMD>Git push<CR>" },
       { "<leader>gl", "<CMD>Git log<CR>" },
       { "<leader>gb", "<CMD>Git blame<CR>" },
-      { "<leader>gd", "<CMD>Gdiffsplit<CR>" },
-      { "<leader>gD", "<CMD>Gdiffsplit!<CR>" },
-      { "<leader>ga", "<CMD>diffget //3<CR>" },
-      { "<leader>gi", "<CMD>diffget //2<CR>" },
     },
   },
   -- git signs
