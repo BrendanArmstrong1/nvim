@@ -16,9 +16,20 @@ return {
   -- search/replace in multiple files
   {
     "windwp/nvim-spectre",
+    init = function()
+      vim.api.nvim_set_keymap("x", "<leader>rr", [[<esc>:lua require('spectre').open_visual()<CR>]], {})
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>rb",
+        [[<cmd>lua require('spectre').open_visual({select_word=true})<CR>]],
+        {}
+      )
+      vim.api.nvim_set_keymap("n", "<leader>rf", [["syiw:lua require('spectre').open_file_search()<CR>"sp]], {})
+    end,
     keys = {
+      { "<leader>r" },
       {
-        "<leader>sr",
+        "<leader>rr",
         function()
           require("spectre").open()
         end,
