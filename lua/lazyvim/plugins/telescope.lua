@@ -10,9 +10,12 @@ local M = {
   },
   cmd = { "Telescope", "Tel" }, -- lazy loads on these commands
   keys = {
-    { "<leader>/", util.telescope("live_grep"), desc = "Find in Files (Grep)" },
-    { "<leader>fg", util.telescope("git_files"), desc = "Find Git Files" },
-    { "<leader>ff", util.telescope("find_files"), desc = "Find Files" },
+    { "<leader>/", util.telescope("live_grep", { cwd = false }), desc = "RG (cwd)" },
+    { "<leader>?", util.telescope("live_grep"), desc = "RG (root)" },
+    { "<leader>fg", util.telescope("git_files", { cwd = false }), desc = "Find Git Files (cwd)" },
+    { "<leader>FG", util.telescope("git_files"), desc = "Find Git Files (root)" },
+    { "<leader>ff", util.telescope("find_files", { cwd = false }), desc = "Find Files (cwd)" },
+    { "<leader>FF", util.telescope("find_files"), desc = "Find Files (root)" },
     { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
     { "<leader>FB", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
@@ -25,7 +28,7 @@ local M = {
     { "<leader>f;", "<cmd>Telescope command_history<cr>", desc = "Command History" },
     { "<leader>f'", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
     {
-      "<leader>fd",
+      "<leader>lb",
       util.telescope("lsp_document_symbols", {
         symbols = {
           "Class",
@@ -48,6 +51,7 @@ local M = {
 function M.config()
   local telescope = require("telescope")
   local actions = require("telescope.actions")
+  local trouble = require("trouble.providers.telescope")
   telescope.setup({
     defaults = {
 
@@ -69,7 +73,8 @@ function M.config()
           ["<CR>"] = actions.select_default + actions.center,
           ["<C-x>"] = actions.select_horizontal + actions.center,
           ["<C-v>"] = actions.select_vertical + actions.center,
-          ["<C-t>"] = actions.select_tab + actions.center,
+
+          ["<C-t>"] = trouble.open_with_trouble,
 
           ["<C-u>"] = actions.preview_scrolling_up,
           ["<C-d>"] = actions.preview_scrolling_down,
@@ -90,7 +95,8 @@ function M.config()
           ["<CR>"] = actions.select_default + actions.center,
           ["<C-x>"] = actions.select_horizontal + actions.center,
           ["<C-v>"] = actions.select_vertical + actions.center,
-          ["<C-t>"] = actions.select_tab + actions.center,
+
+          ["<C-t>"] = trouble.open_with_trouble,
 
           ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
           ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,

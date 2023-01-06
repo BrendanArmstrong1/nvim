@@ -1,4 +1,3 @@
-
 -- This file is automatically loaded by plugins.config
 
 -- Check if we need to reload the file when it changed
