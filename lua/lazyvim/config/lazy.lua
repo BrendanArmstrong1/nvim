@@ -15,7 +15,7 @@ require("lazy").setup({
   spec = "lazyvim.plugins",
   defaults = { lazy = true, version = "*" },
   install = { colorscheme = { "tokyonight", "habamax" } },
-  checker = { enabled = true },
+  checker = { enabled = false },
   performance = {
     rtp = {
       disabled_plugins = {
