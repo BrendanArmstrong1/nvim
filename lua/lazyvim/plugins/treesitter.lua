@@ -1,14 +1,22 @@
 return {
   { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
   {
-    "nvim-treesitter/nvim-treesitter-context",
-    event = "BufReadPre",
-    config = true,
-  },
-  {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = "BufReadPost",
+    dependencies = {
+      {
+        "nvim-treesitter/nvim-treesitter-context",
+        event = "BufReadPre",
+        config = true,
+      },
+      {
+        "andymass/vim-matchup",
+        config = function()
+          vim.g.matchup_matchparen_offscreen = { method = "popup" }
+        end,
+      },
+    },
     config = function()
       require("nvim-treesitter.configs").setup({
         auto_install = false,
