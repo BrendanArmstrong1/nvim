@@ -15,7 +15,6 @@ local M = {
     { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
     { "<leader>FB", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-    { "<leader>fc", "<Cmd>Telescope git_commits<CR>", desc = "commits" },
     { "<leader>fh", "<Cmd>Telescope git_status<CR>", desc = "status" },
     { "<leader>FC", "<cmd>Telescope commands<cr>", desc = "Commands" },
     { "<leader>FH", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
@@ -23,6 +22,22 @@ local M = {
     { "<leader>fl", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
     { "<leader>f;", "<cmd>Telescope command_history<cr>", desc = "Command History" },
     { "<leader>f'", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
+    {
+      "<leader>fc",
+      function()
+        require("telescope.builtin").git_commits({
+          git_command = {
+            "git",
+            "log",
+            "--pretty=oneline",
+            -- "--abbrev-commit",
+            "--",
+            ".",
+          },
+        })
+      end,
+      desc = "commits",
+    },
     {
       "<leader>FS",
       function()
@@ -89,10 +104,10 @@ function M.config()
           ["<Up>"] = actions.move_selection_previous,
 
           ["<CR>"] = actions.select_default + actions.center,
-          ["<C-x>"] = actions.select_horizontal + actions.center,
+          ["<C-t>"] = actions.select_horizontal + actions.center,
           ["<C-v>"] = actions.select_vertical + actions.center,
 
-          ["<C-t>"] = trouble.open_with_trouble,
+          ["<C-x>"] = trouble.open_with_trouble,
 
           ["<C-u>"] = actions.preview_scrolling_up,
           ["<C-d>"] = actions.preview_scrolling_down,
@@ -111,10 +126,10 @@ function M.config()
         n = {
           ["<esc>"] = actions.close,
           ["<CR>"] = actions.select_default + actions.center,
-          ["<C-x>"] = actions.select_horizontal + actions.center,
+          ["<C-t>"] = actions.select_horizontal + actions.center,
           ["<C-v>"] = actions.select_vertical + actions.center,
 
-          ["<C-t>"] = trouble.open_with_trouble,
+          ["<C-x>"] = trouble.open_with_trouble,
 
           ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
           ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
