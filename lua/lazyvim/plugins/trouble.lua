@@ -37,7 +37,7 @@ function M.config()
         open_split = { "<c-x>" }, -- open buffer in new split
         open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
         open_tab = { "<c-t>" }, -- open buffer in new tab
-        jump_close = { "o" }, -- jump to the diagnostic and close the list
+        jump_close = { "o", "l" }, -- jump to the diagnostic and close the list
         toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
         toggle_preview = "p", -- toggle auto_preview
         hover = "K", -- opens a small popup with the full multiline message
