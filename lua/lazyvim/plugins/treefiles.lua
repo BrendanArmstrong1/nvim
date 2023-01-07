@@ -44,14 +44,15 @@ return {
     },
     config = function()
       require("nvim-tree").setup({
+        remove_keymaps = true,
         view = {
           adaptive_size = true,
           mappings = {
               -- stylua: ignore
             list = { -- BEGIN_DEFAULT_MAPPINGS
               { key = { "<CR>", "l", "<2-LeftMouse>" }, action = "edit" },
-              { key = "<C-e>",                          action = "edit_in_place" },
-              { key = "O",                              action = "edit_no_picker" },
+              { key = "e",                              action = "edit_in_place" },
+              { key = "<C-e>",                          action = "edit_no_picker" },
               { key = { ".", "<2-RightMouse>" },        action = "cd" },
               { key = "<C-v>",                          action = "vsplit" },
               { key = "<C-x>",                          action = "split" },
