@@ -12,6 +12,7 @@ return {
     end,
     keys = {
       { "<leader>gg", "<CMD>Git<CR>" },
+      { "<leader>gc", "<CMD>Git commit<CR>" },
       { "<leader>gl", "<CMD>Git log<CR>" },
       { "<leader>gb", "<CMD>Git blame<CR>" },
     },
