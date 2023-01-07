@@ -1,25 +1,10 @@
 return {
-
-  -- snippets
-  {
-    "L3MON4D3/LuaSnip",
-    dependencies = {
-      "rafamadriz/friendly-snippets",
-      config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
-      end,
-    },
-    config = {
-      history = true,
-      delete_check_events = "TextChanged",
-    },
-  },
-
   -- auto completion
   {
     "hrsh7th/nvim-cmp",
     event = {
-      "VeryLazy",
+      "InsertEnter",
+      "CmdlineEnter",
     },
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
@@ -28,6 +13,20 @@ return {
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-nvim-lua",
       "saadparwaiz1/cmp_luasnip",
+      -- snippets
+      {
+        "L3MON4D3/LuaSnip",
+        dependencies = {
+          "rafamadriz/friendly-snippets",
+          config = function()
+            require("luasnip.loaders.from_vscode").lazy_load()
+          end,
+        },
+        config = {
+          history = true,
+          delete_check_events = "TextChanged",
+        },
+      },
     },
     config = function()
       local check_backspace = function()
@@ -143,53 +142,6 @@ return {
           { name = "cmdline" },
         }),
       })
-    end,
-  },
-  -- surround
-  {
-    "echasnovski/mini.surround",
-    keys = { "gz", "dz", "cz", "vz", { "Z", ":<C-u>lua MiniSurround.add('visual')<CR>", mode = "x" } },
-    init = function()
-      -- Make special mapping for "add surrounding for line"
-      vim.api.nvim_set_keymap("n", "gzz", "gz_", { noremap = false })
-    end,
-    config = function()
-      -- use gz mappings instead of s to prevent conflict with leap
-      require("mini.surround").setup({
-        mappings = {
-          add = "gz", -- Add surrounding in Normal and Visual modes
-          delete = "dz", -- Delete surrounding
-          find = "", -- Find surrounding (to the right)
-          find_left = "", -- Find surrounding (to the left)
-          highlight = "vz", -- Highlight surrounding
-          replace = "cz", -- Replace surrounding
-          update_n_lines = "", -- Update `n_lines`
-        },
-      })
-    end,
-  },
-  -- comments
-  { "JoosepAlviste/nvim-ts-context-commentstring" },
-  {
-    "echasnovski/mini.comment",
-    event = "VeryLazy",
-    config = function()
-      require("mini.comment").setup({
-        hooks = {
-          pre = function()
-            require("ts_context_commentstring.internal").update_commentstring({})
-          end,
-        },
-      })
-    end,
-  },
-
-  -- auto pairs
-  {
-    "echasnovski/mini.pairs",
-    event = "VeryLazy",
-    config = function()
-      require("mini.pairs").setup({})
     end,
   },
 }
