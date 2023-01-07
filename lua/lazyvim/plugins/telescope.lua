@@ -24,6 +24,26 @@ local M = {
     { "<leader>f;", "<cmd>Telescope command_history<cr>", desc = "Command History" },
     { "<leader>f'", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
     {
+      "<leader>FS",
+      function()
+        require("telescope.builtin").lsp_workspace_symbols({
+          symbols = {
+            "Class",
+            "Function",
+            "Method",
+            "Constructor",
+            "Interface",
+            "Module",
+            "Struct",
+            "Trait",
+            "Field",
+            "Property",
+          },
+        })
+      end,
+      desc = "Goto Symbol",
+    },
+    {
       "<leader>fs",
       function()
         require("telescope.builtin").lsp_document_symbols({
