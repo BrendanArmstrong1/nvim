@@ -69,9 +69,11 @@ return {
         sources = {
           -- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
           formatting.black.with({ extra_args = { "--fast" } }),
+          -- shell
           formatting.shfmt,
           formatting.clang_format,
           formatting.cmake_format,
+          -- diagnostics.selene,
           formatting.stylua.with({ extra_args = { "--indent-type", "Spaces", "--indent-width", 2 } }),
           formatting.codespell.with({ filetype = { "markdown", "txt" } }),
           formatting.rustfmt.with({
@@ -104,10 +106,10 @@ return {
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     ensure_installed = {
       "stylua",
-      "shellcheck",
-      "shfmt",
+      -- "selene",
       "black",
       "flake8",
+      -- "rust_analyzer",
     },
     config = function(plugin)
       require("mason").setup()
