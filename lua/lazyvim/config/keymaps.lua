@@ -58,8 +58,10 @@ vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { silent = true })
 vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { silent = true })
 
 -- Switch buffers with <ctrl>
-vim.keymap.set("n", "<C-h>", "<cmd>bprevious<cr>")
-vim.keymap.set("n", "<C-s>", "<cmd>bnext<cr>")
+vim.keymap.set("n", "H", "<cmd>bprevious<cr>")
+vim.keymap.set("n", "L", "<cmd>bnext<cr>")
+vim.keymap.set("n", "<c-l>", "<cmd>cnext<cr>zz")
+vim.keymap.set("n", "<c-h>", "<cmd>cprevious<cr>zz")
 
 -- Easier pasting
 vim.keymap.set("n", "[p", ":pu!<cr>")

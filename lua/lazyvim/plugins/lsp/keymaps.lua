@@ -5,7 +5,7 @@ function M.on_attach(client, buffer)
 
   self:map("<leader>vd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
   self:map("<leader>li", "LspInfo", { desc = "Lsp Info" })
-  self:map("<leader>cd", "Telescope diagnostics", { desc = "Telescope Diagnostics" })
+  self:map("<leader>fd", "Telescope diagnostics", { desc = "Telescope Diagnostics" })
   self:map("gd", "Telescope lsp_definitions", { desc = "Goto Definition" })
   self:map("gr", "Telescope lsp_references", { desc = "References" })
   self:map("GD", "Telescope lsp_declarations", { desc = "Goto Declaration" })
@@ -15,7 +15,7 @@ function M.on_attach(client, buffer)
   self:map("[d", M.diagnostic_goto(true), { desc = "Next Diagnostic" })
   self:map("]d", M.diagnostic_goto(false), { desc = "Prev Diagnostic" })
 
-  self:map("<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help", mode = { "i", "n" }, has = "signatureHelp" })
+  self:map("<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help", mode = { "i" }, has = "signatureHelp" })
   self:map("<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", mode = { "n", "v" }, has = "codeAction" })
 
   local format = require("lazyvim.plugins.lsp.format").format
