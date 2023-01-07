@@ -10,18 +10,39 @@ local M = {
   keys = {
     { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "RG" },
     { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Git Files" },
+    { "<leader>fp", "<cmd>Telescope projects<cr>", desc = "Find Git Files" },
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
     { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
     { "<leader>FB", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
     { "<leader>fc", "<Cmd>Telescope git_commits<CR>", desc = "commits" },
-    { "<leader>fs", "<Cmd>Telescope git_status<CR>", desc = "status" },
+    { "<leader>FG", "<Cmd>Telescope git_status<CR>", desc = "status" },
     { "<leader>FC", "<cmd>Telescope commands<cr>", desc = "Commands" },
     { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
     { "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
     { "<leader>fl", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
     { "<leader>f;", "<cmd>Telescope command_history<cr>", desc = "Command History" },
     { "<leader>f'", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
+    {
+      "<leader>fs",
+      function()
+        require("telescope.builtin").lsp_document_symbols({
+          symbols = {
+            "Class",
+            "Function",
+            "Method",
+            "Constructor",
+            "Interface",
+            "Module",
+            "Struct",
+            "Trait",
+            "Field",
+            "Property",
+          },
+        })
+      end,
+      desc = "Goto Symbol",
+    },
   },
 }
 
