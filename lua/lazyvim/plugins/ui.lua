@@ -1,11 +1,4 @@
 return {
-  -- Doesn't work at the moment
-  -- {
-  --   "andymass/vim-matchup",
-  --   config = function()
-  --     vim.g.matchup_matchparen_offscreen = { method = "popup" }
-  --   end,
-  -- },
 
   -- floating winbar
   {
@@ -33,23 +26,9 @@ return {
     end,
   },
 
-  -- auto-resize windows
   {
-    "anuvyklack/windows.nvim",
-    event = "WinNew",
-    dependencies = {
-      { "anuvyklack/middleclass" },
-      { "anuvyklack/animation.nvim", enabled = false },
-    },
-    keys = { { "<leader>Z", "<cmd>WindowsMaximize<cr>", desc = "Zoom" } },
-    config = function()
-      vim.o.winwidth = 5
-      vim.o.winminwidth = 5
-      vim.o.equalalways = false
-      require("windows").setup({
-        animation = { enable = false, duration = 150 },
-      })
-    end,
+    "mbbill/undotree",
+    keys = { { "<leader>u", "<cmd>UndotreeToggle<cr>" } },
   },
 
   -- scrollbar
