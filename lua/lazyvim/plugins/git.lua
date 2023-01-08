@@ -17,6 +17,13 @@ return {
       { "<leader>gb", "<CMD>Git blame<CR>" },
     },
   },
+
+  -- Diffview
+  {
+    "sindrets/diffview.nvim",
+    cmd = "DiffviewOpen",
+  },
+
   -- git signs
   {
     "lewis6991/gitsigns.nvim",
