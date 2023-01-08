@@ -84,6 +84,7 @@ local M = {
 function M.config()
   local telescope = require("telescope")
   local actions = require("telescope.actions")
+  local action_state = require("telescope.actions.state")
   local trouble = require("trouble.providers.telescope")
   telescope.setup({
     defaults = {
@@ -158,6 +159,45 @@ function M.config()
       },
     },
     pickers = {
+      find_files = {
+        results_title = false,
+      },
+      git_files = {
+        results_title = false,
+      },
+      git_status = {
+        expand_dir = false,
+      },
+      git_commits = {
+        mappings = {
+          i = {
+            ["D"] = function()
+              -- Open in diffview
+              local selected_entry = action_state.get_selected_entry()
+              local value = selected_entry.value
+              -- close Telescope window properly prior to switching windows
+              vim.api.nvim_win_close(0, true)
+              vim.cmd("stopinsert")
+              vim.schedule(function()
+                vim.cmd(("DiffviewOpen %s^!"):format(value))
+              end)
+            end,
+          },
+          n = {
+            ["D"] = function()
+              -- Open in diffview
+              local selected_entry = action_state.get_selected_entry()
+              local value = selected_entry.value
+              -- close Telescope window properly prior to switching windows
+              vim.api.nvim_win_close(0, true)
+              vim.cmd("stopinsert")
+              vim.schedule(function()
+                vim.cmd(("DiffviewOpen %s^!"):format(value))
+              end)
+            end,
+          },
+        },
+      },
       -- Default configuration for builtin pickers goes here:
       -- picker_name = {
       --   picker_config_key = value,

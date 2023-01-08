@@ -29,7 +29,7 @@ vim.keymap.set("c", "<c-h>", "<up>")
 vim.keymap.set("i", "<C-z><C-g>", "<cmd>:w<cr><esc>")
 vim.keymap.set("n", "<C-z><C-g>", "<cmd>:w<cr><esc>")
 -- fast quit
-vim.keymap.set("n", "<c-z><c-q>", "<cmd>q!<CR>", { silent = true })
+vim.keymap.set("n", "<c-z><c-q>", "<cmd>tabclose<CR>", { silent = true })
 vim.keymap.set("n", "<c-z><c-d>", "<cmd>wq!<CR>", { silent = true })
 
 -- terminal commands

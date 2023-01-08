@@ -86,6 +86,7 @@ return {
             end
             vim.schedule(function()
               gs.next_hunk()
+              vim.cmd("norm! zz")
             end)
             return "<Ignore>"
           end, { expr = true })
@@ -96,6 +97,7 @@ return {
             end
             vim.schedule(function()
               gs.prev_hunk()
+              vim.cmd("norm! zz")
             end)
             return "<Ignore>"
           end, { expr = true })

@@ -15,16 +15,6 @@ local location = {
   padding = 0,
 }
 
--- -- cool function for progress
--- local progress = function()
---   local current_line = vim.fn.line(".")
---   local total_lines = vim.fn.line("$")
---   local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
---   local line_ratio = current_line / total_lines
---   local index = math.ceil(line_ratio * #chars)
---   return chars[index]
--- end
---
 function M.config()
   if vim.g.started_by_firenvim then
     return
@@ -40,7 +30,7 @@ function M.config()
       disabled_filetypes = { statusline = { "dashboard", "lazy" } },
     },
     sections = {
-      lualine_a = { { "mode", separator = { left = "" } } },
+      lualine_a = { { "mode", separator = { left = " " } } },
       lualine_b = { "branch" },
       lualine_c = {
         { "diagnostics", sources = { "nvim_diagnostic" } },
@@ -88,7 +78,7 @@ function M.config()
       },
       -- lualine_y = { progress },
       lualine_y = {},
-      lualine_z = { location, { clock, separator = { right = "" } } },
+      lualine_z = { location, { clock, separator = { right = " " } } },
     },
     inactive_sections = {
       lualine_a = {},
