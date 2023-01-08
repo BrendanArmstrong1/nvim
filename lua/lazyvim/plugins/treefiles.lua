@@ -40,7 +40,7 @@ return {
     cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeFindFile", "NvimTreeCallapse" },
     keys = { { "<leader>ft", "<cmd>NvimTreeToggle<cr>" } },
     dependencies = {
-      "nvim-tree/nvim-web-devicons", -- optional, for file icons
+      "kyazdani42/nvim-web-devicons", -- optional, for file icons
     },
     config = function()
       require("nvim-tree").setup({
