@@ -19,12 +19,12 @@ vim.keymap.set("i", "<C-l>", "<nop>")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- movement mappings
-vim.keymap.set({ "n", "v" }, "<C-e>", "repeat('<C-e>', 5)", { noremap = true, expr = true })
-vim.keymap.set({ "n", "v" }, "<C-y>", "repeat('<C-y>', 5)", { noremap = true, expr = true })
-vim.keymap.set({ "n", "v" }, "<C-d>", "<C-d>zz", { noremap = true })
-vim.keymap.set({ "n", "v" }, "<C-u>", "<C-u>zz", { noremap = true })
-vim.keymap.set({ "n", "v" }, "n", "nzz", { noremap = true })
-vim.keymap.set({ "n", "v" }, "N", "Nzz", { noremap = true })
+vim.keymap.set({ "n", "x" }, "<C-e>", "repeat('<C-e>', 5)", { noremap = true, expr = true })
+vim.keymap.set({ "n", "x" }, "<C-y>", "repeat('<C-y>', 5)", { noremap = true, expr = true })
+vim.keymap.set({ "n", "x" }, "<C-d>", "<C-d>zz", { noremap = true })
+vim.keymap.set({ "n", "x" }, "<C-u>", "<C-u>zz", { noremap = true })
+vim.keymap.set({ "n", "x" }, "n", "nzz", { noremap = true })
+vim.keymap.set({ "n", "x" }, "N", "Nzz", { noremap = true })
 
 -- command line help
 vim.keymap.set("c", "<c-j>", "<nop>")
@@ -33,11 +33,12 @@ vim.keymap.set("c", "<c-l>", "<down>")
 vim.keymap.set("c", "<c-h>", "<up>")
 
 -- save in insert mode
-vim.keymap.set("i", "<C-z><C-g>", "<cmd>:w<cr><esc>")
-vim.keymap.set("n", "<C-z><C-g>", "<cmd>:w<cr><esc>")
+vim.keymap.set("i", "<C-s>", "<cmd>w<cr><esc>")
+vim.keymap.set("n", "<C-s>", "<cmd>w<cr><esc>")
 -- fast quit
-vim.keymap.set("n", "<c-z><c-q>", "<cmd>tabclose<CR>", { silent = true })
-vim.keymap.set("n", "<c-z><c-d>", "<cmd>wq!<CR>", { silent = true })
+vim.keymap.set("n", "<c-w><c-t>", "<cmd>tabclose!<CR>", { silent = true })
+vim.keymap.set("n", "<c-w><c-d>", "<cmd>wq!<CR>", { silent = true })
+vim.keymap.set("n", "<c-w><c-q>", "<cmd>q!<CR>", { silent = true })
 
 -- terminal commands
 vim.keymap.set("t", "<c-z>", "<c-\\><c-n>", { noremap = true })
@@ -45,13 +46,14 @@ vim.keymap.set("t", "<C-w><c-j>", "<c-\\><c-n><c-w>j", {})
 vim.keymap.set("t", "<C-w><c-k>", "<c-\\><c-n><c-w>k", {})
 vim.keymap.set("t", "<C-w><c-h>", "<c-\\><c-n><c-w>h", {})
 vim.keymap.set("t", "<C-w><c-l>", "<c-\\><c-n><c-w>l", {})
-vim.keymap.set("n", "<c-w><c-t>", "<CMD>vs term://zsh<CR>", {})
+vim.keymap.set("n", "<c-w><c-m>", "<CMD>vs term://zsh<CR>", {})
 
 -- Move to window using the <meta> movement keys
 vim.keymap.set("n", "<A-left>", "<C-w>h")
 vim.keymap.set("n", "<A-down>", "<C-w>j")
 vim.keymap.set("n", "<A-up>", "<C-w>k")
 vim.keymap.set("n", "<A-right>", "<C-w>l")
+
 -- Resize window using <shift> arrow keys
 vim.keymap.set("n", "<S-Up>", "<cmd>resize +2<CR>", { silent = true })
 vim.keymap.set("n", "<S-Down>", "<cmd>resize -2<CR>", { silent = true })
@@ -98,3 +100,17 @@ vim.keymap.set("i", ";", ";<c-g>u")
 -- better indenting
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
+
+-- new file
+vim.keymap.set("n", "<leader>fn", "<cmd>vnew<cr>", { desc = "New File" })
+
+-- toggle options
+-- stylua: ignore start
+vim.keymap.set("n", "<leader>tf", require("lazyvim.plugins.lsp.format").toggle, { desc = "Format on Save" })
+vim.keymap.set("n", "<leader>ts", function() util.toggle("spell") end, { desc = "Spelling" })
+vim.keymap.set("n", "<leader>tw", function() util.toggle("wrap") end, { desc = "Word Wrap" })
+vim.keymap.set("n", "<leader>tn", function() util.toggle("relativenumber", true) util.toggle("number") end, { desc = "Line Numbers" })
+vim.keymap.set("n", "<leader>td", util.toggle_diagnostics, { desc = "Diagnostics" })
+local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
+vim.keymap.set("n", "<leader>tc", function() util.toggle("conceallevel", false, {0, conceallevel}) end, { desc = "Conceal" })
+-- stylua: ignore end
