@@ -12,7 +12,7 @@ local M = {
     { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Git Files" },
     { "<leader>fp", "<cmd>Telescope projects<cr>", desc = "Find Git Files" },
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-    { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+    { "<leader>fb", "<cmd>Telescope git_branches<cr>", desc = "Buffers" },
     { "<leader>FB", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
     { "<leader>fh", "<Cmd>Telescope git_status<CR>", desc = "status" },
