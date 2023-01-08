@@ -29,7 +29,7 @@ return
     { "JoosepAlviste/nvim-ts-context-commentstring" },
     {
       "echasnovski/mini.comment",
-      event = "VeryLazy",
+      keys = { "gc" },
       config = function()
         require("mini.comment").setup({
           hooks = {
@@ -44,7 +44,7 @@ return
     -- auto pairs
     {
       "echasnovski/mini.pairs",
-      event = "VeryLazy",
+      event = "InsertEnter",
       config = function()
         require("mini.pairs").setup({})
       end,
