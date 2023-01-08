@@ -198,6 +198,16 @@ function M.config()
           },
         },
       },
+      buffers = {
+        mappings = {
+          i = {
+            ["D"] = actions.delete_buffer,
+          },
+          n = {
+            ["D"] = actions.delete_buffer,
+          },
+        },
+      },
       -- Default configuration for builtin pickers goes here:
       -- picker_name = {
       --   picker_config_key = value,
