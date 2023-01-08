@@ -1,5 +1,12 @@
 -- This file is automatically loaded by plugins.config
 
+local util = require("lazyvim.util")
+
+-- better up/down
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
+-- Lazy access without triggering cmp lazy-load
 vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>")
 
 -- disable troublesome keys
