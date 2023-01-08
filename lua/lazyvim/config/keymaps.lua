@@ -65,9 +65,10 @@ vim.keymap.set("n", "L", "<cmd>bnext<cr>")
 vim.keymap.set("n", "<c-l>", "<cmd>cnext<cr>zz")
 vim.keymap.set("n", "<c-h>", "<cmd>cprevious<cr>zz")
 
--- Easier pasting
-vim.keymap.set("n", "[p", ":pu!<cr>")
-vim.keymap.set("n", "]p", ":pu<cr>")
+-- Easier pasting(with auto-indent)
+vim.keymap.set("n", "gp", "`[v`]")
+vim.keymap.set("n", "[p", ":pu!<cr>`[v`]=")
+vim.keymap.set("n", "]p", ":pu<cr>`[v`]=")
 
 -- Clear search with <esc>
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>")
