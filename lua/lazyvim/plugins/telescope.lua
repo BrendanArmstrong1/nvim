@@ -171,7 +171,7 @@ function M.config()
       git_commits = {
         mappings = {
           i = {
-            ["D"] = function()
+            ["dd"] = function()
               -- Open in diffview
               local selected_entry = action_state.get_selected_entry()
               local value = selected_entry.value
@@ -184,7 +184,7 @@ function M.config()
             end,
           },
           n = {
-            ["D"] = function()
+            ["dd"] = function()
               -- Open in diffview
               local selected_entry = action_state.get_selected_entry()
               local value = selected_entry.value
