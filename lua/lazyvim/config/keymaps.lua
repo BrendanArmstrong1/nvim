@@ -1,5 +1,7 @@
 -- This file is automatically loaded by plugins.config
 
+vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>")
+
 -- disable troublesome keys
 vim.keymap.set("n", "<C-z>", "<nop>")
 vim.keymap.set("i", "<C-z>", "<nop>")
