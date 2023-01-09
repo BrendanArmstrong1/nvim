@@ -5,7 +5,7 @@ return {
     event = "BufReadPre",
     dependencies = {
       "mason.nvim",
-      { "williamboman/mason-lspconfig.nvim", config = { automatic_installation = true } },
+      { "williamboman/mason-lspconfig.nvim", opts = { automatic_installation = true } },
       "hrsh7th/cmp-nvim-lsp",
     },
     servers = nil,
@@ -47,7 +47,7 @@ return {
         require("nvim-navic").attach(client, buffer)
       end)
     end,
-    config = { separator = " ", highlight = true, depth_limit = 5 },
+    opts = { separator = " ", highlight = true, depth_limit = 5 },
   },
 
   -- formatters
@@ -111,7 +111,7 @@ return {
       "flake8",
       -- "rust_analyzer",
     },
-    config = function(plugin)
+    opts = function(plugin)
       require("mason").setup()
       local mr = require("mason-registry")
       for _, tool in ipairs(plugin.ensure_installed) do

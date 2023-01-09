@@ -29,7 +29,7 @@ return
     { "JoosepAlviste/nvim-ts-context-commentstring" },
     {
       "echasnovski/mini.comment",
-      keys = { "gc" },
+      keys = { { "gc", mode = { "n", "x" } } },
       config = function()
         require("mini.comment").setup({
           hooks = {
