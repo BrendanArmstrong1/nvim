@@ -35,7 +35,7 @@ function M.config()
       lualine_c = {
         { "diagnostics", sources = { "nvim_diagnostic" } },
         { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-        { "filename", path = 1, symbols = { modified = "[+]", readonly = "[-]", unnamed = "[No Name]" } },
+        -- { "filename", path = 0, symbols = { modified = "[+]", readonly = "[-]", unnamed = "[No Name]" } },
         {
           function()
             local navic = require("nvim-navic")
