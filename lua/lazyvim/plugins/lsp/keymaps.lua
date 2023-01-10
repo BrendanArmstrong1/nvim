@@ -12,8 +12,8 @@ function M.on_attach(client, buffer)
   self:map("GI", "Telescope lsp_implementations", { desc = "Goto Implementation" })
   self:map("gt", "Telescope lsp_type_definitions", { desc = "Goto Type Definition" })
   self:map("K", vim.lsp.buf.hover, { desc = "Hover" })
-  self:map("[d", M.diagnostic_goto(true), { desc = "Next Diagnostic" })
-  self:map("]d", M.diagnostic_goto(false), { desc = "Prev Diagnostic" })
+  self:map("]d", M.diagnostic_goto(true), { desc = "Next Diagnostic" })
+  self:map("[d", M.diagnostic_goto(false), { desc = "Prev Diagnostic" })
 
   self:map("<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help", mode = { "i" }, has = "signatureHelp" })
   self:map("<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", mode = { "n", "v" }, has = "codeAction" })
@@ -61,8 +61,9 @@ end
 function M.diagnostic_goto(next, severity)
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
   severity = severity and vim.diagnostic.severity[severity] or nil
+
   return function()
-    go({ severity = severity })
+    go({ severity = severity, float = false })
   end
 end
 
