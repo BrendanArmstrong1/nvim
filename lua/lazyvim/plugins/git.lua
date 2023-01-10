@@ -103,23 +103,21 @@ return {
           end, { expr = true })
 
           -- Actions
+          -- stylua: ignore start
           map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
           map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
           map("n", "<leader>HS", gs.stage_buffer)
           map("n", "<leader>hu", gs.undo_stage_hunk)
           map("n", "<leader>HR", gs.reset_buffer)
           map("n", "<leader>hp", gs.preview_hunk)
-          map("n", "<leader>hb", function()
-            gs.blame_line({ full = true })
-          end)
+          map("n", "<leader>hb", function() gs.blame_line({ full = true }) end)
           map("n", "<leader>hl", gs.toggle_current_line_blame)
           map("n", "<leader>hd", gs.diffthis)
-          map("n", "<leader>HD", function()
-            gs.diffthis("~")
-          end)
+          map("n", "<leader>HD", function() gs.diffthis("~") end)
           map("n", "<leader>ht", gs.toggle_deleted)
           -- Text object
           map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+          -- stylua: ignore end
         end,
       })
     end,
