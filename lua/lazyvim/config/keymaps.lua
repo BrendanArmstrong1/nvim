@@ -101,9 +101,9 @@ vim.keymap.set("i", ";", ";<c-g>u")
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
-vim.keymap.set("n", "<leader>ht", '<CMD>call myfunc#ExecuteStuff("right")<CR>', { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>hw", '<CMD>call myfunc#ExecuteStuff("bot")<CR>', { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>dt", "<CMD>call myfunc#CloseTerm()<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>cg", '<CMD>call myfunc#ExecuteStuff("right")<CR>', { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ch", '<CMD>call myfunc#ExecuteStuff("bot")<CR>', { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>cd", "<CMD>call myfunc#CloseTerm()<CR>", { noremap = true, silent = true })
 
 -- new file
 vim.keymap.set("n", "<leader>fn", "<cmd>vnew<cr>", { desc = "New File" })

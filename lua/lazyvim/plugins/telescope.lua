@@ -9,17 +9,17 @@ local M = {
   cmd = { "Telescope", "Tel" }, -- lazy loads on these commands
   keys = {
     { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "RG" },
-    { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Git Files" },
-    { "<leader>fp", "<cmd>Telescope projects<cr>", desc = "Find Git Files" },
+    { "<leader>FF", "<cmd>Telescope git_files<cr>", desc = "Find Git Files" },
+    { "<leader>FH", "<Cmd>Telescope git_status<CR>", desc = "status" },
+    { "<leader>FB", "<cmd>Telescope git_branches<cr>", desc = "Buffers" },
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-    { "<leader>fb", "<cmd>Telescope git_branches<cr>", desc = "Buffers" },
-    { "<leader>FB", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
+    { "<leader>fp", "<cmd>Telescope projects<cr>", desc = "Find Git Files" },
+    { "<leader>fb", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-    { "<leader>fh", "<Cmd>Telescope git_status<CR>", desc = "status" },
-    { "<leader>FC", "<cmd>Telescope commands<cr>", desc = "Commands" },
-    { "<leader>FH", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
+    { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
     { "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
     { "<leader>fl", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
+    { "<leader>F:", "<cmd>Telescope commands<cr>", desc = "Commands" },
     { "<leader>f;", "<cmd>Telescope command_history<cr>", desc = "Command History" },
     { "<leader>f'", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
     {
@@ -39,7 +39,7 @@ local M = {
       desc = "commits",
     },
     {
-      "<leader>FS",
+      "<leader>FI",
       function()
         require("telescope.builtin").lsp_workspace_symbols({
           symbols = {
@@ -59,7 +59,7 @@ local M = {
       desc = "Goto Symbol",
     },
     {
-      "<leader>fs",
+      "<leader>fi",
       function()
         require("telescope.builtin").lsp_document_symbols({
           symbols = {
