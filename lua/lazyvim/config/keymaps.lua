@@ -32,9 +32,9 @@ vim.keymap.set("c", "<c-k>", "<nop>")
 vim.keymap.set("c", "<c-l>", "<down>")
 vim.keymap.set("c", "<c-h>", "<up>")
 
--- save in insert mode
-vim.keymap.set("i", "<C-s>", "<cmd>w<cr><esc>")
+-- save
 vim.keymap.set("n", "<C-s>", "<cmd>w<cr><esc>")
+
 -- fast quit
 vim.keymap.set("n", "<c-w><c-t>", "<cmd>tabclose!<CR>", { silent = true })
 vim.keymap.set("n", "<c-w><c-d>", "<cmd>wq!<CR>", { silent = true })

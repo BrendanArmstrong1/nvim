@@ -1,5 +1,6 @@
 return {
   { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
+
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -51,14 +52,20 @@ return {
           end,
           additional_vim_regex_highlighting = false,
         },
-        indent = { enable = true },
-        context_commentstring = { enable = true, enable_autocmd = false },
+        indent = {
+          enable = true,
+          disable = { "python" },
+        },
+        context_commentstring = {
+          enable = true,
+          enable_autocmd = false,
+        },
         incremental_selection = {
           enable = true,
           keymaps = {
             init_selection = "S",
             node_incremental = "S",
-            scope_incremental = "<C-s>",
+            scope_incremental = "GS",
             node_decremental = "H",
           },
         },
@@ -66,6 +73,9 @@ return {
           enable = true,
           use_virtual_text = true,
           lint_events = { "BufWrite", "CursorHold" },
+        },
+        endwise = {
+          enable = true,
         },
         textobjects = {
           select = {

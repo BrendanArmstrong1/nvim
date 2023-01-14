@@ -47,6 +47,16 @@ return
       event = "InsertEnter",
       config = function()
         require("nvim-autopairs").setup({
+          fast_wrap = {
+            map = "<c-s>",
+            chars = { "{", "[", "(", '"', "'", "`" },
+            pattern = [=[[%'%"%)%>%]%)%}%,]]=],
+            end_key = "$",
+            keys = "aoeuidhtnsfgcrl",
+            check_comma = true,
+            highlight = "Search",
+            highlight_grey = "Comment",
+          },
           disable_filetype = { "TelescopePrompt" },
           disable_in_macro = false, -- disable when recording or executing a macro
           disable_in_visualblock = false, -- disable when insert after visual block mode
@@ -58,7 +68,7 @@ return
           enable_bracket_in_quote = true, --
           enable_abbr = false, -- trigger abbreviation
           break_undo = true, -- switch for basic rule break undo sequence
-          check_ts = false,
+          check_ts = true,
           map_cr = true,
           map_bs = true, -- map the <BS> key
           map_c_h = false, -- Map the <C-h> key to delete a pair
@@ -110,5 +120,24 @@ return
           -- langs = langs,
         })
       end,
+    },
+
+    -- vim-rsi
+    {
+      "tpope/vim-rsi",
+      event = "InsertEnter",
+    },
+
+    {
+      "tpope/vim-unimpaired",
+      event = "InsertEnter",
+      keys = {
+        { "[<Space>" },
+        { "]<Space>" },
+      },
+    },
+    {
+      "tpope/vim-repeat",
+      event = "VeryLazy",
     },
   }
