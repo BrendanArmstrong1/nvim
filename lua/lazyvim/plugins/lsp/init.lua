@@ -68,7 +68,7 @@ return {
         log_level = "info",
         sources = {
           -- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
-          formatting.black.with({ extra_args = { "--fast" } }),
+          formatting.black.with({ extra_args = { "--fast", "-l 79" } }),
           -- shell
           formatting.shfmt,
           formatting.clang_format,
