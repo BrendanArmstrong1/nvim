@@ -22,7 +22,9 @@ o.undofile = true -- enable/disable undo file creation
 o.shadafile = fn.stdpath("data") .. "/viminfo"
 o.shada = "<800,'100,/50,:100,h"
 o.wildignorecase = true -- When set case is ignored when completing file names and directories
-o.clipboard:append("unnamedplus") -- system clipboard
+if vim.loop.os_uname().sysname == "Linux" then
+  o.clipboard:append("unnamedplus") -- system clipboard
+end
 o.laststatus = 3 -- only one status bar
 o.updatetime = 50
 
