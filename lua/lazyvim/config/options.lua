@@ -22,11 +22,19 @@ o.undofile = true -- enable/disable undo file creation
 o.shadafile = fn.stdpath("data") .. "/viminfo"
 o.shada = "<800,'100,/50,:100,h"
 o.wildignorecase = true -- When set case is ignored when completing file names and directories
-if vim.loop.os_uname().sysname == "Linux" then
-  o.clipboard:append("unnamedplus") -- system clipboard
-end
 o.laststatus = 3 -- only one status bar
 o.updatetime = 50
+
+local is_wsl = (function()
+  local output = vim.fn.systemlist("uname -r")
+  return not not string.find(output[1] or "", "WSL")
+end)()
+local is_mac = vim.fn.has("macunix") == 1
+local is_linux = not is_wsl and not is_mac
+
+if is_linux then
+  o.clipboard:append("unnamedplus") -- system clipboard
+end
 
 o.cmdheight = 1
 o.cursorline = false -- Enable highlighting of the current line
