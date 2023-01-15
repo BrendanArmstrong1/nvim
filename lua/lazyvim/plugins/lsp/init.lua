@@ -70,8 +70,8 @@ return {
         log_level = "info",
         sources = {
           -- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
-          formatting.black.with({ extra_args = { "--fast", "-l 79" } }),
-          diagnostics.flake8,
+          formatting.black.with({ extra_args = { "--fast", "-l", 79 } }),
+          diagnostics.flake8.with({ extra_args = { "--extended-ignore=E203" } }),
 
           -- shell
           formatting.shfmt,
