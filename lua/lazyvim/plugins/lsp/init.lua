@@ -22,6 +22,8 @@ return {
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
       vim.diagnostic.config({
+        float = { source = "always", border = "rounded" },
+        signs = true,
         underline = true,
         update_in_insert = false,
         virtual_text = { spacing = 4, prefix = "●" },
@@ -60,7 +62,7 @@ return {
       -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
       local formatting = null_ls.builtins.formatting
       -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
-      -- local diagnostics = null_ls.builtins.diagnostics
+      local diagnostics = null_ls.builtins.diagnostics
       null_ls.setup({
         debug = false,
         debounce = 150,
@@ -69,6 +71,8 @@ return {
         sources = {
           -- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
           formatting.black.with({ extra_args = { "--fast", "-l 79" } }),
+          diagnostics.flake8,
+
           -- shell
           formatting.shfmt,
           formatting.clang_format,
