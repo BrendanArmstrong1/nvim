@@ -22,8 +22,9 @@ local M = {
     { "<leader>F:", "<cmd>Telescope commands<cr>", desc = "Commands" },
     { "<leader>f;", "<cmd>Telescope command_history<cr>", desc = "Command History" },
     { "<leader>f'", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
+    { "<leader>fc", "<cmd>Telescope git_bcommits<cr>", desc = "git buffer commits" },
     {
-      "<leader>fc",
+      "<leader>FC",
       function()
         require("telescope.builtin").git_commits({
           git_command = {
