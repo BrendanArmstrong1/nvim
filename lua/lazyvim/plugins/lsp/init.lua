@@ -71,7 +71,7 @@ return {
         sources = {
           -- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
           formatting.black.with({ extra_args = { "--fast", "-l", 79 } }),
-          diagnostics.flake8.with({ extra_args = { "--extended-ignore=E203" } }),
+          diagnostics.flake8.with({ extra_args = { "--extend-ignore=E203" } }),
 
           -- shell
           formatting.shfmt,
@@ -79,7 +79,7 @@ return {
           formatting.cmake_format,
           -- diagnostics.selene,
           formatting.stylua.with({ extra_args = { "--indent-type", "Spaces", "--indent-width", 2 } }),
-          formatting.codespell.with({ filetype = { "markdown", "txt" } }),
+          -- formatting.codespell.with({ filetype = { "markdown", "txt" } }),
           formatting.rustfmt.with({
             extra_args = function(params)
               local Path = require("plenary.path")
