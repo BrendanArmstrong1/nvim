@@ -64,3 +64,10 @@ end
 
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+
+o.fillchars = "fold: "
+vim.wo.foldmethod = "expr"
+vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+o.foldlevel = 99
+o.foldtext =
+  [[substitute(getline(v:foldstart),'\\\\t',repeat('\\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
