@@ -70,16 +70,24 @@ return {
         log_level = "info",
         sources = {
           -- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
+          -- formatting.codespell.with({ filetype = { "markdown", "txt" } }),
+
+          -- python
           formatting.black.with({ extra_args = { "--fast", "-l", 79 } }),
           diagnostics.flake8.with({ extra_args = { "--extend-ignore=E203" } }),
 
           -- shell
           formatting.shfmt,
+
+          -- c
           formatting.clang_format,
           formatting.cmake_format,
+
+          -- lua
           -- diagnostics.selene,
           formatting.stylua.with({ extra_args = { "--indent-type", "Spaces", "--indent-width", 2 } }),
-          -- formatting.codespell.with({ filetype = { "markdown", "txt" } }),
+
+          -- rust
           formatting.rustfmt.with({
             extra_args = function(params)
               local Path = require("plenary.path")
