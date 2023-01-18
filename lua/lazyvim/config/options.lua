@@ -65,6 +65,7 @@ end
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 
+-- folding
 o.fillchars = "fold: "
 vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
