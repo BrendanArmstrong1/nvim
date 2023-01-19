@@ -42,11 +42,8 @@ vim.keymap.set("n", "<c-w><c-q>", "<cmd>q!<CR>", { silent = true })
 
 -- terminal commands
 vim.keymap.set("t", "<c-z>", "<c-\\><c-n>", { noremap = true })
-vim.keymap.set("t", "<C-w><c-j>", "<c-\\><c-n><c-w>j", {})
-vim.keymap.set("t", "<C-w><c-k>", "<c-\\><c-n><c-w>k", {})
-vim.keymap.set("t", "<C-w><c-h>", "<c-\\><c-n><c-w>h", {})
-vim.keymap.set("t", "<C-w><c-l>", "<c-\\><c-n><c-w>l", {})
-vim.keymap.set("n", "<c-w><c-m>", "<CMD>vs term://zsh<CR>", {})
+vim.keymap.set("t", "<C-w><c-q>", "<c-\\><c-n><c-w><c-q>", {})
+vim.keymap.set("n", "<c-w><c-m>", "<CMD>vs term://zsh<CR>i", {})
 
 -- Move to window using the <meta> movement keys
 vim.keymap.set("n", "<A-left>", "<C-w>h")

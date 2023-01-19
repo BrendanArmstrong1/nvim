@@ -8,7 +8,11 @@ return {
     dependencies = {
       {
         "nvim-treesitter/nvim-treesitter-context",
-        config = true,
+        config = function()
+          require("treesitter-context").setup({
+            enable = true,
+          })
+        end,
       },
       {
         "andymass/vim-matchup",

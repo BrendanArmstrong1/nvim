@@ -21,7 +21,6 @@ o.undolevels = 10000
 o.undofile = true -- enable/disable undo file creation
 o.shadafile = fn.stdpath("data") .. "/viminfo"
 o.shada = "<800,'100,/50,:100,h"
-o.wildignorecase = true -- When set case is ignored when completing file names and directories
 o.laststatus = 3 -- only one status bar
 o.updatetime = 50
 
@@ -43,8 +42,6 @@ o.grepformat = "%f:%l:%c:%m"
 o.grepprg = "rg --vimgrep"
 o.inccommand = "nosplit" -- preview incremental substitute
 o.joinspaces = false -- No double spaces with join after a dot
-o.list = true -- Show some invisible characters (tabs...
-o.number = true -- Print line number
 o.pumblend = 10 -- Popup blend
 o.pumheight = 10 -- Maximum number of entries in a popup
 o.scrolloff = 4 -- Lines of context
@@ -55,6 +52,7 @@ o.spelllang = { "en" }
 o.termguicolors = true -- True color support
 o.timeoutlen = 300
 o.wildmode = "longest:full,full" -- Command-line completion mode
+o.wildignorecase = true -- When set case is ignored when completing file names and directories
 o.wrap = false -- Disable line wrap
 
 if vim.fn.has("nvim-0.9.0") == 1 then
