@@ -59,11 +59,8 @@ return {
           ["<C-d>"] = cmp.mapping.scroll_docs(-4),
           ["<C-u>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
-          ["<C-e>"] = cmp.mapping({
-            i = cmp.mapping.abort(),
-            c = cmp.mapping.close(),
-          }),
-          ["<C-y>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ["<C-e>"] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
+          ["<C-y>"] = cmp.mapping.confirm({ select = true }),
           ["<C-l>"] = cmp.mapping(function(fallback)
             if luasnip.expandable() then
               luasnip.expand()
@@ -74,20 +71,14 @@ return {
             else
               fallback()
             end
-          end, {
-            "i",
-            "s",
-          }),
+          end, { "i", "s" }),
           ["<C-h>"] = cmp.mapping(function(fallback)
             if luasnip.jumpable(-1) then
               luasnip.jump(-1)
             else
               fallback()
             end
-          end, {
-            "i",
-            "s",
-          }),
+          end, { "i", "s" }),
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
@@ -100,10 +91,7 @@ return {
             else
               fallback()
             end
-          end, {
-            "i",
-            "s",
-          }),
+          end, { "i", "s" }),
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
@@ -112,14 +100,12 @@ return {
             else
               fallback()
             end
-          end, {
-            "i",
-            "s",
-          }),
+          end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
           { name = "luasnip" },
           { name = "nvim_lsp" },
+          { name = "nvim_lua" },
           { name = "path" },
           {
             name = "buffer",

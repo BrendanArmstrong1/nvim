@@ -24,6 +24,7 @@ o.shada = "<800,'100,/50,:100,h"
 o.laststatus = 3 -- only one status bar
 o.updatetime = 50
 
+o.dictionary = fn.stdpath("config") .. "/spell/american-english"
 o.spelllang = { "en_us" }
 
 local is_wsl = (function()
