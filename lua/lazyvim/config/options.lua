@@ -24,6 +24,8 @@ o.shada = "<800,'100,/50,:100,h"
 o.laststatus = 3 -- only one status bar
 o.updatetime = 50
 
+o.spelllang = { "en_us" }
+
 local is_wsl = (function()
   local output = vim.fn.systemlist("uname -r")
   return not not string.find(output[1] or "", "WSL")

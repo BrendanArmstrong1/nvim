@@ -1,5 +1,4 @@
 return {
-  -- auto completion
   {
     "hrsh7th/nvim-cmp",
     event = {
@@ -29,6 +28,19 @@ return {
       },
     },
     config = function()
+      local types = require("cmp.types")
+      ---@type table<integer, integer>
+      local modified_priority = {
+        [types.lsp.CompletionItemKind.Variable] = types.lsp.CompletionItemKind.Method,
+        [types.lsp.CompletionItemKind.Snippet] = 0, -- top
+        [types.lsp.CompletionItemKind.Keyword] = 0, -- top
+        [types.lsp.CompletionItemKind.Text] = 100, -- bottom
+      }
+      ---@param kind integer: kind of completion entry
+      local function modified_kind(kind)
+        return modified_priority[kind] or kind
+      end
+      local compare = require("cmp.config.compare")
       local check_backspace = function()
         local col = vim.fn.col(".") - 1
         return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
@@ -108,9 +120,25 @@ return {
         sources = cmp.config.sources({
           { name = "luasnip" },
           { name = "nvim_lsp" },
-          { name = "buffer" },
           { name = "path" },
+          {
+            name = "buffer",
+            option = {
+              keyword_length = 2,
+              get_bufnrs = function() -- from all buffers (less than 1MB)
+                local bufs = {}
+                for _, bufn in ipairs(vim.api.nvim_list_bufs()) do
+                  local buf_size = vim.api.nvim_buf_get_offset(bufn, vim.api.nvim_buf_line_count(bufn))
+                  if buf_size < 1024 * 1024 then
+                    table.insert(bufs, bufn)
+                  end
+                end
+                return bufs
+              end,
+            },
+          },
         }),
+
         formatting = {
           fields = { "abbr", "menu" },
           format = function(entry, vim_item)
@@ -126,6 +154,42 @@ return {
         experimental = {
           ghost_text = false,
           native_menu = false,
+        },
+        sorting = {
+          -- https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/compare.lua
+          comparators = {
+            compare.offset,
+            compare.exact,
+            compare.recently_used,
+            function(entry1, entry2) -- sort by length ignoring "=~"
+              local len1 = string.len(string.gsub(entry1.completion_item.label, "[=~()]", ""))
+              local len2 = string.len(string.gsub(entry2.completion_item.label, "[=~()]", ""))
+              if len1 ~= len2 then
+                return len1 - len2 < 0
+              end
+            end,
+            function(entry1, entry2) -- sort by compare kind (Variable, Function etc)
+              local kind1 = modified_kind(entry1:get_kind())
+              local kind2 = modified_kind(entry2:get_kind())
+              if kind1 ~= kind2 then
+                return kind1 - kind2 < 0
+              end
+            end,
+            function(entry1, entry2) -- score by lsp, if available
+              local t1 = entry1.completion_item.sortText
+              local t2 = entry2.completion_item.sortText
+              if t1 ~= nil and t2 ~= nil and t1 ~= t2 then
+                return t1 < t2
+              end
+            end,
+            compare.score,
+            compare.order,
+          },
+        },
+        window = {
+          documentation = {
+            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+          },
         },
       })
       -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
