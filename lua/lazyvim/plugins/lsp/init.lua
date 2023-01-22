@@ -121,7 +121,7 @@ return {
       -- "selene",
       "black",
       "flake8",
-      -- "rust_analyzer",
+      "rust-analyzer",
     },
     opts = function(plugin)
       require("mason").setup()
