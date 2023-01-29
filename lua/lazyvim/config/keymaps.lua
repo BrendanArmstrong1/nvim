@@ -43,13 +43,14 @@ vim.keymap.set("n", "<c-w><c-q>", "<cmd>q!<CR>", { silent = true })
 -- terminal commands
 vim.keymap.set("t", "<c-z>", "<c-\\><c-n>", { noremap = true })
 vim.keymap.set("t", "<C-w><c-q>", "<c-\\><c-n><c-w><c-q>", {})
+vim.keymap.set("t", "<C-w><c-w>", "<c-\\><c-n><c-w><c-w>", {})
 vim.keymap.set("n", "<c-w><c-m>", "<CMD>vs term://zsh<CR>i", {})
 
 -- Move to window using the <meta> movement keys
-vim.keymap.set("n", "<A-left>", "<C-w>h")
-vim.keymap.set("n", "<A-down>", "<C-w>j")
-vim.keymap.set("n", "<A-up>", "<C-w>k")
-vim.keymap.set("n", "<A-right>", "<C-w>l")
+vim.keymap.set("n", "<left>", "<C-w>h")
+vim.keymap.set("n", "<down>", "<C-w>j")
+vim.keymap.set("n", "<up>", "<C-w>k")
+vim.keymap.set("n", "<right>", "<C-w>l")
 
 -- Resize window using <shift> arrow keys
 vim.keymap.set("n", "<S-Up>", "<cmd>resize +2<CR>", { silent = true })
