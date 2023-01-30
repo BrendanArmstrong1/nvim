@@ -58,14 +58,6 @@ vim.keymap.set("n", "<S-Down>", "<cmd>resize -2<CR>", { silent = true })
 vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -2<CR>", { silent = true })
 vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +2<CR>", { silent = true })
 
--- Move Lines
-vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { silent = true })
-vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { silent = true })
-vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { silent = true })
-vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { silent = true })
-vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { silent = true })
-vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { silent = true })
-
 -- Switch buffers with <ctrl>
 vim.keymap.set("n", "H", "<cmd>bprevious<cr>")
 vim.keymap.set("n", "L", "<cmd>bnext<cr>")
