@@ -110,7 +110,7 @@ return {
     keys = {
       { "gss", "<cmd>TSJSplit<cr>" },
       { "gsj", "<cmd>TSJJoin<cr>" },
-      { "GJ", "<cmd>TSJToggle<cr>" },
+      { "gj", "<cmd>TSJToggle<cr>" },
     },
     config = function()
       require("treesj").setup({

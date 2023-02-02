@@ -11,7 +11,7 @@ local M = {
     { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Trouble document_diagnostics" },
     { "<leader>xl", "<cmd>TroubleToggle loclist<cr>", desc = "Trouble loclist" },
     { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "Trouble quickfix" },
-    { "GR", "<cmd>TroubleToggle lsp_references<cr>", desc = "Trouble lsp_references" },
+    { "gR", "<cmd>TroubleToggle lsp_references<cr>", desc = "Trouble lsp_references" },
   },
 }
 
