@@ -6,7 +6,26 @@ local servers = {
   -- cssls = {},
   -- tsserver = {},
   -- html = {},
-  rust_analyzer = {},
+  rust_analyzer = {
+    ["rust-analyzer"] = {
+      assist = {
+        importEnforceGranularity = true,
+        importPrefix = "crate",
+      },
+      cargo = {
+        features = "all",
+      },
+      checkOnSave = {
+        overrideCommand = { "cargo", "clippy", "--message-format=json" },
+      },
+      inlayHints = {
+        lifetimeElisionHints = {
+          enable = true,
+          useParameterNames = true,
+        },
+      },
+    },
+  },
   pyright = {
     root_dir = function(fname)
       local root_files = {
