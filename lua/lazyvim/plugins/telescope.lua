@@ -8,9 +8,10 @@ local M = {
   },
   cmd = { "Telescope", "Tel" }, -- lazy loads on these commands
   keys = {
+    { "<leader>?", "<cmd>Telescope grep_string<cr>", desc = "find word under cursor" },
     { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "RG" },
     { "<leader>FF", "<cmd>Telescope git_files<cr>", desc = "Find Git Files" },
-    { "<leader>FH", "<Cmd>Telescope git_status<CR>", desc = "status" },
+    { "<leader>FH", "<cmd>Telescope git_status<CR>", desc = "status" },
     { "<leader>FB", "<cmd>Telescope git_branches<cr>", desc = "Buffers" },
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
     { "<leader>fp", "<cmd>Telescope projects<cr>", desc = "Find Git Files" },
@@ -23,6 +24,18 @@ local M = {
     { "<leader>f;", "<cmd>Telescope command_history<cr>", desc = "Command History" },
     { "<leader>f'", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
     { "<leader>fc", "<cmd>Telescope git_bcommits<cr>", desc = "git buffer commits" },
+    {
+      "<leader>?",
+      function()
+        vim.cmd('noau normal! "vy"')
+        local vis_sel = vim.fn.getreg("v")
+        require("telescope.builtin").grep_string({
+          search = vis_sel,
+        })
+      end,
+      desc = "find word in visual",
+      mode = { "x" },
+    },
     {
       "<leader>FC",
       function()
