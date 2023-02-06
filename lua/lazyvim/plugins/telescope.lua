@@ -27,7 +27,7 @@ local M = {
     {
       "<leader>?",
       function()
-        vim.cmd('noau normal! "vy"')
+        vim.cmd('normal! "vy')
         local vis_sel = vim.fn.getreg("v")
         require("telescope.builtin").grep_string({
           search = vis_sel,
