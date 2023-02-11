@@ -25,7 +25,8 @@ vim.keymap.set("i", "<C-z>", "<nop>")
 vim.keymap.set("n", "<C-l>", "<nop>")
 vim.keymap.set("i", "<C-l>", "<nop>")
 
--- nice replace macro
+-- nice replace macro, works with counts now
+-- "https://github.com/community/community/discussions/29817"
 vim.api.nvim_set_keymap(
   "n",
   "<leader>s",
