@@ -2,7 +2,7 @@
 
 local util = require("lazyvim.util")
 
--- better up/down
+-- better up/down, Add jumps 5 and greater to the jump list
 vim.keymap.set(
   "n",
   "j",
@@ -26,7 +26,12 @@ vim.keymap.set("n", "<C-l>", "<nop>")
 vim.keymap.set("i", "<C-l>", "<nop>")
 
 -- nice replace macro
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>s",
+  "':' .. (v:count ? '' : '%') .. 's/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>'",
+  { noremap = true, expr = true }
+)
 
 -- movement mappings
 vim.keymap.set({ "n", "x" }, "<C-e>", "repeat('<C-e>', 5)", { noremap = true, expr = true })
