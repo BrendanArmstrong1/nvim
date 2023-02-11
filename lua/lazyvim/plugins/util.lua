@@ -192,7 +192,10 @@ return {
   -- vim-rsi
   {
     "tpope/vim-rsi",
-    event = "InsertEnter",
+    event = {
+      "InsertEnter",
+      "CmdlineEnter",
+    },
   },
 
   {
