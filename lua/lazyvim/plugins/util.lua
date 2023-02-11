@@ -197,7 +197,10 @@ return {
 
   {
     "tpope/vim-unimpaired",
-    event = "InsertEnter",
+    event = {
+      "InsertEnter",
+      "CmdlineEnter",
+    },
     keys = {
       { "[<Space>" },
       { "]<Space>" },
