@@ -6,13 +6,13 @@ local util = require("lazyvim.util")
 vim.keymap.set(
   "n",
   "j",
-  "v:count ? (v:count > 4 ? \"m'\" .. v:count : '') .. 'j' : 'gj'",
+  "v:count ? (v:count > 4 ? \"m'\" .. v:count : '') .. 'gj' : 'gj'",
   { expr = true, silent = true }
 )
 vim.keymap.set(
   "n",
   "k",
-  "v:count ? (v:count > 4 ? \"m'\" .. v:count : '') .. 'k' : 'gk'",
+  "v:count ? (v:count > 4 ? \"m'\" .. v:count : '') .. 'gk' : 'gk'",
   { expr = true, silent = true }
 )
 
