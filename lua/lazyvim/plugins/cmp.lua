@@ -56,8 +56,8 @@ return {
         mapping = cmp.mapping.preset.insert({
           ["<C-k>"] = cmp.mapping.select_prev_item(),
           ["<C-j>"] = cmp.mapping.select_next_item(),
-          ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-u>"] = cmp.mapping.scroll_docs(4),
+          ["<C-d>"] = cmp.mapping.scroll_docs(4),
+          ["<C-u>"] = cmp.mapping.scroll_docs(-4),
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
           ["<C-y>"] = cmp.mapping.confirm({ select = true }),
@@ -103,9 +103,9 @@ return {
           end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
+          { name = "nvim_lua" },
           { name = "luasnip" },
           { name = "nvim_lsp" },
-          { name = "nvim_lua" },
           { name = "path" },
           {
             name = "buffer",
