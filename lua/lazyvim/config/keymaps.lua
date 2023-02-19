@@ -16,6 +16,21 @@ vim.keymap.set(
   { expr = true, silent = true }
 )
 
+-- holy shit, don't add '{' or '}' to jumplist.
+-- https://superuser.com/questions/836784/in-vim-dont-store-motions-in-jumplist
+vim.api.nvim_set_keymap(
+  "n",
+  "}",
+  "':<C-u> execute \"keepjumps norm! ' .. v:count1 .. '}\"<CR>'",
+  { expr = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "{",
+  "':<C-u> execute \"keepjumps norm! ' .. v:count1 .. '{\"<CR>'",
+  { expr = true, silent = true }
+)
+
 -- Lazy access without triggering cmp lazy-load
 vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>")
 
