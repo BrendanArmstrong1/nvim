@@ -3,20 +3,10 @@
 local util = require("lazyvim.util")
 
 -- better up/down, Add jumps 5 and greater to the jump list
-vim.keymap.set(
-  "n",
-  "j",
-  "v:count ? (v:count > 4 ? \"m'\" .. v:count : '') .. 'gj' : 'gj'",
-  { expr = true, silent = true }
-)
-vim.keymap.set(
-  "n",
-  "k",
-  "v:count ? (v:count > 4 ? \"m'\" .. v:count : '') .. 'gk' : 'gk'",
-  { expr = true, silent = true }
-)
+vim.keymap.set("n", "j", 'v:count1 > 4 ? "m\'" .. v:count .. "gjm\'" : "gj"', { expr = true, silent = true })
+vim.keymap.set("n", "k", 'v:count1 > 4 ? "m\'" .. v:count .. "gkm\'" : "gk"', { expr = true, silent = true })
 
--- holy shit, don't add '{' or '}' to jumplist.
+-- don't add '{' or '}' to jumplist.
 -- https://superuser.com/questions/836784/in-vim-dont-store-motions-in-jumplist
 vim.api.nvim_set_keymap(
   "n",
