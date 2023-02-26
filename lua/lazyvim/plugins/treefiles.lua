@@ -8,7 +8,7 @@ return {
       require("project_nvim").setup({
         manual_mode = false,
         detection_methods = { "lsp", "pattern" },
-        patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+        patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "Cargo.toml" },
         ignore_lsp = {},
         exclude_dirs = { "~/S/Rust/rustlings/" },
       })
