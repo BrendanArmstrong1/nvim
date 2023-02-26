@@ -10,7 +10,7 @@ local M = {
   keys = {
     { "<leader>?", "<cmd>Telescope grep_string<cr>", desc = "find word under cursor" },
     { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "RG" },
-    { "<leader>FF", "<cmd>Telescope git_files<cr>", desc = "Find Git Files" },
+    { "<leader>FG", "<cmd>Telescope git_files<cr>", desc = "Find Git Files" },
     { "<leader>FH", "<cmd>Telescope git_status<CR>", desc = "status" },
     { "<leader>FB", "<cmd>Telescope git_branches<cr>", desc = "Buffers" },
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
@@ -23,7 +23,16 @@ local M = {
     { "<leader>F:", "<cmd>Telescope commands<cr>", desc = "Commands" },
     { "<leader>f;", "<cmd>Telescope command_history<cr>", desc = "Command History" },
     { "<leader>f'", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
-    { "<leader>fc", "<cmd>Telescope git_bcommits<cr>", desc = "git buffer commits" },
+    { "<leader>FC", "<cmd>Telescope git_bcommits<cr>", desc = "git buffer commits" },
+    {
+      "<leader>FF",
+      function()
+        require("telescope.builtin").find_files({
+          no_ignore = true,
+        })
+      end,
+      desc = "Find Files (no ignore)",
+    },
     {
       "<leader>?",
       function()
