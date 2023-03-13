@@ -75,6 +75,7 @@ return {
           -- python
           formatting.black.with({ extra_args = { "--fast", "-l", 79 } }),
           diagnostics.flake8.with({ extra_args = { "--extend-ignore=E203" } }),
+          diagnostics.ruff,
 
           -- shell
           formatting.shfmt,
