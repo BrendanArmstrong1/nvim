@@ -9,13 +9,15 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
+
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
   spec = {
-    { import = "lazyvim.plugins" },
+    { "LazyVim/LazyVim", import = "lazyvim.plugins", version = false },
+    { import = "plugins" },
   },
-  defaults = { lazy = true, version = "*" },
+  defaults = { lazy = true, version = false },
   install = { colorscheme = { "tokyonight", "habamax" } },
   checker = { enabled = false },
   performance = {

@@ -7,6 +7,9 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
+      require("notify").setup({
+        background_colour = "#000000",
+      })
       local tokyonight = require("tokyonight")
       tokyonight.setup({
         style = "night", -- the theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`

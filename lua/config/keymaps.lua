@@ -1,7 +1,3 @@
--- This file is automatically loaded by plugins.config
-
-local util = require("lazyvim.util")
-
 -- better up/down, Add jumps 5 and greater to the jump list
 vim.keymap.set("n", "j", 'v:count1 > 4 ? "m\'" .. v:count .. "gjm\'" : "gj"', { expr = true, silent = true })
 vim.keymap.set("n", "k", 'v:count1 > 4 ? "m\'" .. v:count .. "gkm\'" : "gk"', { expr = true, silent = true })
@@ -72,6 +68,10 @@ vim.keymap.set("n", "<left>", "<C-w>h")
 vim.keymap.set("n", "<down>", "<C-w>j")
 vim.keymap.set("n", "<up>", "<C-w>k")
 vim.keymap.set("n", "<right>", "<C-w>l")
+vim.keymap.set("n", "<C-l>", "<C-w>l")
+vim.keymap.set("n", "<C-h>", "<C-w>h")
+vim.keymap.set("n", "<C-j>", "<C-w>j")
+vim.keymap.set("n", "<C-k>", "<C-w>k")
 
 -- Resize window using <shift> arrow keys
 vim.keymap.set("n", "<S-Up>", "<cmd>resize +2<CR>", { silent = true })
@@ -82,8 +82,6 @@ vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +2<CR>", { silent = true 
 -- Switch buffers with <ctrl>
 vim.keymap.set("n", "H", "<cmd>bprevious<cr>")
 vim.keymap.set("n", "L", "<cmd>bnext<cr>")
-vim.keymap.set("n", "<c-l>", "<cmd>cnext<cr>zz")
-vim.keymap.set("n", "<c-h>", "<cmd>cprevious<cr>zz")
 
 -- Easier pasting(with auto-indent)
 vim.keymap.set("n", "gp", "`[v`]")
@@ -118,14 +116,3 @@ vim.keymap.set("n", "<leader>cd", "<CMD>call myfunc#CloseTerm()<CR>", { noremap 
 
 -- new file
 vim.keymap.set("n", "<leader>fn", "<cmd>vnew<cr>", { desc = "New File" })
-
--- toggle options
--- stylua: ignore start
-vim.keymap.set("n", "<leader>tf", require("lazyvim.plugins.lsp.format").toggle, { desc = "Format on Save" })
-vim.keymap.set("n", "<leader>ts", function() util.toggle("spell") end, { desc = "Spelling" })
-vim.keymap.set("n", "<leader>tw", function() util.toggle("wrap") end, { desc = "Word Wrap" })
-vim.keymap.set("n", "<leader>tn", function() util.toggle("relativenumber", true) util.toggle("number") end, { desc = "Line Numbers" })
-vim.keymap.set("n", "<leader>td", util.toggle_diagnostics, { desc = "Diagnostics" })
-local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
-vim.keymap.set("n", "<leader>tc", function() util.toggle("conceallevel", false, {0, conceallevel}) end, { desc = "Conceal" })
--- stylua: ignore end
