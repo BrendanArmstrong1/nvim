@@ -12,7 +12,7 @@ return {
       })
       local tokyonight = require("tokyonight")
       tokyonight.setup({
-        style = "night", -- the theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+        style = "moon", -- the theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
         light_style = "day", -- the theme is used when the background is set to light
         transparent = true, -- enable this to disable setting the background color
         terminal_colors = true, -- configure the colors used when opening a `:terminal` in neovim
