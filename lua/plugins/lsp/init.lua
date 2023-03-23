@@ -9,7 +9,7 @@ return {
       {
         "hrsh7th/cmp-nvim-lsp",
         cond = function()
-          return require("lazyvim.util").has("nvim-cmp")
+          return require("util").has("nvim-cmp")
         end,
       },
     },
@@ -104,7 +104,7 @@ return {
       -- setup autoformat
       require("plugins.lsp.format").autoformat = opts.autoformat
       -- setup formatting and keymaps
-      require("lazyvim.util").on_attach(function(client, buffer)
+      require("util").on_attach(function(client, buffer)
         require("plugins.lsp.format").on_attach(client, buffer)
         require("plugins.lsp.keymaps").on_attach(client, buffer)
       end)
@@ -164,7 +164,7 @@ return {
     "SmiteshP/nvim-navic",
     init = function()
       vim.g.navic_silence = true
-      require("lazyvim.util").on_attach(function(client, buffer)
+      require("util").on_attach(function(client, buffer)
         require("nvim-navic").attach(client, buffer)
       end)
     end,
