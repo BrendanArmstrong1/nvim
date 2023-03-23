@@ -28,14 +28,14 @@ o.dictionary = fn.stdpath("config") .. "/spell/american-english"
 o.spelllang = { "en_us" }
 
 local is_wsl = (function()
-	local output = vim.fn.systemlist("uname -r")
-	return not not string.find(output[1] or "", "WSL")
+  local output = vim.fn.systemlist("uname -r")
+  return not not string.find(output[1] or "", "WSL")
 end)()
 local is_mac = vim.fn.has("macunix") == 1
 local is_linux = not is_wsl and not is_mac
 
 if is_linux then
-	o.clipboard:append("unnamedplus") -- system clipboard
+  o.clipboard:append("unnamedplus") -- system clipboard
 end
 
 o.cmdheight = 1
@@ -59,30 +59,30 @@ o.wildignorecase = true -- When set case is ignored when completing file names a
 o.wrap = false -- Disable line wrap
 
 if vim.fn.has("nvim-0.9.0") == 1 then
-	vim.opt.splitkeep = "screen"
-	vim.o.shortmess = "filnxtToOFWIcC"
+  vim.opt.splitkeep = "screen"
+  vim.o.shortmess = "filnxtToOFWIcC"
 end
 
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 
 local big_file = function()
-	local file = vim.fn.expand("%")
-	local max_size = 1000 * 1024 -- 1000 kB
-	if vim.fn.getfsize(file) > max_size then
-		return true
-	end
-	return false
+  local file = vim.fn.expand("%")
+  local max_size = 1000 * 1024 -- 1000 kB
+  if vim.fn.getfsize(file) > max_size then
+    return true
+  end
+  return false
 end
 
 if big_file() then
-	vim.wo.foldmethod = "manual"
+  vim.wo.foldmethod = "manual"
 else
-	vim.wo.foldmethod = "expr"
+  vim.wo.foldmethod = "expr"
 end
 -- folding
 o.fillchars = "fold: "
 vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 o.foldlevel = 99
 o.foldtext =
-	[[substitute(getline(v:foldstart),'\\\\t',repeat('\\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
+  [[substitute(getline(v:foldstart),'\\\\t',repeat('\\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
