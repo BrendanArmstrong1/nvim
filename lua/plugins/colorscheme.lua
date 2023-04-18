@@ -12,7 +12,7 @@ return {
       })
       local tokyonight = require("tokyonight")
       tokyonight.setup({
-        style = "moon", -- the theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+        style = "storm", -- the theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
         light_style = "day", -- the theme is used when the background is set to light
         transparent = true, -- enable this to disable setting the background color
         terminal_colors = true, -- configure the colors used when opening a `:terminal` in neovim
@@ -57,6 +57,55 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
+    lazy = false,
     priority = 1000,
+    config = function()
+      require("catppuccin").setup({
+        flavour = "macchiato", -- latte, frappe, macchiato, mocha
+        background = { -- :h background
+          light = "latte",
+          dark = "mocha",
+        },
+        transparent_background = true,
+        show_end_of_buffer = false, -- show the '~' characters after the end of buffers
+        term_colors = false,
+        dim_inactive = {
+          enabled = false,
+          shade = "dark",
+          percentage = 0.15,
+        },
+        no_italic = false, -- Force no italic
+        no_bold = false, -- Force no bold
+        styles = {
+          comments = { "italic" },
+          conditionals = { "italic" },
+          loops = {},
+          functions = {},
+          keywords = {},
+          strings = {},
+          variables = {},
+          numbers = {},
+          booleans = {},
+          properties = {},
+          types = {},
+          operators = {},
+        },
+        color_overrides = {},
+        custom_highlights = {},
+        integrations = {
+          cmp = true,
+          gitsigns = true,
+          nvimtree = true,
+          telescope = true,
+          notify = true,
+          which_key = true,
+          mini = true,
+          -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+        },
+      })
+
+      -- setup must be called before loading
+      -- vim.cmd.colorscheme("catppuccin")
+    end,
   },
 }

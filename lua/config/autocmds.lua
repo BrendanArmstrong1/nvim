@@ -1,57 +1,102 @@
--- local M = {}
---
--- local count_bufs_by_type = function(loaded_only)
---   loaded_only = (loaded_only == nil and true or loaded_only)
---   local count = { normal = 0, acwrite = 0, help = 0, nofile = 0, nowrite = 0, quickfix = 0, terminal = 0, prompt = 0 }
---   local buftypes = vim.api.nvim_list_bufs()
---   for _, bufname in pairs(buftypes) do
---     if (not loaded_only) or vim.api.nvim_buf_is_loaded(bufname) then
---       local buftype = vim.api.nvim_buf_get_option(bufname, "buftype")
---       buftype = buftype ~= "" and buftype or "normal"
---       count[buftype] = count[buftype] + 1
---     end
---   end
---   return count
--- end
---
--- function M.close_buffer()
---   print(vim.inspect(vim.api.nvim_list_wins()))
---   -- local bufTable = count_bufs_by_type()
---   -- if bufTable.normal <= 1 then
---   --   vim.api.nvim_exec([[:q]], true)
---   -- else
---   --   vim.api.nvim_exec([[:bd]], true)
---   -- end
--- end
---
--- -- local function tab_win_closed(winnr)
--- --   local tabnr = vim.api.nvim_win_get_tabpage(winnr)
--- --   local tab_wins = vim.tbl_filter(function(w)
--- --     return w ~= winnr
--- --   end, vim.api.nvim_tabpage_list_wins(tabnr))
--- --   local tab_bufs = vim.tbl_map(vim.api.nvim_win_get_buf, tab_wins)
--- --   if #tab_bufs == 1 then -- if there is only 1 buffer left in the tab
--- --     local last_buf_info = vim.fn.getbufinfo(tab_bufs[1])[1]
--- --     if
--- --       last_buf_info.name:match(".*NvimTree_%d*$")
--- --       or last_buf_info.name:match(".*NeoTree$")
--- --       or last_buf_info.name:match(".*sh$")
--- --       or last_buf_info.name:match(".*sh$")
--- --     then -- and that buffer is nvim tree
--- --       vim.schedule(function()
--- --         if #vim.api.nvim_list_wins() == 1 then -- if its the last buffer in vim
--- --           vim.cmd("quit") -- then close all of vim
--- --         else -- else there are more tabs open
--- --           vim.api.nvim_win_close(tab_wins[1], true) -- then close only the tab
--- --         end
--- --       end)
--- --     end
--- --   end
--- -- end
---
--- vim.api.nvim_create_autocmd("WinLeave", {
---   callback = function()
---     M.close_buffer()
---   end,
---   nested = true,
--- })
+local function tab_win_closed(winnr)
+  local tabnr = vim.api.nvim_win_get_tabpage(winnr)
+  local tab_wins = vim.tbl_filter(function(w)
+    return w ~= winnr
+  end, vim.api.nvim_tabpage_list_wins(tabnr))
+  local tab_bufs = vim.tbl_map(vim.api.nvim_win_get_buf, tab_wins)
+  if #tab_bufs == 1 then -- if there is only 1 buffer left in the tab
+    local last_buf_info = vim.fn.getbufinfo(tab_bufs[1])[1]
+    if
+      last_buf_info.name:match(".*NvimTree_%d*$")
+      or last_buf_info.name:match(".*NeoTree$")
+      or last_buf_info.name:match(".*sh$")
+      or last_buf_info.name:match(".*sh$")
+    then -- and that buffer is nvim tree
+      vim.schedule(function()
+        if #vim.api.nvim_list_wins() == 1 then -- if its the last buffer in vim
+          vim.cmd("quit") -- then close all of vim
+        else -- else there are more tabs open
+          vim.api.nvim_win_close(tab_wins[1], true) -- then close only the tab
+        end
+      end)
+    end
+  end
+end
+
+vim.api.nvim_command("autocmd TermOpen * setlocal nonumber norelativenumber")
+
+vim.api.nvim_create_autocmd("WinClosed", {
+  callback = function()
+    local winnr = tonumber(vim.fn.expand("<amatch>"))
+    vim.schedule_wrap(tab_win_closed(winnr))
+  end,
+  nested = true,
+})
+
+local function augroup(name)
+  return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
+end
+
+-- Check if we need to reload the file when it changed
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+  group = augroup("checktime"),
+  command = "checktime",
+})
+
+-- Highlight on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = augroup("highlight_yank"),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
+
+-- resize splits if window got resized
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+  group = augroup("resize_splits"),
+  callback = function()
+    vim.cmd("tabdo wincmd =")
+  end,
+})
+
+-- go to last loc when opening a buffer
+vim.api.nvim_create_autocmd("BufReadPost", {
+  group = augroup("last_loc"),
+  callback = function()
+    local mark = vim.api.nvim_buf_get_mark(0, '"')
+    local lcount = vim.api.nvim_buf_line_count(0)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
+})
+
+-- close some filetypes with <q>
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("close_with_q"),
+  pattern = {
+    "PlenaryTestPopup",
+    "help",
+    "lspinfo",
+    "man",
+    "notify",
+    "qf",
+    "spectre_panel",
+    "startuptime",
+    "tsplayground",
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+  end,
+})
+
+-- wrap and check for spell in text filetypes
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("wrap_spell"),
+  pattern = { "gitcommit", "markdown" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = true
+  end,
+})
