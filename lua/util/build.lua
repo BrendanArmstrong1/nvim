@@ -5,7 +5,7 @@ local Util = require("lazy.util")
 local M = {}
 local root = vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":p:h:h:h:h")
 
----@return ReadmeBlock
+-- -@return ReadmeBlock
 function M.keymaps()
   local keymap_set = vim.keymap.set
   ---@type table<string,{mode?:string|string[], keys:string, desc?:string, i:number, group:string}>
@@ -14,7 +14,7 @@ function M.keymaps()
   local group = nil
   ---@type string[]
   local groups = {}
-  local function map(mode, lhs, rhs, opts)
+  local function map(mode, lhs, _, opts)
     if not (opts and opts.desc) then
       return
     end
@@ -44,7 +44,7 @@ function M.keymaps()
   group = "Plugins"
 
   local core = require("lazy.core.plugin").Spec.new({ import = "lazyvim.plugins" })
-  Util.foreach(core.plugins, function(name, plugin)
+  Util.foreach(core.plugins, function(_, plugin)
     group = ("[%s](%s)"):format(plugin.name, plugin.url)
     for _, key in ipairs(plugin.keys or {}) do
       if type(key) == "table" and key.desc then
@@ -57,12 +57,12 @@ function M.keymaps()
   ---@type string[]
   local lines = {}
 
-  for _, group in ipairs(groups) do
-    lines[#lines + 1] = "## " .. group
+  for _, group_alt in ipairs(groups) do
+    lines[#lines + 1] = "## " .. group_alt
     lines[#lines + 1] = ""
     vim.list_extend(lines, { "| Key | Description | Mode |", "| --- | --- | --- |" })
     local mappings = vim.tbl_filter(function(m)
-      return m.group == group and m.desc
+      return m.group == group_alt and m.desc
     end, keymaps)
 
     table.sort(mappings, function(a, b)

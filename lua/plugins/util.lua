@@ -36,39 +36,21 @@ return {
     end,
   },
 
-  -- which-key
+  -- todo comments
   {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {
-      plugins = { spelling = true },
+    "folke/todo-comments.nvim",
+    cmd = { "TodoTrouble", "TodoTelescope" },
+    event = { "BufReadPost", "BufNewFile" },
+    config = true,
+    -- stylua: ignore
+    keys = {
+      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
+      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
+      { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
+      { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
+      { "<leader>St", "<cmd>TodoTelescope<cr>", desc = "Todo" },
+      { "<leader>ST", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
     },
-    config = function(_, opts)
-      local wk = require("which-key")
-      wk.setup(opts)
-      local keymaps = {
-        -- mode = { "n", "v" },
-        -- ["g"] = { name = "+goto" },
-        -- ["gz"] = { name = "+surround" },
-        -- ["]"] = { name = "+next" },
-        -- ["["] = { name = "+prev" },
-        -- ["<leader><tab>"] = { name = "+tabs" },
-        -- ["<leader>b"] = { name = "+buffer" },
-        -- ["<leader>c"] = { name = "+code" },
-        -- ["<leader>f"] = { name = "+file/find" },
-        -- ["<leader>g"] = { name = "+git" },
-        -- ["<leader>gh"] = { name = "+hunks" },
-        -- ["<leader>q"] = { name = "+quit/session" },
-        -- ["<leader>s"] = { name = "+search" },
-        -- ["<leader>u"] = { name = "+ui" },
-        -- ["<leader>w"] = { name = "+windows" },
-        -- ["<leader>x"] = { name = "+diagnostics/quickfix" },
-      }
-      -- if Util.has("noice.nvim") then
-      --   keymaps["<leader>sn"] = { name = "+noice" }
-      -- end
-      wk.register(keymaps)
-    end,
   },
 
   -- comments
@@ -215,6 +197,19 @@ return {
       local ai = require("mini.ai")
       ai.setup(opts)
     end,
+  },
+
+  -- session management
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre",
+    opts = { options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals" } },
+    -- stylua: ignore
+    keys = {
+      { "<leader>qs", function() require("persistence").load() end, desc = "Restore Session" },
+      { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
+      { "<leader>qd", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
+    },
   },
 
   -- easy align
