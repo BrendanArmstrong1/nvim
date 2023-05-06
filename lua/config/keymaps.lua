@@ -32,7 +32,7 @@ vim.api.nvim_set_keymap(
   "n",
   "<leader>s",
   "':' .. (v:count ? '' : '%') .. 's/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>'",
-  { noremap = true, expr = true }
+  { desc = "replace word under cursor", noremap = true, expr = true }
 )
 
 -- movement mappings
@@ -46,8 +46,8 @@ vim.keymap.set({ "n", "x" }, "N", "Nzz", { noremap = true })
 -- command line help
 vim.keymap.set("c", "<c-j>", "<nop>")
 vim.keymap.set("c", "<c-k>", "<nop>")
-vim.keymap.set("c", "<c-l>", "<down>")
-vim.keymap.set("c", "<c-h>", "<up>")
+vim.keymap.set("c", "<c-l>", "<right>")
+vim.keymap.set("c", "<c-h>", "<left>")
 
 -- save
 vim.keymap.set("n", "<C-s>", "<cmd>w<cr><esc>")
@@ -61,7 +61,7 @@ vim.keymap.set("n", "<c-w><c-q>", "<cmd>q!<CR>", { silent = true })
 vim.keymap.set("t", "<c-z>", "<c-\\><c-n>", { noremap = true })
 vim.keymap.set("t", "<C-w><c-q>", "<c-\\><c-n><c-w><c-q>", {})
 vim.keymap.set("t", "<C-w><c-w>", "<c-\\><c-n><c-w><c-w>", {})
-vim.keymap.set("n", "<c-w><c-m>", "<CMD>vs term://zsh<CR>i", {})
+vim.keymap.set("n", "<c-w><c-m>", "<CMD>vs term://zsh<CR>", {})
 
 -- Move to window using the <meta> movement keys
 vim.keymap.set("n", "<left>", "<C-w>h")
@@ -85,8 +85,8 @@ vim.keymap.set("n", "L", "<cmd>bnext<cr>")
 
 -- Easier pasting(with auto-indent)
 vim.keymap.set("n", "gp", "`[v`]")
-vim.keymap.set("n", "[p", ":pu!<cr>`[v`]=")
-vim.keymap.set("n", "]p", ":pu<cr>`[v`]=")
+vim.keymap.set("n", "[p", ":pu!<cr>`[v`]=", { silent = true })
+vim.keymap.set("n", "]p", ":pu<cr>`[v`]=", { silent = true })
 
 -- Clear search with <esc>
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>")
@@ -94,11 +94,11 @@ vim.keymap.set("n", "gw", "*N")
 vim.keymap.set("x", "gw", "*N")
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-vim.keymap.set("n", "n", "'Nn'[v:searchforward]", { expr = true })
-vim.keymap.set("x", "n", "'Nn'[v:searchforward]", { expr = true })
+vim.keymap.set("n", "n", "'Nn'[v:searchforward] .. 'zz'", { expr = true })
+vim.keymap.set("x", "n", "'Nn'[v:searchforward] .. 'zz'", { expr = true })
 vim.keymap.set("o", "n", "'Nn'[v:searchforward]", { expr = true })
-vim.keymap.set("n", "N", "'nN'[v:searchforward]", { expr = true })
-vim.keymap.set("x", "N", "'nN'[v:searchforward]", { expr = true })
+vim.keymap.set("n", "N", "'nN'[v:searchforward] .. 'zz'", { expr = true })
+vim.keymap.set("x", "N", "'nN'[v:searchforward] .. 'zz'", { expr = true })
 vim.keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true })
 
 -- Add undo break-points

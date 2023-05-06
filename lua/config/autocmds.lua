@@ -10,7 +10,6 @@ local function tab_win_closed(winnr)
       last_buf_info.name:match(".*NvimTree_%d*$")
       or last_buf_info.name:match(".*NeoTree$")
       or last_buf_info.name:match(".*sh$")
-      or last_buf_info.name:match(".*sh$")
     then -- and that buffer is nvim tree
       vim.schedule(function()
         if #vim.api.nvim_list_wins() == 1 then -- if its the last buffer in vim
@@ -24,6 +23,8 @@ local function tab_win_closed(winnr)
 end
 
 vim.api.nvim_command("autocmd TermOpen * setlocal nonumber norelativenumber")
+vim.api.nvim_command("autocmd BufWinEnter,WinEnter term://* startinsert")
+vim.api.nvim_command("autocmd BufLeave term://* stopinsert")
 
 vim.api.nvim_create_autocmd("WinClosed", {
   callback = function()

@@ -75,38 +75,6 @@ return {
     },
   },
 
-  -- Better `vim.notify()`
-  {
-    "rcarriga/nvim-notify",
-    keys = {
-      {
-        "<leader>un",
-        function()
-          require("notify").dismiss({ silent = true, pending = true })
-        end,
-        desc = "Delete all Notifications",
-      },
-    },
-    opts = {
-      timeout = 3000,
-      max_height = function()
-        return math.floor(vim.o.lines * 0.75)
-      end,
-      max_width = function()
-        return math.floor(vim.o.columns * 0.75)
-      end,
-    },
-    init = function()
-      -- when noice is not enabled, install notify on VeryLazy
-      local Util = require("util")
-      if not Util.has("noice.nvim") then
-        Util.on_very_lazy(function()
-          vim.notify = require("notify")
-        end)
-      end
-    end,
-  },
-
   {
     "mbbill/undotree",
     keys = { { "<leader>U", "<cmd>UndotreeToggle<cr>", desc = "undotree" } },
@@ -185,11 +153,68 @@ return {
         -- ["<leader>w"] = { name = "+windows" },
         -- ["<leader>x"] = { name = "+diagnostics/quickfix" },
       }
-      -- if Util.has("noice.nvim") then
-      --   keymaps["<leader>sn"] = { name = "+noice" }
-      -- end
+      local util = require("util")
+      if util.has("noice.nvim") then
+        keymaps["<leader>SN"] = { name = "+noice" }
+      end
       wk.register(keymaps)
     end,
+  },
+
+  -- better `vim.notify()`
+  {
+    "rcarriga/nvim-notify",
+    keys = {
+      {
+        "<leader>un",
+        function()
+          require("notify").dismiss({ silent = true, pending = true })
+        end,
+        desc = "delete all notifications",
+      },
+    },
+    opts = {
+      timeout = 3000,
+      max_height = function()
+        return math.floor(vim.o.lines * 0.75)
+      end,
+      max_width = function()
+        return math.floor(vim.o.columns * 0.75)
+      end,
+    },
+    init = function()
+      -- when noice is not enabled, install notify on verylazy
+      local util = require("util")
+      if not util.has("noice.nvim") then
+        util.on_very_lazy(function()
+          vim.notify = require("notify")
+        end)
+      end
+    end,
+  },
+
+  -- better `inc-rename`
+  {
+    "smjonas/inc-rename.nvim",
+    keys = {
+      {
+        "<leader>rn",
+        function()
+          return ":IncRename " .. vim.fn.expand("<cword>")
+        end,
+        desc = "lsp rename",
+        expr = true,
+        -- mode = { "n", "x" },
+      },
+    },
+    opts = {
+      cmd_name = "IncRename", -- the name of the command
+      hl_group = "Substitute", -- the highlight group used for highlighting the identifier's new name
+      preview_empty_name = false, -- whether an empty new name should be previewed; if false the command preview will be cancelled instead
+      show_message = true, -- whether to display a `Renamed m instances in n files` message after a rename operation
+      input_buffer_type = nil, -- the type of the external input buffer to use (the only supported value is currently "dressing")
+      post_hook = nil, -- callback to run after renaming, receives the result table (from LSP handler) as an argument
+    },
   },
 
   -- noicer ui
@@ -206,15 +231,20 @@ return {
     },
     opts = {
       lsp = {
+        progress = {
+          enabled = false, -- messes with my autocmd scripts for closing buffers
+        },
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
         },
       },
       presets = {
-        bottom_search = true,
+        bottom_search = false,
         command_palette = true,
         long_message_to_split = true,
+        inc_rename = true,
       },
     },
     -- stylua: ignore
