@@ -65,6 +65,7 @@ end
 
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+vim.g.markdown_fenced_languages = { "html", "js=javascript", "ruby", "python", "rust", "lua", "vim", "typescript" }
 
 local big_file = function()
   local file = vim.fn.expand("%")
