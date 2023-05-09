@@ -166,7 +166,7 @@ return {
     "rcarriga/nvim-notify",
     keys = {
       {
-        "<leader>un",
+        "<leader>nn",
         function()
           require("notify").dismiss({ silent = true, pending = true })
         end,
@@ -230,6 +230,16 @@ return {
       },
     },
     opts = {
+      messages = {
+        -- NOTE: If you enable messages, then the cmdline is enabled automatically.
+        -- This is a current Neovim limitation.
+        enabled = false, -- enables the Noice messages UI
+        view = "cmdline", -- default view for messages
+        view_error = "notify", -- view for errors
+        view_warn = "mini", -- view for warnings
+        view_history = "messages", -- view for :messages
+        view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
+      },
       lsp = {
         progress = {
           enabled = false, -- messes with my autocmd scripts for closing buffers
