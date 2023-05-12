@@ -67,6 +67,9 @@ end
 vim.g.markdown_recommended_style = 0
 vim.g.markdown_fenced_languages = { "html", "js=javascript", "ruby", "python", "rust", "lua", "vim", "typescript" }
 
+-- fix auto rust stuff
+vim.g.rust_recommended_style = false
+
 local big_file = function()
   local file = vim.fn.expand("%")
   local max_size = 1000 * 1024 -- 1000 kB
