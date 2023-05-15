@@ -15,16 +15,22 @@ return {
       -- snippets
       {
         "L3MON4D3/LuaSnip",
-        dependencies = {
-          "rafamadriz/friendly-snippets",
-          config = function()
-            require("luasnip.loaders.from_vscode").lazy_load()
-          end,
-        },
-        opts = {
-          history = true,
-          delete_check_events = "TextChanged",
-        },
+        config = function()
+          require("luasnip.loaders.from_lua").lazy_load({ paths = "./lua/snippets" })
+          require("luasnip").setup({
+            history = true,
+            delete_check_events = "TextChanged",
+            update_events = "TextChanged,TextChangedI",
+            enable_autosnippets = true,
+            ext_opts = {
+              [require("luasnip.util.types").choiceNode] = {
+                active = {
+                  virt_text = { { " <- choiceNode", "Comment" } },
+                },
+              },
+            },
+          })
+        end,
       },
     },
     config = function()
@@ -54,8 +60,29 @@ return {
           end,
         },
         mapping = cmp.mapping.preset.insert({
-          ["<C-k>"] = cmp.mapping.select_prev_item(),
-          ["<C-j>"] = cmp.mapping.select_next_item(),
+          -- ["<C-k>"] = cmp.mapping.select_prev_item(),
+          ["<C-k>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.expandable() then
+              luasnip.expand()
+            elseif check_backspace() then
+              fallback()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+          ["<C-j>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.choice_active() then
+              luasnip.change_choice(1)
+            elseif check_backspace() then
+              fallback()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
           ["<C-u>"] = cmp.mapping.scroll_docs(-4),
           ["<C-Space>"] = cmp.mapping.complete(),
@@ -103,9 +130,9 @@ return {
           end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
-          { name = "nvim_lua" },
           { name = "luasnip" },
           { name = "nvim_lsp" },
+          { name = "nvim_lua" },
           { name = "path" },
           {
             name = "buffer",

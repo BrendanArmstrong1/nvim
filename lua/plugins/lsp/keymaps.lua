@@ -5,9 +5,7 @@ function M.on_attach(client, buffer)
 
   self:map("<leader>vd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
   self:map("<leader>li", "LspInfo", { desc = "Lsp Info" })
-  self:map("<leader>fd", "Telescope diagnostics", { desc = "Telescope Diagnostics" })
   self:map("gd", "Telescope lsp_definitions", { desc = "Goto Definition" })
-  self:map("gr", "Telescope lsp_references", { desc = "References" })
   self:map("gD", "Telescope lsp_declarations", { desc = "Goto Declaration" })
   self:map("gI", "Telescope lsp_implementations", { desc = "Goto Implementation" })
   self:map("gt", "Telescope lsp_type_definitions", { desc = "Goto Type Definition" })
@@ -21,12 +19,6 @@ function M.on_attach(client, buffer)
   local format = require("plugins.lsp.format").format
   self:map("<leader>cf", format, { desc = "Format Document", has = "documentFormatting" })
   self:map("<leader>cf", format, { desc = "Format Range", mode = "v", has = "documentRangeFormatting" })
-  self:map("<leader>cr", M.rename, { expr = true, desc = "Rename", has = "rename" })
-
-  if client.name == "tsserver" and pcall(require, "typescript") then
-    self:map("<leader>co", "TypescriptOrganizeImports", { desc = "Organize Imports" })
-    self:map("<leader>cR", "TypescriptRenameFile", { desc = "Rename File" })
-  end
 end
 
 function M.new(client, buffer)

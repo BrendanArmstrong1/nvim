@@ -9,12 +9,13 @@ function M.toggle()
     vim.b.autoformat = nil
     M.autoformat = true
   else
+    vim.b.autoformat = false
     M.autoformat = not M.autoformat
   end
   if M.autoformat then
     Util.info("Enabled format on save", { title = "Format" })
   else
-    Util.warn("Disabled format on save", { title = "Format" })
+    Util.info("Disabled format on save", { title = "Format" })
   end
 end
 

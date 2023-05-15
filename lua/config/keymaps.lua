@@ -131,3 +131,32 @@ vim.keymap.set(
 
 -- new file
 vim.keymap.set("n", "<leader>fn", "<cmd>vnew<cr>", { desc = "New File" })
+
+local Util = require("lazy.core.util")
+local enabled = true
+function Toggle_diagnostics()
+  enabled = not enabled
+  if enabled then
+    vim.diagnostic.enable(0)
+  else
+    vim.diagnostic.disable(0)
+  end
+end
+
+local fmt_enabled = true
+function Toggle_formatting()
+  fmt_enabled = not fmt_enabled
+  if fmt_enabled then
+    Util.info("Enabled format on save", { title = "Format" })
+    vim.b.autoformat = true
+  else
+    Util.info("Disabled format on save", { title = "Format" })
+    vim.b.autoformat = false
+  end
+end
+
+-- toggle options
+-- stylua: ignore start
+vim.keymap.set("n", "<leader>tf", Toggle_formatting, { desc = "Format on Save" })
+vim.keymap.set("n", "<leader>td", Toggle_diagnostics, { desc = "Diagnostics" })
+-- stylua: ignore end
