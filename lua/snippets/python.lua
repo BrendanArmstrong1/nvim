@@ -54,7 +54,7 @@ end
 local function pyfdoc(args, _, ostate)
   local nodes, a = generic_pdoc(1, args)
   nodes[#nodes + 1] = t({ "", "\t'''" })
-  nodes[#nodes + 1] = t({ "", "\t", "" })
+  nodes[#nodes + 1] = t({ "", "\t", "", "\t" })
   nodes[#nodes + 1] = i(a + 2 + 1, "pass")
   local snip = sn(nil, nodes)
   snip.old_state = ostate or {}
@@ -64,7 +64,7 @@ end
 local function pycdoc(args, _, ostate)
   local nodes, a = generic_pdoc(2, args)
   nodes[#nodes + 1] = t({ "", "\t\t'''" })
-  nodes[#nodes + 1] = t({ "", "\t\t", "" })
+  nodes[#nodes + 1] = t({ "", "\t\t", "\t\t" })
   nodes[#nodes + 1] = i(a + 2 + 1, "pass")
   local snip = sn(nil, nodes)
   snip.old_state = ostate or {}

@@ -39,7 +39,7 @@ return {
       local modified_priority = {
         [types.lsp.CompletionItemKind.Variable] = types.lsp.CompletionItemKind.Method,
         [types.lsp.CompletionItemKind.Snippet] = 0, -- top
-        [types.lsp.CompletionItemKind.Keyword] = 0, -- top
+        [types.lsp.CompletionItemKind.Keyword] = 50, -- middle
         [types.lsp.CompletionItemKind.Text] = 100, -- bottom
       }
       ---@param kind integer: kind of completion entry

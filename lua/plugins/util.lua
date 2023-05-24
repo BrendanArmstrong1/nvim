@@ -11,6 +11,7 @@ return {
         "Z",
         ":<C-u>lua MiniSurround.add('visual')<CR>",
         mode = "x",
+        silent = true,
       },
     },
     init = function()
