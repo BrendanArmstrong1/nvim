@@ -19,6 +19,12 @@ return {
       -- vim.api.nvim_set_keymap("x", "Z", [[:<C-u>lua MiniSurround.add('visual')<CR>]], { noremap = true })
       -- Make special mapping for "add surrounding for line"
       vim.api.nvim_set_keymap("n", "gzz", "gz_", { noremap = false })
+      vim.api.nvim_set_keymap(
+        "i",
+        "<C-_>",
+        "<C-o>h<C-o>gziw_<C-o>gziw_<C-o>E<C-o>a",
+        { desc = "dunder(python)", noremap = false }
+      )
     end,
     config = function()
       -- use gz mappings instead of s to prevent conflict with leap
