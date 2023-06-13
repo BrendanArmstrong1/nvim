@@ -108,11 +108,32 @@ return {
     version = false, -- wait till new 0.7.0 release to put it back on semver
     event = { "BufReadPre", "BufNewFile" },
     opts = {
-      -- symbol = "▏",
-      symbol = "│",
-      options = { try_as_border = true },
+      symbol = "▏",
+      -- symbol = "│",
+      options = {
+        border = "top",
+        try_as_border = false,
+        indent_at_cursor = true,
+      },
+      mappings = {
+        -- Textobjects
+        object_scope = "ii",
+        object_scope_with_border = "ai",
+
+        -- Motions (jump to respective border line; if not present - body line)
+        goto_top = "[<tab>",
+        goto_bottom = "]<tab>",
+      },
     },
     init = function()
+      local function toggle_indent_scope()
+        if vim.b.miniindentscope_disable then
+          vim.b.miniindentscope_disable = false
+        else
+          vim.b.miniindentscope_disable = true
+        end
+      end
+      vim.keymap.set("n", "<leader>ti", toggle_indent_scope, { desc = "toggle indent scope" })
       vim.api.nvim_create_autocmd("FileType", {
         pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
         callback = function()
@@ -141,7 +162,7 @@ return {
   --       -- ["gz"] = { name = "+surround" },
   --       -- ["]"] = { name = "+next" },
   --       -- ["["] = { name = "+prev" },
-  --       -- ["<leader><tab>"] = { name = "+tabs" },
+  --       -- ["<><tab>"] = { name = "+tabs" },
   --       -- ["<leader>b"] = { name = "+buffer" },
   --       -- ["<leader>c"] = { name = "+code" },
   --       -- ["<leader>f"] = { name = "+file/find" },
