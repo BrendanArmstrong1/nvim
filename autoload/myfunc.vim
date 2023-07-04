@@ -21,19 +21,19 @@ function! myfunc#ExecuteStuff(location) abort
         else
             if a:location == 'right'
               vs +te
-              call feedkeys("\<C-w>\<C-h>")
+              call feedkeys("\<C-w>\<C-w>")
             else
                 sp +te
-                call feedkeys("\<C-w>\<C-k>")
+                call feedkeys("\<C-w>\<C-w>")
             endif
         endif
     else
         if a:location == 'right'
             vs +te
-            call feedkeys("\<C-w>\<C-h>")
+            call feedkeys("\<C-w>\<C-w>")
         else
             sp +te
-            call feedkeys("\<C-w>\<C-k>")
+            call feedkeys("\<C-w>\<C-w>")
         endif
     endif
     let l:list = getbufinfo({'buflisted': 1, 'bufloaded': 1})
