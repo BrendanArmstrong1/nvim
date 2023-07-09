@@ -60,7 +60,6 @@ return {
           end,
         },
         mapping = cmp.mapping.preset.insert({
-          -- ["<C-k>"] = cmp.mapping.select_prev_item(),
           ["<C-k>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
