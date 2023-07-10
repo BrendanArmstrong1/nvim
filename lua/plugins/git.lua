@@ -13,7 +13,7 @@ return {
     keys = {
       { "<leader>gg", "<CMD>Git<CR>" },
       { "<leader>gc", "<CMD>Git commit<CR>" },
-      { "<leader>gl", "<CMD>Git log<CR>" },
+      { "<leader>gL", "<CMD>Git log<CR>" },
       { "<leader>gb", "<CMD>Git blame<CR>" },
     },
   },
@@ -37,7 +37,7 @@ return {
           untracked = { text = "▎" },
         },
         signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-        numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
+        numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
         linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
         word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
         watch_gitdir = {
@@ -107,11 +107,12 @@ return {
           map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
           map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
           map("n", "<leader>HS", gs.stage_buffer)
-          map("n", "<leader>hu", gs.undo_stage_hunk)
           map("n", "<leader>HR", gs.reset_buffer)
+          map("n", "<leader>hu", gs.undo_stage_hunk)
           map("n", "<leader>hp", gs.preview_hunk)
           map("n", "<leader>hb", function() gs.blame_line({ full = true }) end)
           map("n", "<leader>hl", gs.toggle_current_line_blame)
+          map("n", "<leader>gl", gs.toggle_linehl)
           map("n", "<leader>hd", gs.diffthis)
           map("n", "<leader>HD", function() gs.diffthis("~") end)
           map("n", "<leader>ht", gs.toggle_deleted)
