@@ -55,6 +55,7 @@ vim.keymap.set("n", "<C-s>", "<cmd>w<cr><esc>")
 vim.keymap.set("n", "<c-w><c-t>", "<cmd>tabclose!<CR>", { silent = true })
 vim.keymap.set("n", "<c-w><c-d>", "<cmd>wq!<CR>", { silent = true })
 vim.keymap.set("n", "<c-w><c-q>", "<cmd>q!<CR>", { silent = true })
+vim.keymap.set("n", "<c-w><c-b>", "<cmd>bd!<CR>", { silent = true })
 
 -- terminal commands
 vim.keymap.set("t", "<c-z>", "<c-\\><c-n>", { noremap = true })

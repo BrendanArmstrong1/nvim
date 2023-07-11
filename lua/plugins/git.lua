@@ -12,7 +12,6 @@ return {
     end,
     keys = {
       { "<leader>gg", "<CMD>Git<CR>" },
-      { "<leader>gc", "<CMD>Git commit<CR>" },
       { "<leader>gL", "<CMD>Git log<CR>" },
       { "<leader>gb", "<CMD>Git blame<CR>" },
     },
@@ -104,18 +103,18 @@ return {
 
           -- Actions
           -- stylua: ignore start
-          map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
-          map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
-          map("n", "<leader>HS", gs.stage_buffer)
-          map("n", "<leader>HR", gs.reset_buffer)
-          map("n", "<leader>hu", gs.undo_stage_hunk)
-          map("n", "<leader>hp", gs.preview_hunk)
-          map("n", "<leader>hb", function() gs.blame_line({ full = true }) end)
-          map("n", "<leader>hl", gs.toggle_current_line_blame)
-          map("n", "<leader>gl", gs.toggle_linehl)
-          map("n", "<leader>hd", gs.diffthis)
-          map("n", "<leader>HD", function() gs.diffthis("~") end)
-          map("n", "<leader>ht", gs.toggle_deleted)
+          map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", {silent=true})
+          map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", {silent=true})
+          map("n", "<leader>HS", gs.stage_buffer, {silent=true})
+          map("n", "<leader>HR", gs.reset_buffer, {silent=true})
+          map("n", "<leader>hu", gs.undo_stage_hunk, {silent=true})
+          map("n", "<leader>hp", gs.preview_hunk, {silent=true})
+          map("n", "<leader>hb", function() gs.blame_line({ full = true }) end, {silent=true})
+          map("n", "<leader>hl", gs.toggle_current_line_blame, {silent=true})
+          map("n", "<leader>gl", gs.toggle_linehl, {silent=true})
+          map("n", "<leader>hd", gs.diffthis, {silent=true})
+          map("n", "<leader>HD", function() gs.diffthis("~") end, {silent=true})
+          map("n", "<leader>ht", gs.toggle_deleted, {silent=true})
           -- Text object
           map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
           -- stylua: ignore end

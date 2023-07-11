@@ -10,22 +10,22 @@ local M = {
   keys = {
     { "<leader>?", "<cmd>Telescope grep_string<cr>", desc = "find word under cursor" },
     { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "RG" },
-    { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Git Files" },
     { "<leader>fd", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics" },
-    { "<leader>fh", "<cmd>Telescope git_status<CR>", desc = "status" },
-    { "<leader>FR", "<cmd>Telescope git_branches<cr>", desc = "Branches" },
     { "<leader>fr", "<cmd>Telescope lsp_references<cr>", desc = "lsp references" },
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
     { "<leader>fp", "<cmd>Telescope projects<cr>", desc = "Find Git Files" },
     { "<leader>fb", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-    { "<leader>FH", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
-    { "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+    { "<leader>fk", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
+    { "<leader>FK", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
     { "<leader>fl", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
     { "<leader>F:", "<cmd>Telescope commands<cr>", desc = "Commands" },
     { "<leader>f;", "<cmd>Telescope command_history<cr>", desc = "Command History" },
     { "<leader>f'", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
     { "<leader>FC", "<cmd>Telescope git_bcommits<cr>", desc = "git buffer commits" },
+    { "<leader>FG", "<cmd>Telescope git_files<cr>", desc = "Find Git Files" },
+    { "<leader>FH", "<cmd>Telescope git_status<CR>", desc = "status" },
+    { "<leader>FR", "<cmd>Telescope git_branches<cr>", desc = "Branches" },
     {
       "<leader>FF",
       function()
@@ -48,7 +48,7 @@ local M = {
       mode = { "x" },
     },
     {
-      "<leader>FC",
+      "<leader>FS",
       function()
         require("telescope.builtin").git_commits({
           git_command = {
@@ -64,29 +64,9 @@ local M = {
       desc = "commits",
     },
     {
-      "<leader>FI",
-      function()
-        require("telescope.builtin").lsp_workspace_symbols({
-          symbols = {
-            "Class",
-            "Function",
-            "Method",
-            "Constructor",
-            "Interface",
-            "Module",
-            "Struct",
-            "Trait",
-            "Field",
-            "Property",
-          },
-        })
-      end,
-      desc = "Goto Symbol",
-    },
-    {
       "<leader>fi",
       function()
-        require("telescope.builtin").lsp_document_symbols({
+        require("telescope.builtin").lsp_workspace_symbols({
           symbols = {
             "Class",
             "Function",
@@ -193,6 +173,36 @@ function M.config()
       git_status = {
         expand_dir = false,
       },
+      git_bcommits = {
+        mappings = {
+          i = {
+            ["dd"] = function()
+              -- Open in diffview
+              local selected_entry = action_state.get_selected_entry()
+              local value = selected_entry.value
+              -- close Telescope window properly prior to switching windows
+              vim.api.nvim_win_close(0, true)
+              vim.cmd("stopinsert")
+              vim.schedule(function()
+                vim.cmd(("DiffviewOpen %s^!"):format(value))
+              end)
+            end,
+          },
+          n = {
+            ["dd"] = function()
+              -- Open in diffview
+              local selected_entry = action_state.get_selected_entry()
+              local value = selected_entry.value
+              -- close Telescope window properly prior to switching windows
+              vim.api.nvim_win_close(0, true)
+              vim.cmd("stopinsert")
+              vim.schedule(function()
+                vim.cmd(("DiffviewOpen %s^!"):format(value))
+              end)
+            end,
+          },
+        },
+      },
       git_commits = {
         mappings = {
           i = {
@@ -226,10 +236,10 @@ function M.config()
       buffers = {
         mappings = {
           i = {
-            ["D"] = actions.delete_buffer,
+            ["<c-b>"] = actions.delete_buffer,
           },
           n = {
-            ["D"] = actions.delete_buffer,
+            ["<c-b>"] = actions.delete_buffer,
           },
         },
       },
