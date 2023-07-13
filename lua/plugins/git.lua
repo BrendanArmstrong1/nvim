@@ -10,6 +10,7 @@ return {
       vim.api.nvim_set_keymap("n", "<leader>gi", "<CMD>diffget //3<CR>", {})
     end,
     keys = {
+      { "<leader>gc", "<CMD>Git commit<CR>" },
       { "<leader>gg", "<CMD>Git<CR>" },
       { "<leader>gL", "<CMD>Git log<CR>" },
       { "<leader>gb", "<CMD>Git blame<CR>" },
@@ -21,7 +22,8 @@ return {
     "sindrets/diffview.nvim",
     cmd = "DiffviewOpen",
     keys = {
-      { "<leader>gd", "<cmd>DiffviewFileHistory %<cr>", desc = "undotree" },
+      { "<leader>gd", "<cmd>DiffviewFileHistory %<cr>", desc = "open diff of file" },
+      { "<leader>GG", "<cmd>DiffviewOpen<cr>", desc = "open full diff" },
     },
     config = function()
       -- Lua
