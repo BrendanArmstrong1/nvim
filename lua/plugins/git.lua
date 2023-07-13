@@ -4,12 +4,12 @@ return {
     "tpope/vim-fugitive",
     cmd = "G",
     init = function()
-      vim.api.nvim_set_keymap("n", "<leader>gp", "<CMD>Git push<CR>", {})
       vim.api.nvim_set_keymap("n", "<leader>gD", "<CMD>Gdiffsplit!<CR>", {})
       vim.api.nvim_set_keymap("n", "<leader>ga", "<CMD>diffget //2<CR>", {})
       vim.api.nvim_set_keymap("n", "<leader>gi", "<CMD>diffget //3<CR>", {})
     end,
     keys = {
+      { "<leader>gp", "<CMD>Git push<CR>" },
       { "<leader>gc", "<CMD>Git commit<CR>" },
       { "<leader>gg", "<CMD>Git<CR>" },
       { "<leader>gL", "<CMD>Git log<CR>" },
