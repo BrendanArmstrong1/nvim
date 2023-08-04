@@ -7,9 +7,9 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      require("notify").setup({
-        background_colour = "#000000",
-      })
+      -- require("notify").setup({
+      --   background_colour = "#000000",
+      -- })
       local tokyonight = require("tokyonight")
       tokyonight.setup({
         style = "storm", -- the theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
@@ -97,7 +97,7 @@ return {
           gitsigns = true,
           nvimtree = true,
           telescope = true,
-          notify = true,
+          -- notify = true,
           which_key = true,
           mini = true,
           -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)

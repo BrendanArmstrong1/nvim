@@ -33,11 +33,12 @@ function M.config()
       lualine_a = { { "mode", separator = { left = " " } } },
       lualine_b = {
         { "branch" },
-        {
-          require("noice").api.statusline.mode.get,
-          cond = require("noice").api.statusline.mode.has,
-          color = { fg = "#ff9e64" },
-        },
+        -- integration with noice
+        -- {
+        --   require("noice").api.statusline.mode.get,
+        --   cond = require("noice").api.statusline.mode.has,
+        --   color = { fg = "#ff9e64" },
+        -- },
       },
       lualine_c = {
         { "diagnostics", sources = { "nvim_diagnostic" } },

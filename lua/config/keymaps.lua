@@ -130,7 +130,7 @@ vim.keymap.set(
 )
 
 -- new file
-vim.keymap.set("n", "<leader>fn", "<cmd>vnew<cr>", { desc = "New File" })
+vim.keymap.set("n", "<leader>o", ":e <C-R>=expand('%:p:h') . '/' <CR>", { desc = "New File" })
 
 local Util = require("lazy.core.util")
 local enabled = true
