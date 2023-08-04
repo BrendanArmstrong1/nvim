@@ -39,7 +39,6 @@ if is_linux then
 end
 
 o.cmdheight = 1
-
 o.cursorline = false -- Enable highlighting of the current line
 o.formatoptions = "jqlnt" -- tcqj
 o.grepformat = "%f:%l:%c:%m"
