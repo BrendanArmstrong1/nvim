@@ -236,10 +236,10 @@ function M.config()
       buffers = {
         mappings = {
           i = {
-            ["<c-b>"] = actions.delete_buffer,
+            ["<c-d>"] = actions.delete_buffer,
           },
           n = {
-            ["<c-b>"] = actions.delete_buffer,
+            ["<c-d>"] = actions.delete_buffer,
           },
         },
       },
