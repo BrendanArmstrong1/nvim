@@ -34,6 +34,23 @@ vim.api.nvim_set_keymap(
   { desc = "replace word under cursor", noremap = true, expr = true }
 )
 
+local function ReplaceVisualSelection()
+  local keys = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
+  vim.api.nvim_feedkeys(keys, "x", false)
+  local vstart = vim.api.nvim_buf_get_mark(0, "<")
+  local vend = vim.api.nvim_buf_get_mark(0, ">")
+  local line = vim.api.nvim_buf_get_lines(0, vstart[1] - 1, vend[1], 0)
+  local text = string.sub(line[1], vstart[2] + 1, vend[2] + 1)
+  return ":<C-U>" .. text
+end
+
+vim.keymap.set(
+  "x",
+  "<leader>s",
+  ReplaceVisualSelection,
+  { desc = "replace word under cursor", noremap = true, expr = true }
+)
+
 -- movement mappings
 vim.keymap.set({ "n", "x" }, "<C-e>", "repeat('<C-e>', 5)", { noremap = true, expr = true })
 vim.keymap.set({ "n", "x" }, "<C-y>", "repeat('<C-y>', 5)", { noremap = true, expr = true })
@@ -131,6 +148,16 @@ vim.keymap.set(
 
 -- new file
 vim.keymap.set("n", "<leader>o", ":e <C-R>=expand('%:p:h') . '/' <CR>", { desc = "New File" })
+
+-- function Print_tmux_panes()
+--   local job = vim.fn.jobstart("tmux list-panes", {
+--     on_stdout = function(jobid, data, event)
+--       print(dump(data))
+--     end,
+--   })
+-- end
+--
+-- vim.keymap.set("n", "gy", Print_tmux_panes)
 
 local Util = require("lazy.core.util")
 local enabled = true

@@ -22,6 +22,7 @@ return {
             delete_check_events = "TextChanged",
             update_events = "TextChanged,TextChangedI",
             enable_autosnippets = true,
+            store_selection_keys = "<C-n>",
             ext_opts = {
               [require("luasnip.util.types").choiceNode] = {
                 active = {

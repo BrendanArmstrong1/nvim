@@ -9,7 +9,7 @@ local function tab_win_closed(winnr)
     if
       last_buf_info.name:match(".*NvimTree_%d*$")
       or last_buf_info.name:match(".*NeoTree$")
-      or last_buf_info.name:match(".*sh$")
+      or last_buf_info.name:match(".*zsh$")
     then -- and that buffer is nvim tree
       vim.schedule(function()
         if #vim.api.nvim_list_wins() == 1 then -- if its the last buffer in vim
