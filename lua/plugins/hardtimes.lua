@@ -6,7 +6,7 @@ return {
     config = function()
       require("hardtime").setup({
         -- Add "oil" to the disabled_filetypes
-        disabled_filetypes = { "qf", "netrw", "fugitive", "NvimTree", "lazy", "mason", "oil" },
+        disabled_filetypes = { "qf", "gitignore", "netrw", "fugitive", "NvimTree", "lazy", "mason", "oil" },
       })
     end,
   },
