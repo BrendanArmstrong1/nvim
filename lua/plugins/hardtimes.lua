@@ -2,11 +2,22 @@ return {
   {
     "m4xshen/hardtime.nvim",
     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-    event = "VeryLazy",
+    cmd = {
+      "Hardtime",
+    },
     config = function()
       require("hardtime").setup({
-        -- Add "oil" to the disabled_filetypes
-        disabled_filetypes = { "qf", "gitignore", "netrw", "fugitive", "NvimTree", "lazy", "mason", "oil" },
+        disabled_filetypes = {
+          "qf",
+          "gitignore",
+          "fugitiveblame",
+          "netrw",
+          "fugitive",
+          "NvimTree",
+          "lazy",
+          "mason",
+          "oil",
+        },
       })
     end,
   },

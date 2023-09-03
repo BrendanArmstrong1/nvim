@@ -1,7 +1,5 @@
 local M = {
   "nvim-telescope/telescope.nvim",
-  -- commit = "0b1c41ad8052badca6e72eafa4bc5481152e483e",
-  -- branch = "0.1.x",
   dependencies = {
     { "nvim-lua/plenary.nvim" },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
