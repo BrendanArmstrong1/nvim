@@ -174,15 +174,18 @@ vim.keymap.set(
 -- new file
 vim.keymap.set("n", "<leader>o", ":e <C-R>=expand('%:p:h') . '/' <CR>", { desc = "New File" })
 
--- function Print_tmux_panes()
---   local job = vim.fn.jobstart("tmux list-panes", {
---     on_stdout = function(jobid, data, event)
---       print(dump(data))
---     end,
---   })
--- end
---
--- vim.keymap.set("n", "gy", Print_tmux_panes)
+function Print_tmux_panes()
+	vim.fn.jobstart("tmux list-panes", {
+		on_stdout = function(jobid, data, event)
+			for k, v in pairs(data) do
+				print(k, v)
+			end
+		end,
+	})
+	vim.fn.jobstart("tmux split-window -d -h")
+end
+
+vim.keymap.set("n", "gy", Print_tmux_panes)
 
 local Util = require("lazy.core.util")
 local enabled = true
