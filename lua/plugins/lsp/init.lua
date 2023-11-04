@@ -29,7 +29,7 @@ return {
 			-- LSP Server Settings
 			servers = {
 				bashls = {},
-				-- clangd = {},
+				clangd = {},
 				-- cssls = {},
 				-- tsserver = {},
 				-- html = {},
@@ -157,7 +157,7 @@ return {
 		opts = { separator = " ", highlight = true, depth_limit = 5 },
 	},
 
-	-- -- formatters
+	-- -- formatters and linters
 
 	{
 		"dense-analysis/ale",
@@ -165,13 +165,21 @@ return {
 		config = function()
 			vim.g.ale_linters_explicit = 1
 			vim.g.ale_linters = {
-				python = { "ruff", "flake8", "mypy" },
+				python = { "ruff", "mypy" },
 				rust = { "analyzer", "cargo" },
 			}
-			vim.g.ale_fix_on_save = 1
+
+			vim.g.ale_python_mypy_options = "--enable-incomplete-feature=Unpack"
+      vim.g.ale_python_mypy_ignore_invalid_syntax = 1
+			vim.g.ale_python_black_options = "--line-length 80"
+
+			vim.g.ale_rust_cargo_use_clippy = vim.fn.executable("cargo-clippy")
+
+			vim.g.ale_fix_on_save = 0
+
 			vim.g.ale_fixers = {
 				["*"] = { "remove_trailing_lines", "trim_whitespace" },
-				python = "black",
+				python = { "black" },
 				lua = { "stylua" },
 				rust = { "rustfmt" },
 			}
@@ -188,7 +196,8 @@ return {
 			"stylua",
 			-- "selene",
 			"black",
-			"flake8",
+      "ruff",
+      "mypy",
 			"rust-analyzer",
 		},
 		opts = function(plugin)
