@@ -2,7 +2,7 @@ return {
 	-- lspconfig
 	{
 		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
@@ -161,7 +161,7 @@ return {
 
 	{
 		"dense-analysis/ale",
-		event = "BufReadPre",
+		event = "BufReadPost",
 		config = function()
 			vim.g.ale_linters_explicit = 1
 			vim.g.ale_linters = {
@@ -170,8 +170,11 @@ return {
 			}
 
 			vim.g.ale_python_mypy_options = "--enable-incomplete-feature=Unpack"
+      vim.g.ale_python_mypy_auto_pipenv = 1
       vim.g.ale_python_mypy_ignore_invalid_syntax = 1
+      vim.g.ale_python_ruff_auto_pipenv = 1
 			vim.g.ale_python_black_options = "--line-length 80"
+      vim.g.ale_python_black_auto_pipenv = 1
 
 			vim.g.ale_rust_cargo_use_clippy = vim.fn.executable("cargo-clippy")
 

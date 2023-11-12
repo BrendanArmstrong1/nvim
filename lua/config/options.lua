@@ -70,23 +70,24 @@ vim.g.markdown_fenced_languages = { "html", "js=javascript", "ruby", "python", "
 -- fix auto rust stuff
 vim.g.rust_recommended_style = false
 
-local big_file = function()
-  local file = vim.fn.expand("%")
-  local max_size = 1000 * 1024 -- 1000 kB
-  if vim.fn.getfsize(file) > max_size then
-    return true
-  end
-  return false
-end
 
-if big_file() then
-  vim.wo.foldmethod = "manual"
-else
-  vim.wo.foldmethod = "expr"
-end
--- folding
-o.fillchars = "fold: "
-vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
-o.foldlevel = 99
-o.foldtext =
-  [[substitute(getline(v:foldstart),'\\\\t',repeat('\\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
+-- local big_file = function()
+--   local file = vim.fn.expand("%")
+--   local max_size = 1000 * 1024 -- 1000 kB
+--   if vim.fn.getfsize(file) > max_size then
+--     return true
+--   end
+--   return false
+-- end
+--
+-- if big_file() then
+--   vim.wo.foldmethod = "manual"
+-- else
+--   vim.wo.foldmethod = "expr"
+-- end
+-- -- folding
+-- o.fillchars = "fold: "
+-- vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+-- o.foldlevel = 99
+-- o.foldtext =
+--   [[substitute(getline(v:foldstart),'\\\\t',repeat('\\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]

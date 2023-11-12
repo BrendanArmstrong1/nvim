@@ -45,7 +45,7 @@ local function ReplaceVisualSelection()
 		end
 		return set
 	end
-	local escaped_keys = Set({"<", "[", "\\", "." })
+	local escaped_keys = Set({ "<", "[", "\\", "." })
 	local vstart = vim.api.nvim_buf_get_mark(0, "<")
 	local vend = vim.api.nvim_buf_get_mark(0, ">")
 	local line = vim.api.nvim_buf_get_lines(0, vstart[1] - 1, vend[1], 0)
@@ -64,9 +64,9 @@ local function ReplaceVisualSelection()
 	end
 
 	if count > 0 then
-		return  ":<C-U>.,.+" .. count .. "s/" .. escaped_string .. "/" .. text .. "/gI<Left><Left><Left>"
-  end
-  return  ":<C-U>%s/" .. escaped_string .. "/" .. text .. "/gI<Left><Left><Left>"
+		return ":<C-U>.,.+" .. count .. "s/" .. escaped_string .. "/" .. text .. "/gI<Left><Left><Left>"
+	end
+	return ":<C-U>%s/" .. escaped_string .. "/" .. text .. "/gI<Left><Left><Left>"
 end
 
 vim.keymap.set(
@@ -175,17 +175,19 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>o", ":e <C-R>=expand('%:p:h') . '/' <CR>", { desc = "New File" })
 
 function Print_tmux_panes()
-	vim.fn.jobstart("tmux list-panes", {
-		on_stdout = function(jobid, data, event)
-			for k, v in pairs(data) do
-				print(k, v)
-			end
-		end,
-	})
-	vim.fn.jobstart("tmux split-window -d -h")
+  local tmux_active = vim.fn.expand("$TMUX")
+  if tmux_active ~= "$TMUX" then
+  vim.fn.jobstart("tmux list-panes", {
+    on_stdout = function(jobid, data, event)
+        for k,v in ipairs(data) do
+          print(k, v)
+        end
+    end,
+  })
+  end
 end
 
-vim.keymap.set("n", "gy", Print_tmux_panes)
+-- vim.keymap.set("n", "gy", Print_tmux_panes)
 
 local Util = require("lazy.core.util")
 local enabled = true
@@ -193,8 +195,10 @@ function Toggle_diagnostics()
 	enabled = not enabled
 	if enabled then
 		vim.diagnostic.enable(0)
+		Util.info("Diagnostics on", { title = "Diagnostics" })
 	else
 		vim.diagnostic.disable(0)
+		Util.info("Diagnostics off", { title = "Diagnostics" })
 	end
 end
 

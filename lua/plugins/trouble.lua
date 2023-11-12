@@ -40,7 +40,7 @@ function M.config()
         hover = "K", -- opens a small popup with the full multiline message
         preview = "P", -- preview the diagnostic location
         close_folds = { "zM", "zm" }, -- close all folds
-        open_folds = { "zR", "zr" }, -- open all folds
+        open_folds = { "zo", "zo" }, -- open all folds
         toggle_fold = { "zA", "za" }, -- toggle fold of current file
         previous = "k", -- previous item
         next = "j", -- next item
