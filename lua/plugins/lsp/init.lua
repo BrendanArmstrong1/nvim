@@ -58,7 +58,12 @@ return {
 						pylsp = {
 							plugins = {
 								pycodestyle = {
-									ignore = { "W391", "E742" },
+									ignore = {
+										"W391",
+										"E742",
+										"W503",
+										"W504",
+									},
 									maxLineLength = 80,
 								},
 							},
@@ -170,11 +175,11 @@ return {
 			}
 
 			vim.g.ale_python_mypy_options = "--enable-incomplete-feature=Unpack"
-      vim.g.ale_python_mypy_auto_pipenv = 1
-      vim.g.ale_python_mypy_ignore_invalid_syntax = 1
-      vim.g.ale_python_ruff_auto_pipenv = 1
+			vim.g.ale_python_mypy_auto_pipenv = 1
+			vim.g.ale_python_mypy_ignore_invalid_syntax = 1
+			vim.g.ale_python_ruff_auto_pipenv = 1
 			vim.g.ale_python_black_options = "--line-length 80"
-      vim.g.ale_python_black_auto_pipenv = 1
+			vim.g.ale_python_black_auto_pipenv = 1
 
 			vim.g.ale_rust_cargo_use_clippy = vim.fn.executable("cargo-clippy")
 
@@ -199,8 +204,8 @@ return {
 			"stylua",
 			-- "selene",
 			"black",
-      "ruff",
-      "mypy",
+			"ruff",
+			"mypy",
 			"rust-analyzer",
 		},
 		opts = function(plugin)
