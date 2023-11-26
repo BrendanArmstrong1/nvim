@@ -56,15 +56,30 @@ return {
 				pylsp = {
 					settings = {
 						pylsp = {
+							configurationSources = { "flake8" },
 							plugins = {
-								pycodestyle = {
-									ignore = {
+								mccabe = {
+									threshold = 20,
+								},
+								pydocstyle = {
+									enabled = false,
+									convention = "numpy",
+								},
+								flake8 = {
+									enabled = true,
+									extendIgnore = {
 										"W391",
 										"E742",
 										"W503",
 										"W504",
 									},
-									maxLineLength = 80,
+									maxLineLength = 100,
+								},
+								pyflakes = {
+									enabled = true,
+								},
+								pycodestyle = {
+									enabled = false,
 								},
 							},
 						},
@@ -163,22 +178,21 @@ return {
 	},
 
 	-- -- formatters and linters
-
 	{
 		"dense-analysis/ale",
 		event = "BufReadPost",
 		config = function()
 			vim.g.ale_linters_explicit = 1
 			vim.g.ale_linters = {
-				python = { "ruff", "mypy" },
+				python = { "flake8" },
 				rust = { "analyzer", "cargo" },
 			}
 
-			vim.g.ale_python_mypy_options = "--enable-incomplete-feature=Unpack"
-			vim.g.ale_python_mypy_auto_pipenv = 1
-			vim.g.ale_python_mypy_ignore_invalid_syntax = 1
-			vim.g.ale_python_ruff_auto_pipenv = 1
-			vim.g.ale_python_black_options = "--line-length 80"
+			-- vim.g.ale_python_mypy_options = "--enable-incomplete-feature=Unpack"
+			-- vim.g.ale_python_mypy_auto_pipenv = 1
+			-- vim.g.ale_python_mypy_ignore_invalid_syntax = 1
+			-- vim.g.ale_python_ruff_auto_pipenv = 1
+			vim.g.ale_python_black_options = "--line-length 100"
 			vim.g.ale_python_black_auto_pipenv = 1
 
 			vim.g.ale_rust_cargo_use_clippy = vim.fn.executable("cargo-clippy")
@@ -203,6 +217,7 @@ return {
 		ensure_installed = {
 			"stylua",
 			-- "selene",
+			"flake8",
 			"black",
 			"ruff",
 			"mypy",

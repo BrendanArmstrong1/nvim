@@ -49,22 +49,23 @@ return {
       \ "compact" : 0, 
       \}
 
-      " let g:ctrlsf_auto_focus = { "at" : "start", }
-      let g:ctrlsf_auto_focus = {
-      \ "at": "done",
-      \ "duration_less_than": 1000
-      \ }
+      let g:ctrlsf_auto_focus = { "at" : "start", }
 
-      " let g:ctrlsf_auto_preview = 1
       "values ar 'yes' 'no' 'smart'
       let g:ctrlsf_case_sensitive = 'yes'
+
+      let g:ctrlsf_default_view_mode = "normal"
 
       let g:ctrlsf_backend = 'rg'
       let g:ctrlsf_extra_backend_args = {
       \ 'rg': '--no-ignore --glob "!.git"'
       \ }
       let g:ctrlsf_position = 'left_local'
-      let g:ctrlsf_mapping = { "vsplit": "<C-v>", }
+      let g:ctrlsf_mapping = { 
+      \ "vsplit": "<C-v>",
+      \ "quit": "Q",
+      \ "loclist": "<C-t>",
+      \ }
 
       ]])
     end,

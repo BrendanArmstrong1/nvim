@@ -134,9 +134,9 @@ return {
             { "n", "[x", actions.prev_conflict, { desc = "In the merge-tool: jump to the previous conflict" } },
             { "n", "]x", actions.next_conflict, { desc = "In the merge-tool: jump to the next conflict" } },
             { "n", "gq", "<CMD>DiffviewClose<cr>", { desc = "close diffview" } },
-            { "n", "<leader>co", actions.conflict_choose("ours"), { desc = "Choose the OURS version of a conflict" } },
-            { "n", "<leader>ct", actions.conflict_choose("theirs"), { desc = "Choose the THEIRS version of a conflict" } },
-            { "n", "<leader>cb", actions.conflict_choose("base"), { desc = "Choose the BASE version of a conflict" } },
+            { "n", "<leader>ce", actions.conflict_choose("ours"), { desc = "Choose the OURS version of a conflict" } },
+            { "n", "<leader>ci", actions.conflict_choose("theirs"), { desc = "Choose the THEIRS version of a conflict" } },
+            { "n", "<leader>cu", actions.conflict_choose("base"), { desc = "Choose the BASE version of a conflict" } },
             { "n", "<leader>ca", actions.conflict_choose("all"), { desc = "Choose all the versions of a conflict" } },
             { "n", "dx", actions.conflict_choose("none"), { desc = "Delete the conflict region" } },
             { "n", "<leader>cO", actions.conflict_choose_all("ours"), { desc = "Choose OURS" } },
@@ -346,7 +346,7 @@ return {
           map("n", "<leader>hp", gs.preview_hunk, {silent=true})
           map("n", "<leader>hb", function() gs.blame_line({ full = true }) end, {silent=true})
           map("n", "<leader>hl", gs.toggle_current_line_blame, {silent=true})
-          map("n", "<leader>gl", gs.toggle_linehl, {silent=true})
+          map("n", "<leader>HL", gs.toggle_linehl, {silent=true})
           map("n", "<leader>hd", gs.diffthis, {silent=true})
           map("n", "<leader>HD", function() gs.diffthis("~") end, {silent=true})
           map("n", "<leader>ht", gs.toggle_deleted, {silent=true})

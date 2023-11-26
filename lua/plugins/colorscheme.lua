@@ -5,14 +5,14 @@ return {
   {
     "folke/tokyonight.nvim",
     lazy = false,
-    priority = 1000,
+    priority = 1,
     config = function()
       -- require("notify").setup({
       --   background_colour = "#000000",
       -- })
       local tokyonight = require("tokyonight")
       tokyonight.setup({
-        style = "storm", -- the theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+        style = "night", -- the theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
         light_style = "day", -- the theme is used when the background is set to light
         transparent = true, -- enable this to disable setting the background color
         terminal_colors = true, -- configure the colors used when opening a `:terminal` in neovim
@@ -58,7 +58,7 @@ return {
     "catppuccin/nvim",
     name = "catppuccin",
     lazy = false,
-    priority = 2000,
+    priority = 200,
     config = function()
       require("catppuccin").setup({
         flavour = "macchiato", -- latte, frappe, macchiato, mocha
