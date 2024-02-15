@@ -1,3 +1,25 @@
+local ls = require "luasnip"
+local re = require("luasnip.extras").rep
+local fmt = require("luasnip.extras.fmt").fmt
+local i = ls.insert_node
+local s = ls.snippet
+local t = ls.text_node
+local sn = ls.snippet_node
+local f = ls.function_node
+local c = ls.choice_node
+local d = ls.dynamic_node
+local r = ls.restore_node
+local l = require("luasnip.extras").lambda
+local rep = require("luasnip.extras").rep
+local p = require("luasnip.extras").partial
+local m = require("luasnip.extras").match
+local n = require("luasnip.extras").nonempty
+local dl = require("luasnip.extras").dynamic_lambda
+local fmta = require("luasnip.extras.fmt").fmta
+local types = require("luasnip.util.types")
+local conds = require("luasnip.extras.conditions")
+local conds_expand = require("luasnip.extras.conditions.expand")
+
 local function difference(a, b)
   local aa = {}
   for _, v in pairs(a) do
@@ -220,6 +242,25 @@ return {
     )
   ),
 
+  -- logging
+  s({
+    trig = "logsetup",
+    dscr = "setup the logger",
+    name = "logger_setup",
+  }, fmt([[
+      {root} = logging.getLogger()
+      {}.setLevel(logging.DEBUG)
+
+      handler = logging.StreamHandler(sys.stdout)
+      handler.setLevel(logging.DEBUG)
+      formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+      handler.setFormatter(formatter)
+      {}.addHandler(handler)
+      ]],{
+        root = i(1, "root"),
+        re(1),
+        re(1),
+      })),
   -- debugging
   s({
     trig = "pdb",

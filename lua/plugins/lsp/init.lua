@@ -184,14 +184,13 @@ return {
 		config = function()
 			vim.g.ale_linters_explicit = 1
 			vim.g.ale_linters = {
-				python = { "flake8" },
+				python = { "ruff", "mypy" },
 				rust = { "analyzer", "cargo" },
 			}
 
-			-- vim.g.ale_python_mypy_options = "--enable-incomplete-feature=Unpack"
-			-- vim.g.ale_python_mypy_auto_pipenv = 1
-			-- vim.g.ale_python_mypy_ignore_invalid_syntax = 1
-			-- vim.g.ale_python_ruff_auto_pipenv = 1
+			vim.g.ale_python_mypy_options = "--enable-incomplete-feature=Unpack --check-untyped-defs"
+			vim.g.ale_python_mypy_ignore_invalid_syntax = 1
+			vim.g.ale_python_ruff_auto_pipenv = 1
 			vim.g.ale_python_black_options = "--line-length 100"
 			vim.g.ale_python_black_auto_pipenv = 1
 

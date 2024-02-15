@@ -98,12 +98,12 @@ vim.keymap.set("n", "<c-w><c-t>", "<cmd>tabclose!<CR>", { silent = true })
 vim.keymap.set("n", "<c-w><c-d>", "<cmd>wq!<CR>", { silent = true })
 vim.keymap.set("n", "<c-w><c-q>", "<cmd>q!<CR>", { silent = true })
 vim.keymap.set("n", "<c-w><c-b>", "<cmd>bd!<CR>", { silent = true })
+vim.keymap.set("n", "<c-w><c-m>", "<cmd>bd!<CR>", { silent = true })
 
 -- terminal commands
 vim.keymap.set("t", "<c-z>", "<c-\\><c-n>", { noremap = true })
 vim.keymap.set("t", "<C-w><c-q>", "<c-\\><c-n><c-w><c-q>", {})
 vim.keymap.set("t", "<C-w><c-w>", "<c-\\><c-n><c-w><c-w>", {})
-vim.keymap.set("n", "<c-w><c-m>", "<CMD>vs term://zsh<CR>", {})
 
 -- Move to window using the <meta> movement keys
 vim.keymap.set("n", "<left>", "<C-w>h")
@@ -175,16 +175,16 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>o", ":e <C-R>=expand('%:p:h') . '/' <CR>", { desc = "New File" })
 
 function Print_tmux_panes()
-  local tmux_active = vim.fn.expand("$TMUX")
-  if tmux_active ~= "$TMUX" then
-  vim.fn.jobstart("tmux list-panes", {
-    on_stdout = function(jobid, data, event)
-        for k,v in ipairs(data) do
-          print(k, v)
-        end
-    end,
-  })
-  end
+	local tmux_active = vim.fn.expand("$TMUX")
+	if tmux_active ~= "$TMUX" then
+		vim.fn.jobstart("tmux list-panes", {
+			on_stdout = function(jobid, data, event)
+				for k, v in ipairs(data) do
+					print(k, v)
+				end
+			end,
+		})
+	end
 end
 
 -- vim.keymap.set("n", "gy", Print_tmux_panes)
