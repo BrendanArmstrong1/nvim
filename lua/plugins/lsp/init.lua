@@ -190,9 +190,8 @@ return {
 
 			vim.g.ale_python_mypy_options = "--enable-incomplete-feature=Unpack --check-untyped-defs"
 			vim.g.ale_python_mypy_ignore_invalid_syntax = 1
-			vim.g.ale_python_ruff_auto_pipenv = 1
+      vim.g.ale_python_ruff_format_options = "--line-length 100"
 			vim.g.ale_python_black_options = "--line-length 100"
-			vim.g.ale_python_black_auto_pipenv = 1
 
 			vim.g.ale_rust_cargo_use_clippy = vim.fn.executable("cargo-clippy")
 
@@ -200,7 +199,7 @@ return {
 
 			vim.g.ale_fixers = {
 				["*"] = { "remove_trailing_lines", "trim_whitespace" },
-				python = { "black" },
+				python = { "ruff_format" },
 				lua = { "stylua" },
 				rust = { "rustfmt" },
 			}
