@@ -202,6 +202,7 @@ return {
 				python = { "ruff_format" },
 				lua = { "stylua" },
 				rust = { "rustfmt" },
+        c ={"clang-format"},
 			}
 		end,
 	},
