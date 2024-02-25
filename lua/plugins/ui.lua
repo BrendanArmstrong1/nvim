@@ -92,7 +92,7 @@ return {
       symbol = "▏",
       -- symbol = "│",
       options = {
-        border = "none",
+        border = "top",
         try_as_border = true,
         indent_at_cursor = true,
       },
@@ -102,8 +102,8 @@ return {
         object_scope_with_border = "ai",
 
         -- Motions (jump to respective border line; if not present - body line)
-        goto_top = "[<tab>",
-        goto_bottom = "]<tab>",
+        goto_top = "[;",
+        goto_bottom = "];",
       },
     },
     init = function()
