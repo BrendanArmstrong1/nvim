@@ -126,8 +126,8 @@ vim.keymap.set("n", "<C-b>", "<nop>")
 vim.keymap.set("n", "<C-f>", "<nop>")
 vim.keymap.set("n", "<C-b>", "<cmd>bprevious<cr>")
 vim.keymap.set("n", "<C-f>", "<cmd>bnext<cr>")
-vim.keymap.set({"n", "x", "o"}, "L", "$")
-vim.keymap.set({"n", "x", "o"}, "H", "^")
+vim.keymap.set({ "n", "x", "o" }, "L", "$")
+vim.keymap.set({ "n", "x", "o" }, "H", "^")
 
 -- Easier pasting(with auto-indent)
 vim.keymap.set("n", "gp", "`[v`]")
@@ -156,42 +156,45 @@ vim.keymap.set("i", ";", ";<c-g>u")
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
-vim.keymap.set(
-	"n",
-	"<leader>cg",
-	'<CMD>call myfunc#ExecuteStuff("right")<CR>',
-	{ desc = "execute bufffer(right)", noremap = true, silent = true }
-)
-vim.keymap.set(
-	"n",
-	"<leader>ch",
-	'<CMD>call myfunc#ExecuteStuff("bot")<CR>',
-	{ desc = "execute buffer(bot)", noremap = true, silent = true }
-)
-vim.keymap.set(
-	"n",
-	"<leader>cd",
-	"<CMD>call myfunc#CloseTerm()<CR>",
-	{ desc = "close term", noremap = true, silent = true }
-)
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<leader>cg",
+-- 	'<CMD>call myfunc#ExecuteStuff("right")<CR>',
+-- 	{ desc = "execute bufffer(right)", noremap = true, silent = true }
+-- )
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<leader>ch",
+-- 	'<CMD>call myfunc#ExecuteStuff("bot")<CR>',
+-- 	{ desc = "execute buffer(bot)", noremap = true, silent = true }
+-- )
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<leader>cd",
+-- 	"<CMD>call myfunc#CloseTerm()<CR>",
+-- 	{ desc = "close term", noremap = true, silent = true }
+-- )
 
 -- new file
 vim.keymap.set("n", "<leader>o", ":e <C-R>=expand('%:p:h') . '/' <CR>", { desc = "New File" })
+vim.keymap.set("n", "<leader>.", "<cmd>echo expand('%:p')<cr>", { desc = "print file" })
 
 function Print_tmux_panes()
 	local tmux_active = vim.fn.expand("$TMUX")
 	if tmux_active ~= "$TMUX" then
 		vim.fn.jobstart("tmux list-panes", {
-			on_stdout = function(jobid, data, event)
-				for k, v in ipairs(data) do
-					print(k, v)
-				end
+      stdout_buffered = true,
+			on_stdout = function(_, data, _)
+        data[#data] = nil
+        for k, v in ipairs(data) do
+          print(k, v)
+        end
 			end,
 		})
 	end
 end
 
--- vim.keymap.set("n", "gy", Print_tmux_panes)
+vim.keymap.set("n", "gy", Print_tmux_panes)
 
 local Util = require("lazy.core.util")
 local enabled = true

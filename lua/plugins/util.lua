@@ -18,7 +18,7 @@ return {
 			-- Remap adding surrounding to Visual mode selection
 			-- vim.api.nvim_set_keymap("x", "Z", [[:<C-u>lua MiniSurround.add('visual')<CR>]], { noremap = true })
 			-- Make special mapping for "add surrounding for line"
-      --
+			--
 			vim.api.nvim_set_keymap("n", "gzz", "gz_", { noremap = false })
 			vim.api.nvim_set_keymap(
 				"i",
@@ -77,7 +77,7 @@ return {
 					custom_commentstring = function()
 						return require("ts_context_commentstring").calculate_commentstring() or vim.bo.commentstring
 					end,
-					ignore_blank_line = true,
+					ignore_blank_line = false,
 				},
 				mappings = {
 					comment = "gc",
@@ -233,12 +233,39 @@ return {
     },
 	},
 
-	-- easy align
 	{
-		"junegunn/vim-easy-align",
-		keys = {
-			{ "gl", "<Plug>(EasyAlign)", mode = { "n", "x" } },
-		},
+		"echasnovski/mini.align",
+		version = "*",
+		keys = { { "gl", mode = { "n", "x" } }, { "gL", mode = { "n", "x" } } },
+		config = function()
+			require("mini.align").setup({
+				-- Module mappings. Use `''` (empty string) to disable one.
+				mappings = {
+					start = "gl",
+					start_with_preview = "gL",
+				},
+
+				-- Default options controlling alignment process
+				options = {
+					split_pattern = "",
+					justify_side = "right",
+					merge_delimiter = "",
+				},
+
+				-- Default steps performing alignment (if `nil`, default is used)
+				steps = {
+					pre_split = {},
+					split = nil,
+					pre_justify = {},
+					justify = nil,
+					pre_merge = {},
+					merge = nil,
+				},
+
+				-- Whether to disable showing non-error feedback
+				silent = false,
+			})
+		end,
 	},
 
 	-- vim-rsi
