@@ -77,7 +77,6 @@ return {
 				sync_install = false,
 				ensure_installed = {
 					"bash",
-					"help",
 					"html",
 					"javascript",
 					"json",
