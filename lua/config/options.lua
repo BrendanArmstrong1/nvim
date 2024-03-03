@@ -1,7 +1,7 @@
 local fn = vim.fn
 local o = vim.opt
 
-vim.g.completeopt = "popup,menuone,noselect,noinsert" -- A comma separated list of options for Insert mode completion
+o.completeopt = "menu,menuone" -- A comma separated list of options for Insert mode completion
 o.mouse = "a"
 o.number = true -- show line numbers (or only the current one)
 o.relativenumber = true -- line numbers

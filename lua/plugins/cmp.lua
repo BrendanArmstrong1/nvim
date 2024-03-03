@@ -8,7 +8,6 @@ return {
 		dependencies = {
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"saadparwaiz1/cmp_luasnip",
@@ -23,7 +22,7 @@ return {
 			local modified_priority = {
 				[types.lsp.CompletionItemKind.Variable] = types.lsp.CompletionItemKind.Method,
 				[types.lsp.CompletionItemKind.Snippet] = 0, -- top
-				[types.lsp.CompletionItemKind.Keyword] = 50, -- middle
+				[types.lsp.CompletionItemKind.Keyword] = 100, -- middle
 				[types.lsp.CompletionItemKind.Text] = 100, -- bottom
 			}
 			---@param kind integer: kind of completion entry
@@ -37,6 +36,8 @@ return {
 			end
 			local luasnip = require("luasnip")
 			local cmp = require("cmp")
+      local feedkeys = require('cmp.utils.feedkeys')
+      local keymap = require('cmp.utils.keymap')
 			cmp.setup({
 				snippet = {
 					expand = function(args)
@@ -70,7 +71,25 @@ return {
 					["<C-u>"] = cmp.mapping.scroll_docs(-4),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
-					["<C-y>"] = cmp.mapping.confirm({ select = true }),
+					["<C-y>"] = cmp.mapping(function(fallback)
+						if vim.fn.pumvisible() == 1 then
+							-- native pumenu
+							-- workaround for neovim/neovim#22892
+							if vim.fn.complete_info({ "selected" }).selected == -1 then
+								-- nothing selected, insert newline
+								feedkeys.call(keymap.t("<C-y>"), "in")
+							else
+								-- something selected, confirm selection by stopping Ctrl-X mode
+								-- :h i_CTRL-X_CTRL-Z*
+								feedkeys.call(keymap.t("<C-X><C-Z>"), "in")
+							end
+						else
+							-- `nvim-cmp` default confirm action
+							-- Accept currently selected item.
+							-- Set `select` to `false` to only confirm explicitly selected items.
+							cmp.mapping.confirm({ select = false })(fallback)
+						end
+					end, { "i", "s" }),
 					["<C-l>"] = cmp.mapping(function(fallback)
 						if luasnip.expandable() then
 							luasnip.expand()
@@ -113,27 +132,10 @@ return {
 					end, { "i", "s" }),
 				}),
 				sources = cmp.config.sources({
-					{ name = "luasnip" },
-					{ name = "nvim_lsp" },
+					{ name = "luasnip", max_item_count = 2 },
+					{ name = "nvim_lsp", max_item_count = 3 },
 					{ name = "nvim_lua" },
 					{ name = "path" },
-					{
-						name = "buffer",
-						option = {
-							keyword_length = 2,
-							get_bufnrs = function() -- from all buffers (less than 1MB)
-								local bufs = {}
-								for _, bufn in ipairs(vim.api.nvim_list_bufs()) do
-									local buf_size =
-										vim.api.nvim_buf_get_offset(bufn, vim.api.nvim_buf_line_count(bufn))
-									if buf_size < 1024 * 1024 then
-										table.insert(bufs, bufn)
-									end
-								end
-								return bufs
-							end,
-						},
-					},
 				}),
 
 				formatting = {
@@ -142,7 +144,6 @@ return {
 						vim_item.menu = ({
 							nvim_lsp = "[LSP]",
 							luasnip = "[Snippet]",
-							buffer = "[Buffer]",
 							path = "[Path]",
 						})[entry.source.name]
 						return vim_item

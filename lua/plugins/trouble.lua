@@ -3,12 +3,12 @@ local M = {
   cmd = { "Trouble", "TroubleToggle" }, -- lazy loads on these commands
   ft = { "Telescope" },
   keys = {
-    { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "Toggle Trouble" },
-    { "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Trouble workspace_diagnostics" },
-    { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Trouble document_diagnostics" },
-    { "<leader>xl", "<cmd>TroubleToggle loclist<cr>", desc = "Trouble loclist" },
-    { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "Trouble quickfix" },
-    { "gR", "<cmd>TroubleToggle lsp_references<cr>", desc = "Trouble lsp_references" },
+    { "<leader>xx", function() require("trouble").toggle() end, desc = "Toggle Trouble" },
+    { "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end, desc = "Trouble workspace_diagnostics" },
+    { "<leader>xd", function() require("trouble").toggle("document_diagnostics") end, desc = "Trouble document_diagnostics" },
+    { "<leader>xl", function() require("trouble").toggle("loclist") end, desc = "Trouble loclist" },
+    { "<leader>xq", function() require("trouble").toggle("quickfix") end, desc = "Trouble quickfix" },
+    { "gR", function() require("trouble").toggle("lsp_references") end, desc = "Trouble lsp_references" },
   },
 }
 

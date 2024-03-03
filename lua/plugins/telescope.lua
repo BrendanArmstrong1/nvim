@@ -108,10 +108,11 @@ function M.config()
           ["<Up>"] = actions.move_selection_previous,
 
           ["<CR>"] = actions.select_default + actions.center,
-          ["<C-t>"] = actions.select_horizontal + actions.center,
+          ["<C-s>"] = actions.select_horizontal + actions.center,
           ["<C-v>"] = actions.select_vertical + actions.center,
 
           ["<C-x>"] = trouble.open_with_trouble,
+          ["<C-q>"] = trouble.open_selected_with_trouble,
 
           ["<C-u>"] = actions.preview_scrolling_up,
           ["<C-d>"] = actions.preview_scrolling_down,
@@ -121,7 +122,6 @@ function M.config()
 
           ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
           ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-          ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
           ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
           ["<C-l>"] = actions.complete_tag,
           ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
@@ -130,14 +130,14 @@ function M.config()
         n = {
           ["<esc>"] = actions.close,
           ["<CR>"] = actions.select_default + actions.center,
-          ["<C-t>"] = actions.select_horizontal + actions.center,
+          ["<C-s>"] = actions.select_horizontal + actions.center,
           ["<C-v>"] = actions.select_vertical + actions.center,
 
           ["<C-x>"] = trouble.open_with_trouble,
+          ["<C-q>"] = trouble.open_selected_with_trouble,
 
           ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
           ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-          ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
           ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 
           ["j"] = actions.move_selection_next,
