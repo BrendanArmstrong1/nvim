@@ -87,7 +87,7 @@ return {
 							-- `nvim-cmp` default confirm action
 							-- Accept currently selected item.
 							-- Set `select` to `false` to only confirm explicitly selected items.
-							cmp.mapping.confirm({ select = false })(fallback)
+							cmp.mapping.confirm({ select = true })(fallback)
 						end
 					end, { "i", "s" }),
 					["<C-l>"] = cmp.mapping(function(fallback)
