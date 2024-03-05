@@ -132,8 +132,8 @@ return {
 					end, { "i", "s" }),
 				}),
 				sources = cmp.config.sources({
-					{ name = "luasnip", max_item_count = 2 },
-					{ name = "nvim_lsp", max_item_count = 3 },
+					{ name = "luasnip", max_item_count = 4 },
+					{ name = "nvim_lsp"},
 					{ name = "nvim_lua" },
 					{ name = "path" },
 				}),
