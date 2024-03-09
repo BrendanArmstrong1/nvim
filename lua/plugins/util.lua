@@ -70,7 +70,7 @@ return {
 	},
 	{
 		"echasnovski/mini.comment",
-		keys = { { "gc", mode = { "n", "x" } } },
+		keys = { { "gc", mode = { "n", "x", "o" } } },
 		config = function()
 			require("mini.comment").setup({
 				options = {
