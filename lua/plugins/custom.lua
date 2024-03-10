@@ -1,6 +1,8 @@
 return {
-  {
-    dir = "/home/brendan/S/Nvim_plugins/lua/sortvis",
-    cmd = {"SortVis"},
-  }
+	{
+		"BrendanArmstrong1/sortvis.nvim",
+		cmd = "SortVis",
+		dev = false,
+		config = true,
+	},
 }

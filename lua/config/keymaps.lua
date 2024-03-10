@@ -33,7 +33,6 @@ vim.api.nvim_set_keymap(
 	"':' .. (v:count ? '' : '%') .. 's/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>'",
 	{ desc = "replace word under cursor", noremap = true, expr = true }
 )
-
 local function ReplaceVisualSelection()
 	local count = vim.v.count
 	local keys = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
