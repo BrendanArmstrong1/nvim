@@ -36,8 +36,39 @@ return {
 			end
 			local luasnip = require("luasnip")
 			local cmp = require("cmp")
-      local feedkeys = require('cmp.utils.feedkeys')
-      local keymap = require('cmp.utils.keymap')
+			local feedkeys = require("cmp.utils.feedkeys")
+			local keymap = require("cmp.utils.keymap")
+			local select_next = false
+			vim.keymap.set({ "i" }, "<C-l>", function()
+				local ok, _ = pcall(luasnip.activate_node, {
+					strict = true,
+					select = select_next,
+				})
+				if not ok then
+					print("No node.")
+					return
+				end
+				if select_next then
+					return
+				end
+				local curbuf = vim.api.nvim_get_current_buf()
+				local hl_duration_ms = 100
+				local node = luasnip.session.current_nodes[curbuf]
+				local from, to = node:get_buf_position({ raw = true })
+				local id = vim.api.nvim_buf_set_extmark(curbuf, luasnip.session.ns_id, from[1], from[2], {
+					end_row = to[1],
+					end_col = to[2],
+					hl_group = "Visual",
+				})
+				vim.defer_fn(function()
+					vim.api.nvim_buf_del_extmark(curbuf, luasnip.session.ns_id, id)
+				end, hl_duration_ms)
+				select_next = true
+
+				vim.loop.new_timer():start(1000, 0, function()
+					select_next = false
+				end)
+			end)
 			cmp.setup({
 				snippet = {
 					expand = function(args)
@@ -93,7 +124,7 @@ return {
 					["<C-l>"] = cmp.mapping(function(fallback)
 						if luasnip.expandable() then
 							luasnip.expand()
-						elseif luasnip.expand_or_jumpable() then
+						elseif luasnip.expand_or_locally_jumpable() then
 							luasnip.expand_or_jump()
 						elseif check_backspace() then
 							fallback()
@@ -133,7 +164,7 @@ return {
 				}),
 				sources = cmp.config.sources({
 					{ name = "luasnip", max_item_count = 4 },
-					{ name = "nvim_lsp"},
+					{ name = "nvim_lsp" },
 					{ name = "nvim_lua" },
 					{ name = "path" },
 				}),
