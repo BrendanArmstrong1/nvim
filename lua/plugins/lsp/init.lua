@@ -1,3 +1,13 @@
+local function on_attach(on_attach)
+	vim.api.nvim_create_autocmd("LspAttach", {
+		callback = function(args)
+			local buffer = args.buf
+			local client = vim.lsp.get_client_by_id(args.data.client_id)
+			on_attach(client, buffer)
+		end,
+	})
+end
+
 return {
 	-- lspconfig
 	{
@@ -110,7 +120,7 @@ return {
 		---@param opts PluginLspOpts
 		config = function(_, opts)
 			-- setup formatting and keymaps
-			require("util").on_attach(function(client, buffer)
+			on_attach(function(client, buffer)
 				require("plugins.lsp.keymaps").on_attach(client, buffer)
 			end)
 
@@ -170,7 +180,7 @@ return {
 		"SmiteshP/nvim-navic",
 		init = function()
 			vim.g.navic_silence = true
-			require("util").on_attach(function(client, buffer)
+			on_attach(function(client, buffer)
 				require("nvim-navic").attach(client, buffer)
 			end)
 		end,
@@ -190,7 +200,7 @@ return {
 
 			vim.g.ale_python_mypy_options = "--enable-incomplete-feature=Unpack --check-untyped-defs"
 			vim.g.ale_python_mypy_ignore_invalid_syntax = 1
-      vim.g.ale_python_ruff_format_options = "--line-length 100"
+			vim.g.ale_python_ruff_format_options = "--line-length 100"
 			vim.g.ale_python_black_options = "--line-length 100"
 
 			vim.g.ale_rust_cargo_use_clippy = vim.fn.executable("cargo-clippy")
@@ -202,7 +212,7 @@ return {
 				python = { "ruff_format" },
 				lua = { "stylua" },
 				rust = { "rustfmt" },
-        c ={"clang-format"},
+				c = { "clang-format" },
 			}
 		end,
 	},
