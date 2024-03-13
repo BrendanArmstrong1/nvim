@@ -8,7 +8,6 @@ return {
 		},
 		config = function()
       local path = require("lua_snippet_repo").load_snippets()
-      print(vim.inspect(path))
 			require("luasnip.loaders.from_lua").lazy_load({ paths = path })
 			require("luasnip").setup({
 				history = true,
