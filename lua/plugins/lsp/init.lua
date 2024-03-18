@@ -38,13 +38,15 @@ return {
 			},
 			-- LSP Server Settings
 			servers = {
-				bashls = {},
-				clangd = {},
+				marksman = { single_file_support = true },
+				bashls = { single_file_support = true },
+				clangd = { single_file_support = true },
 				-- cssls = {},
 				-- tsserver = {},
 				-- html = {},
 				rust_analyzer = {
 					["rust-analyzer"] = {
+						single_file_support = true,
 						assist = {
 							importEnforceGranularity = true,
 							importPrefix = "crate",
@@ -66,6 +68,7 @@ return {
 				pylsp = {
 					settings = {
 						pylsp = {
+							single_file_support = true,
 							configurationSources = { "flake8" },
 							plugins = {
 								mccabe = {
@@ -97,6 +100,7 @@ return {
 				},
 				lua_ls = {
 					settings = {
+						single_file_support = true,
 						Lua = {
 							diagnostics = {
 								globals = { "vim" },
