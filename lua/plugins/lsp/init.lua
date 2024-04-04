@@ -41,8 +41,8 @@ return {
 				marksman = { single_file_support = true },
 				bashls = { single_file_support = true },
 				clangd = { single_file_support = true },
-				-- cssls = {},
-				-- tsserver = {},
+				cssls = {},
+				tsserver = {},
 				-- html = {},
 				rust_analyzer = {
 					["rust-analyzer"] = {
@@ -200,6 +200,8 @@ return {
 			vim.g.ale_linters = {
 				python = { "ruff", "mypy" },
 				rust = { "analyzer", "cargo" },
+				javascript = { "tsserver" },
+				css = { "csslint" },
 			}
 
 			vim.g.ale_python_mypy_options = "--enable-incomplete-feature=Unpack --check-untyped-defs"
@@ -217,6 +219,8 @@ return {
 				lua = { "stylua" },
 				rust = { "rustfmt" },
 				c = { "clang-format" },
+				javascript = { "prettier" },
+        css = { "prettier" },
 			}
 		end,
 	},
