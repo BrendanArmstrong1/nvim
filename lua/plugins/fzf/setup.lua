@@ -1,4 +1,5 @@
 local util = require("plugins.fzf.util")
+local helptags = require("plugins.fzf.helptags_setup")
 
 M = {}
 
@@ -15,13 +16,13 @@ end
 function M.fzhelptags_command()
 	vim.api.nvim_create_user_command("FzHelpTags", function(_)
 		vim.fn["fzf#run"](vim.fn["fzf#wrap"]({
-			source = util.find_tags(),
-			sinklist = util.process_help_tags,
+			source = helptags.find_tags(),
+			sinklist = helptags.process_help_tags,
 			options = {
 				"--layout=reverse",
-				"-m",
+				"+m",
 				"--preview",
-				"rg --no-heading --line-number -A 20 -B 3 --color=always {3} {2} || echo {3}",
+				"rg --no-heading -A 20 -B 3 --color=always {3} {2} || echo {3}",
 				"--ansi",
 				"--tiebreak=begin",
 				"--delimiter",
