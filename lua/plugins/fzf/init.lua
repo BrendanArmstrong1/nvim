@@ -7,10 +7,11 @@ M.dependencies = { "junegunn/fzf" }
 
 -- stylua: ignore
 M.keys = {
+	{ "<leader>:", "<cmd>Commands<cr>", mode = { "n" } },
 	{ "<leader>ff", "<cmd>FzFiles<cr>", mode = { "n" } },
 	{ "<leader>fl", "<cmd>BLines<cr>", mode = { "n" } },
 	{ "<leader>FL", "<cmd>Lines<cr>", mode = { "n" } },
-	{ "<leader>fk", "<cmd>Helptags<cr>", mode = { "n" } },
+	{ "<leader>fk", "<cmd>FzHelpTags<cr>", mode = { "n" } },
 	{ "<leader>FK", "<cmd>Maps<cr>", mode = { "n" } },
 	{ "<leader>\\", "<cmd>RG<CR>", mode = { "n" } },
 	{ "<leader>?", function() return util.word_search(false) end, expr = true, mode = "n" },
@@ -22,10 +23,8 @@ M.keys = {
 
 function M.config()
   setup.setup()
-  setup.default_command()
-  setup.layout()
 	setup.fzfiles_command()
-  setup.colors()
+  setup.fzhelptags_command()
 end
 
 return M
