@@ -1,5 +1,6 @@
 table.unpack = table.unpack or unpack -- 5.1 compatibility
-M = {}
+
+local M = {}
 
 -- stylua: ignore
 local function get_vis_cols()
@@ -11,10 +12,20 @@ local function get_vis_cols()
 end
 
 local function escape_chars(text)
-	return text
+	local escaped_characters = {
+		["%("] = "\\(",
+		["%)"] = "\\)",
+		["%{"] = "\\{",
+		["%}"] = "\\}",
+	}
+	local escaped_text = text
+	for i, v in pairs(escaped_characters) do
+		escaped_text = string.gsub(escaped_text, i, v)
+	end
+	return escaped_text
 end
 
-function M.word_search(visual)
+M.run = function(visual)
 	if visual then
 		local keys = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
 		vim.api.nvim_feedkeys(keys, "x", false)
@@ -24,21 +35,5 @@ function M.word_search(visual)
 	end
 	return "<cmd>Rg " .. vim.fn.expand("<cword>") .. "<CR>"
 end
-
-local ignore_string = {
-	".git",
-	"*.dll",
-	"*.seq",
-	"*.stp",
-	"*.zip",
-	"*.whl",
-	"*.lib",
-	"*.pdf",
-	"*.jpg",
-	"*.png",
-	"*.docx",
-}
-
-M.ignored_filetypes = table.concat(ignore_string, ",")
 
 return M

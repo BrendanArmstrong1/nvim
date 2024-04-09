@@ -1,4 +1,4 @@
-local M = {}
+M = {}
 
 function M.on_attach(client, buffer)
 	local self = M.new(client, buffer)

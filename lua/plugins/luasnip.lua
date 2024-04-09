@@ -1,13 +1,10 @@
 return {
 	{
 		"L3MON4D3/LuaSnip",
-		keys = { { "<c-n>", mode = {"x"} } },
-		dependencies = {
-			"BrendanArmstrong1/lua_snippet_repo.nvim",
-      dev = false,
-		},
+		keys = { { "<c-n>", mode = { "x" } } },
+		dependencies = { "BrendanArmstrong1/lua_snippet_repo.nvim" },
 		config = function()
-      local path = require("lua_snippet_repo").load_snippets()
+			local path = require("lua_snippet_repo").load_snippets()
 			require("luasnip.loaders.from_lua").lazy_load({ paths = path })
 			require("luasnip").setup({
 				history = true,
