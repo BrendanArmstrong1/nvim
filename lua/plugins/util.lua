@@ -59,15 +59,6 @@ return {
     },
 	},
 
-	-- comments
-	{
-		"JoosepAlviste/nvim-ts-context-commentstring",
-		config = function()
-			require("ts_context_commentstring").setup({
-				enable_autocmd = false,
-			})
-		end,
-	},
 	{
 		"echasnovski/mini.comment",
 		keys = { { "gc", mode = { "n", "x", "o" } } },

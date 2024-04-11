@@ -4,8 +4,12 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		event = "BufReadPost",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		dependencies = { "nvim-treesitter/nvim-treesitter", "JoosepAlviste/nvim-ts-context-commentstring" },
 		config = function()
+			vim.g.skip_ts_context_commentstring_module = true
+			require("ts_context_commentstring").setup({
+			     enable_autocmd = false
+			   })
 			local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 			vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
 			vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
@@ -118,10 +122,6 @@ return {
 						goto_node = "<cr>",
 						show_help = "?",
 					},
-				},
-				context_commentstring = {
-					enable = true,
-					enable_autocmd = false,
 				},
 				incremental_selection = {
 					enable = true,

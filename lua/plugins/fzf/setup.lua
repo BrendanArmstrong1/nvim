@@ -19,7 +19,7 @@ M.setup = function()
 	vim.env.FZF_DEFAULT_COMMAND = "rg --files --no-ignore --hidden --follow --glob '!{"
 		.. table.concat(ignore_string, ",")
 		.. "}'"
-	vim.env.FZF_DEFAULT_OPTS = "--layout=reverse --info=inline -m --border --margin=0 --padding=0 " .. binding_cmd
+	vim.env.FZF_DEFAULT_OPTS = "--layout=reverse --ansi --info=inline -m --border --margin=0 --padding=0 " .. binding_cmd
 	vim.g.fzf_vim = {
 		preview_window = { "right,50%,<70(hidden)", "ctrl-/" },
 		buffers_jump = 1,

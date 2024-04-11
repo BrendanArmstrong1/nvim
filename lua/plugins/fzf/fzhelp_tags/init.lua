@@ -1,12 +1,13 @@
-local util = require("plugins.fzf.help_tags.util")
-
 local M = {}
 
 M.setup = function()
+  local sink = require("plugins.fzf.fzhelp_tags.sink")
+  local source = require("plugins.fzf.fzhelp_tags.source")
+
 	vim.api.nvim_create_user_command("FzHelpTags", function(_)
 		vim.fn["fzf#run"](vim.fn["fzf#wrap"]({
-			source = util.find_tags(),
-			sinklist = util.process_help_tags,
+			source = source.find_tags(),
+			sinklist = sink.process_help_tags,
 			options = {
 				"+m",
 				"--preview",

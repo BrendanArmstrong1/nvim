@@ -1,3 +1,5 @@
+local util = require("plugins.fzf.util")
+
 local M = {}
 
 local function path_tail(path)
@@ -54,7 +56,7 @@ M.find_tags = function()
 						table.insert(
 							tags,
 							table.concat({
-								fields[1],
+								util.green(fields[1], "Label"),
 								help_files[fields[2]],
 								escaped_tags,
 								original_tags,
@@ -70,18 +72,5 @@ M.find_tags = function()
 	return tags
 end
 
-M.process_help_tags = function(line)
-	local command = line[1]
-	local info = vim.split(line[2], "\t")
-	local tag = string.sub(info[4], 3, #info[4] - 2)
-	print(vim.inspect(info))
-	local cmd
-	if command == "enter" then
-		cmd = "help "
-	elseif command == "ctrl-v" then
-		cmd = "vert help "
-	end
-	vim.cmd(cmd .. tag)
-end
 
 return M
