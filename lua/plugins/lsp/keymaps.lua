@@ -5,18 +5,11 @@ function M.on_attach(client, buffer)
 
 	self:map("<leader>vd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 	self:map("<leader>li", "LspInfo", { desc = "Lsp Info" })
-	self:map("gd", "Telescope lsp_definitions", { desc = "Goto Definition" })
-	self:map("gD", "Telescope lsp_declarations", { desc = "Goto Declaration" })
-
-	self:map("gI", "Telescope lsp_implementations", { desc = "Goto Implementation" })
-	self:map("gt", "Telescope lsp_type_definitions", { desc = "Goto Type Definition" })
 	self:map("K", vim.lsp.buf.hover, { desc = "Hover" })
 	self:map("]d", M.diagnostic_goto(true), { desc = "Next Diagnostic" })
 	self:map("[d", M.diagnostic_goto(false), { desc = "Prev Diagnostic" })
-
 	self:map("<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help", mode = { "i" }, has = "signatureHelp" })
 	self:map("<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", mode = { "n", "v" }, has = "codeAction" })
-
 	self:map("<leader>cf", "ALEFix", { desc = "Format Document", has = "documentFormatting" })
 end
 

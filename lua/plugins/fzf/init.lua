@@ -5,6 +5,13 @@ M.dependencies = { "junegunn/fzf" }
 -- stylua: ignore
 M.keys = {
 	{ "<leader>:", "<cmd>Commands<cr>", mode = { "n" } },
+	{ "gd", vim.lsp.buf.definition, mode = { "n" } },
+	{ "gr", function() vim.lsp.buf.references() end, mode = { "n" } },
+	{ "gI", vim.lsp.buf.implementation, mode = { "n" } },
+	{ "gt", vim.lsp.buftype_definition, mode = { "n" } },
+	{ "<leader>fd", "<cmd>FzfLspDiagnosticsAll<cr>", mode = { "n" } },
+	{ "<leader>FD", "<cmd>FzfLspDiagnostics<cr>", mode = { "n" } },
+	{ "<leader>fr", "<cmd>FzfFuzzyLast<cr>", mode = { "n" } },
 	{ "<leader>ff", "<cmd>FzFiles<cr>", mode = { "n" } },
 	{ "<leader>fl", "<cmd>BLines<cr>", mode = { "n" } },
 	{ "<leader>FL", "<cmd>Lines<cr>", mode = { "n" } },
@@ -22,6 +29,7 @@ M.config = function()
 	require("plugins.fzf.setup").setup()
 	require("plugins.fzf.fzfiles").setup()
 	require("plugins.fzf.fzhelp_tags").setup()
+	require("plugins.fzf.fzLsp").setup()
 end
 
 return M

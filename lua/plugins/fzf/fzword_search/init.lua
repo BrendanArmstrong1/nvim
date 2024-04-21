@@ -1,3 +1,4 @@
+---@diagnostic disable-next-line: deprecated
 table.unpack = table.unpack or unpack -- 5.1 compatibility
 
 local M = {}

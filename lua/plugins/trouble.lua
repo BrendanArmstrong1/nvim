@@ -1,14 +1,14 @@
 local M = { "folke/trouble.nvim" }
 
 M.cmd = { "Trouble", "TroubleToggle" } -- lazy loads on these commands
-M.ft = { "Telescope", "fzf" }
+M.ft = { "fzf" }
 M.branch = "dev"
 
 -- stylua: ignore
 M.keys = {
 	{ "<leader>xx", "<CMD>Trouble diagnostics toggle<cr>", desc = "Toggle Trouble" },
 	{ "<leader>xb", "<CMD>Trouble diagnostics toggle filter.buf=0<CR>", desc = "Trouble buffer diagnostics" },
-	{ "<leader>xs", "<CMD>Trouble symbols toggle focus=false<CR>", desc = "Trouble symbols toggle" },
+	{ "<leader>xs", "<CMD>Trouble symbols toggle focus=false win.position=right<CR>", desc = "Trouble symbols toggle" },
 	{ "<leader>xl", "<CMD>Trouble loclist toggle<CR>", desc = "Trouble loclist" },
 	{ "<leader>xq", "<CMD>Trouble qflist toggle<CR>", desc = "Trouble quickfix" },
 	{ "gR", "<CMD>Trouble lsp toggle focus=false win.position=right<CR>", desc = "Trouble lsp_references" },
@@ -19,7 +19,7 @@ function M.config()
 		{
 			position = "bottom", -- position of the list can be: bottom, top, left, right
 			height = 25, -- height of the trouble list when position is top or bottom
-			width = 75, -- width of the list when position is left or right
+			width = 150, -- width of the list when position is left or right
 			icons = true, -- use devicons for filenames
 			mode = "workspace_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
 			severity = nil, -- nil (ALL) or vim.diagnostic.severity.ERROR | WARN | INFO | HINT

@@ -69,7 +69,7 @@ function M.config()
         },
         {
           function()
-            local stats = require("lazy").stats()
+            local stats = require("lazy.stats").stats()
             local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
             return " " .. ms .. "ms"
           end,
