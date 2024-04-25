@@ -10,6 +10,7 @@ local ignore_string = {
 	"*.lib",
 	"*.pdf",
 	"*.jpg",
+	"*.aoeb",
 	"*.png",
 	"*.docx",
 }
