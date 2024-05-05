@@ -34,7 +34,6 @@ local function ansi(str, group, default, ...)
 	local fg = get_color("fg", group)
 	local bg = get_color("bg", group)
 	local color = (fg == "" and ansi_color[default] or csi(fg, 1)) .. (bg == "" and "" or ";" .. csi(bg, 0))
-  print(color)
 	return vim.fn.printf("\x1b[%s%sm%s\x1b[m", color, #param and ";1" or "", str)
 end
 
@@ -44,6 +43,5 @@ for color_name, _ in pairs(ansi_color) do
 		return ansi(str, parm[1] or "", color_name)
 	end
 end
-print(M.green("hello in yellow", "Label"))
 
 return M

@@ -2,6 +2,7 @@ local M = {}
 
 local ignore_string = {
 	".git",
+	"target",
 	"*.dll",
 	"*.seq",
 	"*.stp",

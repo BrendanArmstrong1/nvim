@@ -48,11 +48,6 @@ return {
           monthly = '%Y_m%m',
         }
       }
-			vim.g.wiki_select_method = {
-				pages = require("wiki.telescope").pages,
-				tags = require("wiki.telescope").tags,
-				toc = require("wiki.telescope").toc,
-			}
 		end,
 	},
 }
