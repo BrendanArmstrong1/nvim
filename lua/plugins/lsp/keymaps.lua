@@ -2,8 +2,7 @@ M = {}
 
 function M.on_attach(client, buffer)
 	local self = M.new(client, buffer)
-
-	self:map("<leader>vd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+  self:map("<leader>vd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 	self:map("<leader>li", "LspInfo", { desc = "Lsp Info" })
 	self:map("K", vim.lsp.buf.hover, { desc = "Hover" })
 	self:map("]d", M.diagnostic_goto(true), { desc = "Next Diagnostic" })
