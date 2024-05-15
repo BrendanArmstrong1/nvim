@@ -65,47 +65,60 @@ return {
 						},
 					},
 				},
-				pylsp = {
-					settings = {
-						pylsp = {
-							single_file_support = true,
-							configurationSources = { "flake8" },
-							plugins = {
-								mccabe = {
-									threshold = 20,
-								},
-								pydocstyle = {
-									enabled = false,
-									convention = "numpy",
-								},
-								flake8 = {
-									enabled = true,
-									extendIgnore = {
-										"W391",
-										"E742",
-										"W503",
-										"W504",
-									},
-									maxLineLength = 100,
-								},
-								pyflakes = {
-									enabled = true,
-								},
-								pycodestyle = {
-									enabled = false,
-								},
-							},
+				pyright = {
+					python = {
+						disableOrganizeImports = false,
+						analysis = {
+							indexing = true,
+							typeCheckingMode = "basic",
+							autoSearchPaths = true,
+							autoImportCompletions = true,
+							diagnosticMode = "openFilesOnly",
+							useLibraryCodeForTypes = true,
 						},
 					},
 				},
+				-- pylsp = {
+				-- 	settings = {
+				-- 		pylsp = {
+				-- 			single_file_support = true,
+				-- 			configurationSources = { "flake8" },
+				-- 			plugins = {
+				-- 				mccabe = {
+				-- 					threshold = 20,
+				-- 				},
+				-- 				pydocstyle = {
+				-- 					enabled = false,
+				-- 					convention = "numpy",
+				-- 				},
+				-- 				flake8 = {
+				-- 					enabled = true,
+				-- 					extendIgnore = {
+				-- 						"W391",
+				-- 						"E742",
+				-- 						"W503",
+				-- 						"W504",
+				-- 					},
+				-- 					maxLineLength = 100,
+				-- 				},
+				-- 				pyflakes = {
+				-- 					enabled = true,
+				-- 				},
+				-- 				pycodestyle = {
+				-- 					enabled = false,
+				-- 				},
+				-- 			},
+				-- 		},
+				-- 	},
+				-- },
 				lua_ls = {
 					settings = {
 						single_file_support = true,
 						Lua = {
 							diagnostics = {
 								globals = { "vim" },
-                undefined_global = false,
-                missing_parameters = false,
+								undefined_global = false,
+								missing_parameters = false,
 							},
 						},
 					},
