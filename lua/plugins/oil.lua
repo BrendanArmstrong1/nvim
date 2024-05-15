@@ -3,8 +3,9 @@ return {
 		"stevearc/oil.nvim",
 		cmd = { "Oil" },
 		keys = {
-			{ "<leader>ft", "<cmd>Oil<cr>", desc = "Oil" },
-			{ "-", "<cmd>Oil<cr>", desc = "Oil" },
+			{ "<leader>-", function ()
+        require("oil").toggle_float()
+			end, desc = "Oil" },
 		},
 		dependencies = { "kyazdani42/nvim-web-devicons" },
 		config = function()
