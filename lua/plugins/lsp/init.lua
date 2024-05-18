@@ -70,11 +70,18 @@ return {
 						disableOrganizeImports = false,
 						analysis = {
 							indexing = true,
+							include = function()
+								vim.fn.getcwd()
+							end,
 							typeCheckingMode = "basic",
 							autoSearchPaths = true,
 							autoImportCompletions = true,
 							diagnosticMode = "openFilesOnly",
 							useLibraryCodeForTypes = true,
+							-- error, warning, information, true, false, none
+							diagnosticSeverityOverrides = {
+								reportUnusedImport = "none",
+							},
 						},
 					},
 				},
