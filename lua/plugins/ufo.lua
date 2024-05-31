@@ -17,8 +17,8 @@ return {
 				python = { "indent" },
 				git = "",
 			}
-			vim.keymap.set("n", "zO", require("ufo").openAllFolds)
-			vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+			vim.keymap.set("n", "ZO", require("ufo").openAllFolds)
+			vim.keymap.set("n", "ZM", require("ufo").closeAllFolds)
 			vim.keymap.set("n", "zo", require("ufo").openFoldsExceptKinds)
 			vim.keymap.set("n", "zm", require("ufo").closeFoldsWith)
 			vim.keymap.set("n", "zp", require("ufo").peekFoldedLinesUnderCursor)
