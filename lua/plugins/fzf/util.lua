@@ -1,3 +1,5 @@
+table.unpack = table.unpack or unpack -- 5.1 compatibility
+
 local M = {}
 
 local function get_color(attr, group)
@@ -13,7 +15,7 @@ end
 
 local function csi(color, fg)
 	local prefix = fg and "38;" or "48;"
-	if string.sub(color,1,1) == "#" then
+	if string.sub(color, 1, 1) == "#" then
 		return prefix
 			.. "2;"
 			.. vim.fn.join(
@@ -30,7 +32,7 @@ end
 local ansi_color = { black = 30, red = 31, green = 32, yellow = 33, blue = 34, magenta = 35, cyan = 36 }
 
 local function ansi(str, group, default, ...)
-  local param = {...}
+	local param = { ... }
 	local fg = get_color("fg", group)
 	local bg = get_color("bg", group)
 	local color = (fg == "" and ansi_color[default] or csi(fg, 1)) .. (bg == "" and "" or ";" .. csi(bg, 0))
@@ -42,6 +44,28 @@ for color_name, _ in pairs(ansi_color) do
 		local parm = { ... }
 		return ansi(str, parm[1] or "", color_name)
 	end
+end
+
+M.complete_word = function()
+	local _, cur_x = table.unpack(vim.api.nvim_win_get_cursor(0))
+	local current_line = vim.api.nvim_get_current_line()
+	local sliced_line = string.sub(current_line, 1, cur_x)
+	local query = string.match(sliced_line, "^.-(%w+)$")
+	require("fzf-lua").fzf_exec(function(fzf_cb)
+		coroutine.wrap(function()
+			local co = coroutine.running()
+			local dictionary = vim.split(vim.api.nvim_get_option("dictionary"), ",", { plain = true })
+			for _, dict in ipairs(dictionary) do
+				for line in io.lines(dict) do
+					fzf_cb(line, function()
+						coroutine.resume(co)
+					end)
+					coroutine.yield()
+				end
+			end
+			fzf_cb()
+		end)()
+	end, { complete = true, query = query })
 end
 
 return M
