@@ -53,18 +53,19 @@ M.config = function()
 			},
 		},
 		grep = {
-				actions = {
-					["ctrl-g"] = false,
-					["ctrl-t"] = { actions.grep_lgrep },
-				},
+			actions = {
+				["ctrl-g"] = false,
+				["ctrl-t"] = { actions.grep_lgrep },
+			},
 		},
 		tags = {
-				actions = {
-					["ctrl-g"] = false,
-					["ctrl-t"] = { actions.grep_lgrep },
-				},
+			actions = {
+				["ctrl-g"] = false,
+				["ctrl-t"] = { actions.grep_lgrep },
+			},
 		},
 	})
+	require("fzf-lua").register_ui_select()
 	-- require("plugins.fzf.setup").setup()
 end
 
