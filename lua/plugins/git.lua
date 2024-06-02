@@ -2,7 +2,7 @@ return {
   -- Fugitive
   {
     "tpope/vim-fugitive",
-    cmd = "G",
+    cmd = {"G", "Gedit", "Gvsplit"},
     init = function()
       vim.api.nvim_set_keymap("n", "<leader>gD", "<CMD>Gdiffsplit!<CR>", {})
       vim.api.nvim_set_keymap("n", "<leader>ga", "<CMD>diffget //2<CR>", {})

@@ -68,4 +68,43 @@ M.complete_word = function()
 	end, { complete = true, query = query })
 end
 
+M.git_pickaxe = function()
+	local actions = require("fzf-lua.actions")
+	require("fzf-lua").fzf_live(
+		'git log --color --pretty=format:"%C(yellow)%h%Creset '
+			.. '%Cgreen(%><(12)%cr%><|(12))%Creset %s %C(blue)<%an>%Creset" -S',
+		{
+			prompt = "PickAxe> ",
+			delimiter = " ",
+			header = ":: <" .. M.yellow("ctrl-y") .. "> to " .. M.red("copy commit hash"),
+			preview = {
+				type = "cmd",
+				field_index = "{+}", -- for fzf_opts = {["--multi"] = true}
+				fn = function(items)
+					print(vim.inspect(items))
+					local current_line = vim.api.nvim_get_current_line()
+					local query = string.match(current_line, "^PickAxe> (%w+).*$")
+					local hash = vim.split(items[1], " ")[1]
+					return "git show --color --pretty=medium "
+						.. hash
+						.. " -S "
+						.. query
+						.. " | bat --style=default --color=always"
+				end,
+			},
+			actions = {
+				["default"] = function(selected, _)
+					local hash = vim.split(selected[1], " ")[1]
+					vim.cmd("Gedit " .. hash)
+				end,
+				["ctrl-v"] = function(selected, _)
+					local hash = vim.split(selected[1], " ")[1]
+					vim.cmd("Gvsplit " .. hash)
+				end,
+				["ctrl-y"] = { fn = actions.git_yank_commit, exec_silent = true },
+			},
+		}
+	)
+end
+
 return M
