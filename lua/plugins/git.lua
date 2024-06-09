@@ -13,6 +13,7 @@ return {
 		end,
 		keys = {
 			{ "<leader>gp", "<CMD>Git push<CR>" },
+			{ "<leader>GB", "<CMD>GBrowse!<CR>", mode = "x" },
 			{ "<leader>gc", "<CMD>Git commit<CR>" },
 			{ "<leader>gg", "<CMD>Git<CR>" },
 			{ "<leader>gL", "<CMD>Git log<CR>" },
@@ -26,7 +27,7 @@ return {
 		cmd = "DiffviewOpen",
 		keys = {
 			{ "<leader>gd", "<cmd>DiffviewFileHistory %<cr>", desc = "open diff of file" },
-			{ "<leader>GG", "<cmd>DiffviewOpen<cr>", desc = "open full diff" },
+			{ "<leader>gG", "<cmd>DiffviewOpen<cr>", desc = "open full diff" },
 		},
 		config = function()
 			-- Lua
