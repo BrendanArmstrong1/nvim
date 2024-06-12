@@ -2,7 +2,7 @@ local M = { "folke/trouble.nvim" }
 
 M.cmd = { "Trouble", "TroubleToggle" } -- lazy loads on these commands
 M.ft = { "fzf" }
-M.branch = "dev"
+M.branch = "main"
 
 -- stylua: ignore
 M.keys = {
