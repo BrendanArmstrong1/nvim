@@ -13,7 +13,7 @@ return {
 		end,
 		keys = {
 			{ "<leader>gp", "<CMD>Git push<CR>" },
-			{ "<leader>GB", "<CMD>GBrowse!<CR>", mode = "x" },
+			{ "<leader>GB", ":GBrowse!<CR>", mode = "x" },
 			{ "<leader>gc", "<CMD>Git commit<CR>" },
 			{ "<leader>gg", "<CMD>Git<CR>" },
 			{ "<leader>gL", "<CMD>Git log<CR>" },
