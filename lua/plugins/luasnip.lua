@@ -4,6 +4,7 @@ return {
 		keys = { { "<c-n>", mode = { "x" } } },
 		dependencies = { "BrendanArmstrong1/lua_snippet_repo.nvim" },
 		config = function()
+
       local function extend_fts(extended_fts)
         setmetatable(extended_fts, {
           -- if the filetype is not extended, only it itself should be loaded.
@@ -32,6 +33,7 @@ return {
           return res
         end
       end
+
 			local path = require("lua_snippet_repo").load_snippets()
 			require("luasnip.loaders.from_lua").lazy_load({ paths = path })
 			require("luasnip").setup({
