@@ -49,7 +49,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		event = "BufReadPost",
-    commit = "aa0c7dd29631ee8c2df738d99bd33b762b3a6e22",
+    -- commit = "aa0c7dd29631ee8c2df738d99bd33b762b3a6e22",
 		dependencies = {
 			{
 				"nvim-treesitter/nvim-treesitter-context",
