@@ -65,59 +65,59 @@ return {
 						},
 					},
 				},
-				pyright = {
-					python = {
-						disableOrganizeImports = false,
-						analysis = {
-							indexing = true,
-							include = function()
-								vim.fn.getcwd()
-							end,
-							typeCheckingMode = "basic",
-							autoSearchPaths = true,
-							autoImportCompletions = true,
-							diagnosticMode = "openFilesOnly",
-							useLibraryCodeForTypes = true,
-							-- error, warning, information, true, false, none
-							diagnosticSeverityOverrides = {
-								reportUnusedImport = "none",
-							},
-						},
-					},
-				},
-				-- pylsp = {
-				-- 	settings = {
-				-- 		pylsp = {
-				-- 			single_file_support = true,
-				-- 			configurationSources = { "flake8" },
-				-- 			plugins = {
-				-- 				mccabe = {
-				-- 					threshold = 20,
-				-- 				},
-				-- 				pydocstyle = {
-				-- 					enabled = false,
-				-- 					convention = "numpy",
-				-- 				},
-				-- 				flake8 = {
-				-- 					enabled = true,
-				-- 					extendIgnore = {
-				-- 						"W391",
-				-- 						"E742",
-				-- 						"W503",
-				-- 						"W504",
-				-- 					},
-				-- 					maxLineLength = 100,
-				-- 				},
-				-- 				pyflakes = {
-				-- 					enabled = true,
-				-- 				},
-				-- 				pycodestyle = {
-				-- 					enabled = false,
-				-- 				},
+				-- pyright = {
+				-- 	python = {
+				-- 		disableOrganizeImports = false,
+				-- 		analysis = {
+				-- 			indexing = true,
+				-- 			include = function()
+				-- 				vim.fn.getcwd()
+				-- 			end,
+				-- 			typeCheckingMode = "basic",
+				-- 			autoSearchPaths = true,
+				-- 			autoImportCompletions = true,
+				-- 			diagnosticMode = "openFilesOnly",
+				-- 			useLibraryCodeForTypes = true,
+				-- 			-- error, warning, information, true, false, none
+				-- 			diagnosticSeverityOverrides = {
+				-- 				reportUnusedImport = "none",
 				-- 			},
 				-- 		},
 				-- 	},
 				-- },
+				pylsp = {
+					settings = {
+						pylsp = {
+							single_file_support = true,
+							configurationSources = { "flake8" },
+							plugins = {
+								mccabe = {
+									threshold = 20,
+								},
+								pydocstyle = {
+									enabled = false,
+									convention = "numpy",
+								},
+								flake8 = {
+									enabled = true,
+									extendIgnore = {
+										"W391",
+										"E742",
+										"W503",
+										"W504",
+									},
+									maxLineLength = 100,
+								},
+								pyflakes = {
+									enabled = true,
+								},
+								pycodestyle = {
+									enabled = false,
+								},
+							},
+						},
+					},
+				},
 				lua_ls = {
 					settings = {
 						single_file_support = true,
@@ -253,19 +253,19 @@ return {
 		"williamboman/mason.nvim",
 		cmd = "Mason",
 		keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
-		ensure_installed = {
-			"stylua",
-			-- "selene",
-			"flake8",
-			"black",
-			"ruff",
-			"mypy",
-			"rust-analyzer",
-		},
-		opts = function(plugin)
+		opts = function(_)
 			require("mason").setup()
+      local ensure_installed = {
+        "stylua",
+        -- "selene",
+        "flake8",
+        "black",
+        "ruff",
+        "mypy",
+        "rust-analyzer",
+      }
 			local mr = require("mason-registry")
-			for _, tool in ipairs(plugin.ensure_installed) do
+			for _, tool in ipairs(ensure_installed) do
 				local p = mr.get_package(tool)
 				if not p:is_installed() then
 					p:install()
