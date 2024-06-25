@@ -44,27 +44,6 @@ return {
 		end,
 	},
 
-	{
-		"echasnovski/mini.comment",
-		keys = { { "gc", mode = { "n", "x", "o" } } },
-		config = function()
-			require("mini.comment").setup({
-				options = {
-					custom_commentstring = function()
-						return require("ts_context_commentstring").calculate_commentstring() or vim.bo.commentstring
-					end,
-					ignore_blank_line = false,
-				},
-				mappings = {
-					comment = "gc",
-					commentine = "gc",
-					comment_visual = "gc",
-					textobject = "gc",
-				},
-			})
-		end,
-	},
-
 	-- auto pairs
 	{
 		"windwp/nvim-autopairs",
