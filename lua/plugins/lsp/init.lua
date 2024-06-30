@@ -40,7 +40,11 @@ return {
 			servers = {
 				marksman = { single_file_support = true },
 				bashls = { single_file_support = true },
-				clangd = { single_file_support = true },
+				clangd = {
+					-- init_options = { fallbackFlags = { "-xc", "-Wall", "-Wextra", "-pedantic", "-std=c89" } },
+					single_file_support = true,
+					filetypes = { "c", "h" },
+				},
 				cssls = {},
 				tsserver = {},
 				-- html = {},
@@ -255,15 +259,15 @@ return {
 		keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
 		opts = function(_)
 			require("mason").setup()
-      local ensure_installed = {
-        "stylua",
-        -- "selene",
-        "flake8",
-        "black",
-        "ruff",
-        "mypy",
-        "rust-analyzer",
-      }
+			local ensure_installed = {
+				"stylua",
+				-- "selene",
+				"flake8",
+				"black",
+				"ruff",
+				"mypy",
+				"rust-analyzer",
+			}
 			local mr = require("mason-registry")
 			for _, tool in ipairs(ensure_installed) do
 				local p = mr.get_package(tool)
