@@ -238,6 +238,7 @@ return {
 			vim.g.ale_rust_cargo_use_clippy = vim.fn.executable("cargo-clippy")
 
 			vim.g.ale_fix_on_save = 0
+      vim.g.ale_c_clangformat_use_local_file = 1
 
 			vim.g.ale_fixers = {
 				["*"] = { "remove_trailing_lines", "trim_whitespace" },
