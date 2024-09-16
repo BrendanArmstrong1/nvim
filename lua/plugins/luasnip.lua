@@ -51,7 +51,7 @@ return {
 				},
 				ft_func = require("luasnip.extras.filetype_functions").from_pos_or_filetype,
 				load_ft_func = extend_fts({
-          markdown = {"tex", "lua", "json", "python"},
+          markdown = {"tex", "lua", "json", "python", "md"},
           html = {"javascript"}
         }),
 			})

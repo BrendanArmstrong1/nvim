@@ -10,7 +10,7 @@ return {
 		ft = { "markdown" },
 		config = function()
 			vim.g.wiki_index_name = "_index.md"
-			vim.g.wiki_root = vim.fn.expand("~/S/Wiki/content/")
+			vim.g.wiki_root = vim.fn.expand("~/ssd/Wiki/content/")
 			vim.g.wiki_link_creation = {
 				md = {
 					link_type = "md",

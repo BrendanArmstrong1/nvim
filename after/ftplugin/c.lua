@@ -13,7 +13,7 @@ vim.o.shiftwidth = 2 -- Size of an indent
 vim.g.ale_c_clangformat_style_option = [[
 {
 BasedOnStyle: LLVM,
-ColumnLimit: 100,
+ColumnLimit: 80,
 IndentWidth: 2,
 
 AlignAfterOpenBracket: Align,

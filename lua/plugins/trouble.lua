@@ -11,7 +11,7 @@ M.keys = {
 	{ "<leader>xs", "<CMD>Trouble symbols toggle focus=false win.position=right<CR>", desc = "Trouble symbols toggle" },
 	{ "<leader>xl", "<CMD>Trouble loclist toggle<CR>", desc = "Trouble loclist" },
 	{ "<leader>xq", "<CMD>Trouble qflist toggle<CR>", desc = "Trouble quickfix" },
-	{ "gR", "<CMD>Trouble lsp toggle focus=false win.position=right<CR>", desc = "Trouble lsp_references" },
+	{ "gr", "<CMD>Trouble lsp toggle focus=false<CR>", desc = "Trouble lsp_references" },
 }
 
 function M.config()

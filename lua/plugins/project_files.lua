@@ -20,7 +20,7 @@ return {
 					"Cargo.toml",
 				},
 				ignore_lsp = {},
-				exclude_dirs = { "~/S/Rust/rustlings/" },
+				exclude_dirs = { "~/ssd/Rust/rustlings/" },
 			})
 		end,
 	},

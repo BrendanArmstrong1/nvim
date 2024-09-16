@@ -18,7 +18,7 @@ require("lazy").setup({
   },
   defaults = { lazy = true, version = false },
   dev = {
-    path = "~/S/Nvim_plugins",
+    path = "~/ssd/Nvim_plugins",
     fallback = false,
   },
   install = { colorscheme = { "tokyonight", "habamax" } },

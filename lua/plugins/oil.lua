@@ -3,21 +3,28 @@ return {
 		"stevearc/oil.nvim",
 		cmd = { "Oil" },
 		keys = {
-			{ "<leader>-", function ()
-        require("oil").toggle_float()
-			end, desc = "Oil" },
+			{
+				"<leader>-",
+				function()
+					require("oil").open()
+				end,
+				desc = "Oil",
+			},
 		},
 		dependencies = { "kyazdani42/nvim-web-devicons" },
 		config = function()
-			require("oil").setup({
-				-- Id is automatically added at the beginning, and name at the end
-				-- See :help oil-columns
-				columns = {
+      local column_toggle = true
+      local columns = {
+					"type",
 					"icon",
 					{ "permissions", highlight = "Error" },
 					{ "size", highlight = "Special" },
-					-- "mtime",
-				},
+					"mtime",
+				}
+			require("oil").setup({
+				-- Id is automatically added at the beginning, and name at the end
+				-- See :help oil-columns
+				columns = columns,
 				-- Buffer-local options to use for oil buffers
 				buf_options = {
 					buflisted = false,
@@ -28,10 +35,10 @@ return {
 					wrap = false,
 					signcolumn = "no",
 					cursorcolumn = false,
-					foldcolumn = "0",
+					foldcolumn = "1",
 					spell = false,
 					list = false,
-					conceallevel = 3,
+					conceallevel = 0,
 					concealcursor = "n",
 				},
 				-- Oil will take over directory buffers (e.g. `vim .` or `:e src/`
@@ -55,20 +62,31 @@ return {
 				keymaps = {
 					["g?"] = "actions.show_help",
 					["<cr>"] = "actions.select",
-					["<C-v>"] = "actions.select_vsplit",
-					["<C-s>"] = false,
-					["<C-x>"] = "actions.select_split",
-					["<C-t>"] = "actions.select_tab",
+					["<leader>v"] = "actions.select_vsplit",
+					["<leader>x"] = "actions.select_split",
+					["<leader>t"] = "actions.select_tab",
+					["<C-s>"] = function()
+						require("oil").save()
+					end,
 					["<C-p>"] = "actions.preview",
 					["<C-c>"] = "actions.close",
 					["."] = "actions.open_cmdline",
-					["q"] = "actions.close",
+					["Q"] = "actions.close",
 					["Y"] = "actions.copy_entry_path",
 					["R"] = "actions.refresh",
 					["-"] = "actions.parent",
 					["_"] = "actions.open_cwd",
 					["`"] = "actions.cd",
 					["~"] = "actions.tcd",
+					["gd"] = function()
+            if column_toggle then
+              require("oil").set_columns({})
+              column_toggle = false
+            else
+              require("oil").set_columns(columns)
+              column_toggle = true
+            end
+					end,
 					["gs"] = "actions.toggle_hidden",
 				},
 				-- Set to false to disable all of the above keymaps

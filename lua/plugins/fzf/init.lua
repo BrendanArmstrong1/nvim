@@ -3,9 +3,9 @@ M.dependencies = { "nvim-tree/nvim-web-devicons" }
 -- stylua: ignore
 M.keys = {
 	{ "<leader>:", function() require("fzf-lua").commands() end, mode = { "n" } },
-	{ "gt", function() require("fzf-lua").lsp_typedefs({jump_to_single_result = true}) end, mode = { "n" } },
+	{ "gT", function() require("fzf-lua").lsp_typedefs({jump_to_single_result = true}) end, mode = { "n" } },
 	{ "gI", function() require("fzf-lua").lsp_implementations({jump_to_single_result = true}) end, mode = { "n" } },
-	{ "gr", function() require("fzf-lua").lsp_references({jump_to_single_result = true}) end, mode = { "n" } },
+	{ "gR", function() require("fzf-lua").lsp_references({jump_to_single_result = true}) end, mode = { "n" } },
 	{ "gd", function() require("fzf-lua").lsp_definitions({jump_to_single_result = true}) end, mode = { "n" } },
 	{ "<leader>fi", function() require("fzf-lua").lsp_document_symbols() end, mode = { "n" } },
 	{ "<leader>fI", function() require("fzf-lua").lsp_workspace_symbols() end, mode = { "n" } },

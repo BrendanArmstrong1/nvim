@@ -43,10 +43,11 @@ return {
 				clangd = {
 					-- init_options = { fallbackFlags = { "-xc", "-Wall", "-Wextra", "-pedantic", "-std=c89" } },
 					single_file_support = true,
-					filetypes = { "c", "h" },
+					-- filetypes = { "c", "h" },
 				},
 				cssls = {},
-				tsserver = {},
+				ts_ls = {},
+				texlab = {},
 				-- html = {},
 				rust_analyzer = {
 					["rust-analyzer"] = {
@@ -69,59 +70,59 @@ return {
 						},
 					},
 				},
-				-- pyright = {
-				-- 	python = {
-				-- 		disableOrganizeImports = false,
-				-- 		analysis = {
-				-- 			indexing = true,
-				-- 			include = function()
-				-- 				vim.fn.getcwd()
-				-- 			end,
-				-- 			typeCheckingMode = "basic",
-				-- 			autoSearchPaths = true,
-				-- 			autoImportCompletions = true,
-				-- 			diagnosticMode = "openFilesOnly",
-				-- 			useLibraryCodeForTypes = true,
-				-- 			-- error, warning, information, true, false, none
-				-- 			diagnosticSeverityOverrides = {
-				-- 				reportUnusedImport = "none",
-				-- 			},
-				-- 		},
-				-- 	},
-				-- },
-				pylsp = {
-					settings = {
-						pylsp = {
-							single_file_support = true,
-							configurationSources = { "flake8" },
-							plugins = {
-								mccabe = {
-									threshold = 20,
-								},
-								pydocstyle = {
-									enabled = false,
-									convention = "numpy",
-								},
-								flake8 = {
-									enabled = true,
-									extendIgnore = {
-										"W391",
-										"E742",
-										"W503",
-										"W504",
-									},
-									maxLineLength = 100,
-								},
-								pyflakes = {
-									enabled = true,
-								},
-								pycodestyle = {
-									enabled = false,
-								},
+				pyright = {
+					python = {
+						disableOrganizeImports = false,
+						analysis = {
+							indexing = true,
+							include = function()
+								vim.fn.getcwd()
+							end,
+							typeCheckingMode = "basic",
+							autoSearchPaths = true,
+							autoImportCompletions = true,
+							diagnosticMode = "openFilesOnly",
+							useLibraryCodeForTypes = true,
+							-- error, warning, information, true, false, none
+							diagnosticSeverityOverrides = {
+								reportUnusedImport = "none",
 							},
 						},
 					},
 				},
+				-- pylsp = {
+				-- 	settings = {
+				-- 		pylsp = {
+				-- 			single_file_support = true,
+				-- 			configurationSources = { "flake8" },
+				-- 			plugins = {
+				-- 				mccabe = {
+				-- 					threshold = 20,
+				-- 				},
+				-- 				pydocstyle = {
+				-- 					enabled = false,
+				-- 					convention = "numpy",
+				-- 				},
+				-- 				flake8 = {
+				-- 					enabled = true,
+				-- 					extendIgnore = {
+				-- 						"W391",
+				-- 						"E742",
+				-- 						"W503",
+				-- 						"W504",
+				-- 					},
+				-- 					maxLineLength = 100,
+				-- 				},
+				-- 				pyflakes = {
+				-- 					enabled = true,
+				-- 				},
+				-- 				pycodestyle = {
+				-- 					enabled = false,
+				-- 				},
+				-- 			},
+				-- 		},
+				-- 	},
+				-- },
 				lua_ls = {
 					settings = {
 						single_file_support = true,
@@ -228,6 +229,7 @@ return {
 				rust = { "analyzer", "cargo" },
 				javascript = { "tsserver" },
 				css = { "csslint" },
+				tex = { "texlab" },
 			}
 
 			vim.g.ale_python_mypy_options = "--enable-incomplete-feature=Unpack --check-untyped-defs"
@@ -238,7 +240,7 @@ return {
 			vim.g.ale_rust_cargo_use_clippy = vim.fn.executable("cargo-clippy")
 
 			vim.g.ale_fix_on_save = 0
-      vim.g.ale_c_clangformat_use_local_file = 1
+			vim.g.ale_c_clangformat_use_local_file = 1
 
 			vim.g.ale_fixers = {
 				["*"] = { "remove_trailing_lines", "trim_whitespace" },
@@ -248,6 +250,7 @@ return {
 				c = { "clang-format" },
 				javascript = { "prettier" },
 				css = { "prettier" },
+				tex = { "latexindent" },
 			}
 		end,
 	},
