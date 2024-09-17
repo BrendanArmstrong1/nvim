@@ -227,7 +227,7 @@ return {
 			vim.g.ale_linters = {
 				python = { "ruff", "mypy" },
 				rust = { "analyzer", "cargo" },
-				javascript = { "tsserver" },
+				javascript = { "ts_ls" },
 				css = { "csslint" },
 				tex = { "texlab" },
 			}
