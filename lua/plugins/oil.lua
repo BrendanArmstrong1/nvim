@@ -13,14 +13,14 @@ return {
 		},
 		dependencies = { "kyazdani42/nvim-web-devicons" },
 		config = function()
-      local column_toggle = true
-      local columns = {
-					"type",
-					"icon",
-					{ "permissions", highlight = "Error" },
-					{ "size", highlight = "Special" },
-					"mtime",
-				}
+			local column_toggle = true
+			local columns = {
+				{"type", highlight = "Typedef"},
+				"icon",
+				{ "permissions", highlight = "Error" },
+				{ "size", highlight = "Special" },
+				{ "mtime", highlight = "String" },
+			}
 			require("oil").setup({
 				-- Id is automatically added at the beginning, and name at the end
 				-- See :help oil-columns
@@ -79,13 +79,13 @@ return {
 					["`"] = "actions.cd",
 					["~"] = "actions.tcd",
 					["gd"] = function()
-            if column_toggle then
-              require("oil").set_columns({})
-              column_toggle = false
-            else
-              require("oil").set_columns(columns)
-              column_toggle = true
-            end
+						if column_toggle then
+							require("oil").set_columns({})
+							column_toggle = false
+						else
+							require("oil").set_columns(columns)
+							column_toggle = true
+						end
 					end,
 					["gs"] = "actions.toggle_hidden",
 				},
