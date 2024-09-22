@@ -43,10 +43,13 @@ vim.keymap.set({ "n", "x" }, "n", "nzz", { noremap = true })
 vim.keymap.set({ "n", "x" }, "N", "Nzz", { noremap = true })
 
 -- command line help
+-- stylua: ignore start
 vim.keymap.set("c", "<c-j>", "<nop>")
 vim.keymap.set("c", "<c-k>", "<nop>")
+vim.keymap.set("c", "<c-n>", function() require("cmp").complete() end)
 vim.keymap.set("c", "<c-l>", "<right>")
 vim.keymap.set("c", "<c-h>", "<left>")
+-- stylua: ignore end
 
 -- save
 vim.keymap.set("n", "<C-s>", "<cmd>w<cr><esc>")
@@ -130,8 +133,8 @@ function Print_tmux_panes()
 end
 
 function Test_function()
-  local str = vim.api.nvim_replace_termcodes(":hello worl<Left><Left>",true,false,true)
-  vim.api.nvim_feedkeys(str, "t", false)
+	local str = vim.api.nvim_replace_termcodes(":hello worl<Left><Left>", true, false, true)
+	vim.api.nvim_feedkeys(str, "t", false)
 end
 vim.keymap.set("n", "gy", Print_tmux_panes)
 vim.keymap.set("n", "g.", Test_function)

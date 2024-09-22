@@ -5,14 +5,16 @@ return {
 			"InsertEnter",
 			"CmdlineEnter",
 		},
-		keys = { {
-			"<c-x><c-o>",
-			function()
-				require("cmp").complete()
-			end,
-			desc = "completion remap",
-			mode = { "i" },
-		} },
+		keys = {
+			{
+				"<c-x><c-o>",
+				function()
+					require("cmp").complete()
+				end,
+				desc = "completion remap",
+				mode = { "i" },
+			},
+		},
 		dependencies = {
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-nvim-lsp",
