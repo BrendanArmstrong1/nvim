@@ -5,6 +5,14 @@ return {
 			"InsertEnter",
 			"CmdlineEnter",
 		},
+		keys = { {
+			"<c-x><c-o>",
+			function()
+				require("cmp").complete()
+			end,
+			desc = "completion remap",
+			mode = { "i" },
+		} },
 		dependencies = {
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-nvim-lsp",
@@ -70,6 +78,9 @@ return {
 				end)
 			end)
 			cmp.setup({
+				completion = {
+					autocomplete = false,
+				},
 				snippet = {
 					expand = function(args)
 						require("luasnip").lsp_expand(args.body)
