@@ -27,6 +27,26 @@ return {
 			},
 		},
 		config = function()
+
+			function SetAutoCmp(mode)
+				local cmp = require("cmp")
+				if mode then
+					cmp.setup({
+						completion = {
+							autocomplete = { require("cmp.types").cmp.TriggerEvent.TextChanged },
+						},
+					})
+				else
+					cmp.setup({
+						completion = {
+							autocomplete = false,
+						},
+					})
+				end
+			end
+      vim.cmd('command AutoCmpOn lua SetAutoCmp(true)')
+      vim.cmd('command AutoCmpOff lua SetAutoCmp(false)')
+
 			local types = require("cmp.types")
 			---@type table<integer, integer>
 			local modified_priority = {
