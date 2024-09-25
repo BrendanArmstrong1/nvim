@@ -125,7 +125,7 @@ return {
 					},
 				},
 				incremental_selection = {
-					enable = true,
+					enable = false,
 					keymaps = {
 						init_selection = "S",
 						node_incremental = "S",
