@@ -101,7 +101,7 @@ return {
 			end)
 			cmp.setup({
 				completion = {
-					autocomplete = false,
+					autocomplete = { require("cmp.types").cmp.TriggerEvent.TextChanged },
 				},
 				snippet = {
 					expand = function(args)
