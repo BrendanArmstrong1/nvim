@@ -55,6 +55,7 @@ o.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the
 o.spelllang = { "en" }
 o.termguicolors = true -- True color support
 o.timeoutlen = 300
+o.ttimeoutlen = 1 -- prevent <esc> from being mapped to <alt> on quick keystrokes
 o.wildmode = "longest:full,full" -- Command-line completion mode
 o.wildignorecase = true -- When set case is ignored when completing file names and directories
 o.wrap = false -- Disable line wrap
