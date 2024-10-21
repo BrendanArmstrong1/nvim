@@ -37,7 +37,7 @@ return {
       -- symbol = "│",
       options = {
         border = "top",
-        try_as_border = true,
+        try_as_border = false,
         indent_at_cursor = true,
       },
       mappings = {
