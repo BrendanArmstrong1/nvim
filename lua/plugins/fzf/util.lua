@@ -70,6 +70,7 @@ end
 
 M.git_pickaxe = function()
 	local actions = require("fzf-lua.actions")
+	local index_choice = 0
 	require("fzf-lua").fzf_live(
 		'git log --color --pretty=format:"%C(yellow)%h%Creset '
 			.. '%Cgreen(%><(12)%cr%><|(12))%Creset %s %C(blue)<%an>%Creset" -S',
@@ -81,15 +82,43 @@ M.git_pickaxe = function()
 				type = "cmd",
 				field_index = "{+}", -- for fzf_opts = {["--multi"] = true}
 				fn = function(items)
-					print(vim.inspect(items))
 					local current_line = vim.api.nvim_get_current_line()
 					local query = string.match(current_line, "^PickAxe> (%w+).*$")
 					local hash = vim.split(items[1], " ")[1]
+					local handle = io.popen("git show --color --pretty=medium " .. hash .. " -S " .. query)
+					local index = 0
+					local found = 0
+					local index_choice_copy = index_choice
+					if handle ~= nil then
+						for line in handle:lines() do
+							index = index + 1
+							if string.match(line, query) then
+								if index_choice_copy <= 0 then
+									found = 1
+									break
+								end
+								index_choice_copy = index_choice_copy - 1
+							end
+						end
+						handle:close()
+					end
+					if found ~= 1 then
+						index = 0
+					end
+					local start = 0
+					if index >= 3 then
+						start = index - 3
+					end
 					return "git show --color --pretty=medium "
 						.. hash
 						.. " -S "
 						.. query
-						.. " | bat --style=default --color=always"
+						.. " | bat --style=default --color=always "
+						.. "--line-range "
+						.. start
+						.. ": "
+						.. "--highlight-line "
+						.. index
 				end,
 			},
 			actions = {
@@ -102,6 +131,22 @@ M.git_pickaxe = function()
 					vim.cmd("Gvsplit " .. hash)
 				end,
 				["ctrl-y"] = { fn = actions.git_yank_commit, exec_silent = true },
+				["ctrl-n"] = {
+					fn = function(selected, opts)
+						index_choice = index_choice + 1
+						print("hello " .. index_choice)
+					end,
+					reload = true,
+				},
+				["ctrl-p"] = {
+					fn = function(_, _)
+						if index_choice >= 0 then
+							index_choice = index_choice - 1
+						end
+						print(index_choice)
+					end,
+					reload = true,
+				},
 			},
 		}
 	)

@@ -7,16 +7,17 @@ return {
 		},
 		cmd = { "G", "Gedit", "Gvsplit", "GBrowse" },
 		init = function()
-			vim.api.nvim_set_keymap("n", "<leader>gD", "<CMD>Gdiffsplit!<CR>", {})
-			vim.api.nvim_set_keymap("n", "<leader>ga", "<CMD>diffget //2<CR>", {})
-			vim.api.nvim_set_keymap("n", "<leader>gi", "<CMD>diffget //3<CR>", {})
+			vim.api.nvim_set_keymap("n", "<leader>gs", "<CMD>Gdiffsplit!<CR>", {})
+			-- vim.api.nvim_set_keymap("n", "<leader>ga", "<CMD>diffget //2<CR>", {})
+			-- vim.api.nvim_set_keymap("n", "<leader>gi", "<CMD>diffget //3<CR>", {})
 		end,
 		keys = {
 			{ "<leader>gp", "<CMD>Git push<CR>" },
-			{ "<leader>GB", ":GBrowse!<CR>", mode = "x" },
-			{ "<leader>gc", "<CMD>Git commit<CR>" },
-			{ "<leader>gg", "<CMD>Git<CR>" },
-			{ "<leader>gL", "<CMD>Git log<CR>" },
+			{ "<leader>gr", ":GBrowse!<CR>", mode = "x" },
+			{ "<leader>GR", ":GBrowse<CR>", mode = "x" },
+			{ "<leader>GL", "<CMD>tab Git log<CR>" },
+			{ "<leader>gc", "<CMD>tab Git commit<CR>" },
+			{ "<leader>gg", "<CMD>tab Git<CR>" },
 			{ "<leader>gb", "<CMD>Git blame<CR>" },
 		},
 	},
@@ -27,7 +28,7 @@ return {
 		cmd = "DiffviewOpen",
 		keys = {
 			{ "<leader>gd", "<cmd>DiffviewFileHistory %<cr>", desc = "open diff of file" },
-			{ "<leader>gG", "<cmd>DiffviewOpen<cr>", desc = "open full diff" },
+			{ "<leader>GD", "<cmd>DiffviewOpen<cr>", desc = "open full diff" },
 		},
 		config = function()
 			-- Lua
