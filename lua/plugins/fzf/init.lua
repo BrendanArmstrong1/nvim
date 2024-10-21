@@ -7,13 +7,13 @@ M.keys = {
 	{ "gI", function() require("fzf-lua").lsp_implementations({jump_to_single_result = true}) end, mode = { "n" } },
 	{ "gR", function() require("fzf-lua").lsp_references({jump_to_single_result = true}) end, mode = { "n" } },
 	{ "gd", function() require("fzf-lua").lsp_definitions({jump_to_single_result = true}) end, mode = { "n" } },
+  { "<leader>gi", function() require("plugins.fzf.util").git_pickaxe() end, mode = "n" },
 	{ "<leader>fi", function() require("fzf-lua").lsp_document_symbols() end, mode = { "n" } },
 	{ "<leader>fI", function() require("fzf-lua").lsp_workspace_symbols() end, mode = { "n" } },
 	{ "<leader>fd", function() require("fzf-lua").diagnostics_document() end, mode = { "n" } },
 	{ "<leader>FD", function() require("fzf-lua").diagnostics_workspace() end, mode = { "n" } },
 	{ "<leader>fs", function() require("fzf-lua").git_status() end, mode = { "n" } },
 	{ "<leader>fgg", function() require("fzf-lua").git_commits() end, mode = { "n" } },
-  { "<leader>fgp", function() require("plugins.fzf.util").git_pickaxe() end, mode = "n" },
 	{ "<leader>fgs", function() require("fzf-lua").git_stash() end, mode = { "n" } },
 	{ "<leader>fgc", function() require("fzf-lua").git_bcommits() end, mode = { "n" } },
 	{ "<leader>fr", function() require("fzf-lua").resume() end, mode = { "n" } },
@@ -66,7 +66,6 @@ M.config = function()
 		},
 	})
 	require("fzf-lua").register_ui_select()
-	-- require("plugins.fzf.setup").setup()
 end
 
 return M
