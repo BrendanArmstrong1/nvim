@@ -24,7 +24,7 @@ M4.cmd = {"BCtohex"}
 M4.config = true
 
 local M5 = { "BrendanArmstrong1/visual_transpose.nvim" }
-M5.dev = false
+M5.dev = true
 M5.cmd = {"VisTranspose"}
 M5.config = true
 
