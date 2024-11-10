@@ -35,7 +35,8 @@ function M.on_attach(client, buffer)
 	self:map("<leader>li", "LspInfo", { desc = "Lsp Info" })
 	self:map("<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help", mode = { "i" }, has = "signatureHelp" })
 	self:map("<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", mode = { "n", "v" }, has = "codeAction" })
-	self:map("<leader>cg", "ALEFix", { desc = "Format Document", has = "documentFormatting" })
+	self:map("<leader>cf", "ALEFix", { desc = "Format Document", has = "documentFormatting" })
+
 	-- -- THIS IS FOR COMPLETION LATER
 	-- ---Utility for keymap creation.
 	-- ---@param lhs string
