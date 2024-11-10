@@ -7,7 +7,7 @@ return {
 			{ "<leader>fw", "<cmd>WikiPages<CR>", desc = "open the wiki" },
 		},
 
-		ft = { "markdown" },
+		-- ft = { "markdown" },
 		config = function()
 			vim.g.wiki_index_name = "_index.md"
 			vim.g.wiki_root = vim.fn.expand("~/ssd/Wiki/content/")
