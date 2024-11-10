@@ -313,9 +313,9 @@ return {
 					end
 
 					-- Navigation
-					map("n", "]h", function()
+					map("n", "]@", function()
 						if vim.wo.diff then
-							return "]h"
+							return "]@"
 						end
 						vim.schedule(function()
 							gs.next_hunk()
@@ -324,9 +324,9 @@ return {
 						return "<Ignore>"
 					end, { expr = true })
 
-					map("n", "[h", function()
+					map("n", "[@", function()
 						if vim.wo.diff then
-							return "[h"
+							return "[@"
 						end
 						vim.schedule(function()
 							gs.prev_hunk()
