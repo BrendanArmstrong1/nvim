@@ -58,5 +58,6 @@
   "vim-rsi": { "branch": "master", "commit": "45540637ead22f011e8215f1c90142e49d946a54" },
   "vim-unimpaired": { "branch": "master", "commit": "6d44a6dc2ec34607c41ec78acf81657248580bf1" },
   "visual_replace.nvim": { "branch": "main", "commit": "107ae8ee0627dc76218d1df7261f97e37dae2412" },
-  "visual_sort.nvim": { "branch": "main", "commit": "72a82abb285838a7f1321490eda7647f3f8e18a5" }
+  "visual_sort.nvim": { "branch": "main", "commit": "72a82abb285838a7f1321490eda7647f3f8e18a5" },
+  "zen-mode.nvim": { "branch": "main", "commit": "29b292bdc58b76a6c8f294c961a8bf92c5a6ebd6" }
 }
