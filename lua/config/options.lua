@@ -1,6 +1,20 @@
 local fn = vim.fn
 local o = vim.opt
 
+local opts_info = vim.api.nvim_get_all_options_info()
+
+local opt = setmetatable({}, {
+	__newindex = function(_, key, value)
+		vim.o[key] = value
+		local scope = opts_info[key].scope
+		if scope == "win" then
+			vim.wo[key] = value
+		elseif scope == "buf" then
+			vim.bo[key] = value
+		end
+	end,
+})
+
 o.completeopt = "menu,menuone" -- A comma separated list of options for Insert mode completion
 o.mouse = "a"
 o.number = true -- show line numbers (or only the current one)
@@ -22,8 +36,6 @@ o.undofile = true -- enable/disable undo file creation
 o.shadafile = fn.stdpath("data") .. "/viminfo"
 o.shada = "<800,'100,/50,:100,h"
 o.laststatus = 3 -- only one status bar
-o.updatetime = 50
-o.diffopt = "internal,filler,closeoff,vertical"
 
 o.dictionary = fn.stdpath("config") .. "/spell/american-english"
 o.spelllang = { "en_us" }
@@ -41,7 +53,6 @@ end
 
 o.cmdheight = 1
 o.cursorline = false -- Enable highlighting of the current line
-o.formatoptions = "jqlnt" -- tcqj
 o.grepformat = "%f:%l:%c:%m"
 o.grepprg = "rg --vimgrep"
 o.inccommand = "nosplit" -- preview incremental substitute
@@ -54,16 +65,101 @@ o.sidescrolloff = 8 -- Columns of context
 o.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 o.spelllang = { "en" }
 o.termguicolors = true -- True color support
+o.updatetime = 50
 o.timeoutlen = 300
 o.ttimeoutlen = 1 -- prevent <esc> from being mapped to <alt> on quick keystrokes
-o.wildmode = "longest:full,full" -- Command-line completion mode
-o.wildignorecase = true -- When set case is ignored when completing file names and directories
 o.wrap = false -- Disable line wrap
 
 if vim.fn.has("nvim-0.9.0") == 1 then
 	vim.opt.splitkeep = "screen"
-	vim.o.shortmess = "filnxtToOFWIcC"
+	vim.o.shortmess = table.concat({
+		"f", -- (file x of x) instead of just (x of x)
+		"l", -- use "999L, 888B" instead of "999 lines, 888 bytes"
+		"t", -- truncate file messages at start
+		"T", -- truncate non-file messages in middle
+		"o", -- file-read message overwrites previous
+		"O", -- file-read message overwrites previous
+		"F", -- Don't give file info when editing a file
+		"W", -- Dont show [w] or written when writing
+		"A", -- ignore annoying swap file messages
+		"s", -- don't give "search hit BOTTOM, continuing at TOP"
+		"c", -- don't give |ins-completion-menu| messages
+	})
 end
+
+local function add(value, str, sep)
+	sep = sep or ","
+	str = str or ""
+	value = type(value) == "table" and table.concat(value, sep) or value
+	return str ~= "" and table.concat({ value, str }, sep) or value
+end
+
+opt.formatoptions = table.concat({
+	"1",
+	"q", -- continue comments with gq"
+	"c", -- Auto-wrap comments using textwidth
+	"n", -- Recognize numbered lists
+	"t", -- autowrap lines using text width value
+	"p", -- Don't break lines at single spaces that follow periods.
+	"j", -- remove a comment leader when joining lines.
+	"lv", -- Only break if the line was not longer than 'textwidth' when the insert
+	-- started and only at a white character that has been entered during the
+	-- current insert command.
+})
+
+vim.o.diffopt = add({
+	"internal",
+	"filler",
+	"closeoff",
+	"vertical",
+	"iwhite",
+	"hiddenoff",
+	"foldcolumn:0",
+	"context:4",
+	"algorithm:histogram",
+	"indent-heuristic",
+}, vim.o.diffopt)
+
+vim.o.fillchars = add({
+	"vert:▕", -- alternatives │
+	"fold: ",
+	"eob: ", -- suppress ~ at EndOfBuffer
+	"diff:─", -- alternatives: ⣿ ░
+	"msgsep:‾",
+	"foldopen:▾",
+	"foldsep:│",
+	"foldclose:▸",
+})
+
+vim.o.foldtext = "v:lua.folds()"
+vim.o.foldopen = add(vim.o.foldopen, "search")
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 10
+opt.foldmethod = "syntax"
+
+vim.o.wildmode = "longest:full,full" -- Command-line completion mode
+-- vim.o.wildcharm = api.nvim_eval([[char2nr("\<C-Z>")]]) -- FIXME: what's the correct way to do this?
+
+vim.cmd("set wildcharm=<C-Z>")
+vim.o.wildmenu = true
+vim.o.wildignorecase = true -- Ignore case when completing file names and directories
+-- Binary
+vim.o.wildignore = add {
+  '*.aux,*.out,*.toc',
+  '*.o,*.obj,*.dll,*.jar,*.pyc,*.rbc,*.class',
+  '*.ai,*.bmp,*.gif,*.ico,*.jpg,*.jpeg,*.png,*.psd,*.webp',
+  '*.avi,*.m4a,*.mp3,*.oga,*.ogg,*.wav,*.webm',
+  '*.eot,*.otf,*.ttf,*.woff',
+  '*.doc,*.pdf',
+  '*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz',
+  -- Cache
+  '.sass-cache',
+  '*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*.gem',
+  -- Temp/System
+  '*.*~,*~ ',
+  '*.swp,.lock,.DS_Store,._*,tags.lock'
+}
+vim.o.wildoptions = 'pum'
 
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
