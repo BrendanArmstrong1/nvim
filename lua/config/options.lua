@@ -32,7 +32,11 @@ o.splitright = true
 o.splitbelow = true
 o.undodir = fn.stdpath("data") .. "/undodir" -- set undo directory
 o.undolevels = 10000
-o.undofile = true -- enable/disable undo file creation
+if vim.opt_local.binary:get() then
+  o.undofile = false -- enable/disable undo file creation
+else
+  o.undofile = true -- enable/disable undo file creation
+end
 o.shadafile = fn.stdpath("data") .. "/viminfo"
 o.shada = "<800,'100,/50,:100,h"
 o.laststatus = 3 -- only one status bar
