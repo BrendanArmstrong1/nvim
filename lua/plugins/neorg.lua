@@ -1,8 +1,12 @@
 return {
 	{
 		"nvim-neorg/neorg",
-    cmd = {"Neorg"},
-    ft = {"norg"},
+		keys = {
+			{ "<leader>w<leader>w", "<cmd>Neorg journal today<cr>", desc = "neorg Journal" },
+			{ "<leader>ww", "<cmd>Neorg index<cr>", desc = "neorg index" },
+		},
+		cmd = { "Neorg" },
+		ft = { "norg" },
 		-- lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
 		version = "*", -- Pin Neorg to the latest stable release
 		config = function()
@@ -30,7 +34,7 @@ return {
 								work = "~/neorg/work",
 							},
 							default_workspace = "work",
-              index = "index.norg", -- The name of the main (root) .norg file
+							index = "index.norg", -- The name of the main (root) .norg file
 						},
 					},
 				},

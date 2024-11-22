@@ -95,6 +95,9 @@ vim.keymap.set("n", "]p", ":pu<cr>`[v`]=", { silent = true })
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>")
 vim.keymap.set("n", "gw", "*N")
 vim.keymap.set("x", "gw", "*N")
+vim.keymap.set("n", "<leader>gw", function()
+	vim.cmd("windo diffthis")
+end, { noremap = true, desc = "Git diff (w)indows" })
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 vim.keymap.set("n", "n", "'Nn'[v:searchforward] .. 'zz'", { expr = true })
