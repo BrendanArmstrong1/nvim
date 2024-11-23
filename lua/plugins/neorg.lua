@@ -1,6 +1,13 @@
 return {
 	{
 		"nvim-neorg/neorg",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			"nvim-cmp",
+			"nvim-lua/plenary.nvim",
+		},
+		build = ":Neorg sync-parsers",
 		keys = {
 			{ "<leader>w<leader>w", "<cmd>Neorg journal today<cr>", desc = "neorg Journal" },
 			{ "<leader>ww", "<cmd>Neorg index<cr>", desc = "neorg index" },
@@ -13,20 +20,28 @@ return {
 			require("neorg").setup({
 				load = {
 					["core.defaults"] = {}, -- Loads default behaviour
-					["core.concealer"] = {}, -- Adds pretty icons to your documents
+					-- ["core.concealer"] = {}, -- Adds pretty icons to your documents
 					["core.ui.calendar"] = {},
 					["core.completion"] = { config = { engine = "nvim-cmp", name = "[Norg]" } },
 					["core.integrations.nvim-cmp"] = {},
-					-- ["core.concealer"] = { config = { icon_preset = "diamond" } },
+					["core.concealer"] = { config = { icon_preset = "diamond" } },
 					["core.esupports.metagen"] = { config = { type = "auto", update_date = true } },
 					["core.qol.toc"] = {},
 					["core.qol.todo_items"] = {},
 					["core.looking-glass"] = {},
 					["core.presenter"] = { config = { zen_mode = "zen-mode" } },
 					["core.export"] = {},
+					["core.text-objects"] = {},
 					["core.export.markdown"] = { config = { extensions = "all" } },
 					["core.summary"] = {},
 					["core.tangle"] = { config = { report_on_empty = false } },
+					["core.keybinds"] = {
+						-- https://github.com/nvim-neorg/neorg/blob/main/lua/neorg/modules/core/keybinds/keybinds.lua
+						config = {
+							default_keybinds = true,
+							neorg_leader = "<Leader><Leader>",
+						},
+					},
 					["core.dirman"] = { -- Manages Neorg workspaces
 						config = {
 							workspaces = {
