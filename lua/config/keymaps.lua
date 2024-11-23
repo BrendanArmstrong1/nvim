@@ -1,6 +1,6 @@
 -- better up/down, Add jumps 5 and greater to the jump list
-vim.keymap.set("n", "j", 'v:count1 > 4 ? "m\'" .. v:count .. "gjm\'" : "gj"', { expr = true, silent = true })
-vim.keymap.set("n", "k", 'v:count1 > 4 ? "m\'" .. v:count .. "gkm\'" : "gk"', { expr = true, silent = true })
+vim.keymap.set("n", "j", 'v:count1 > 5 ? "m\'" .. v:count .. "gjm\'" .. (v:count1 > 20 ? "zz" : "") : "gj"', { expr = true, silent = true })
+vim.keymap.set("n", "k", 'v:count1 > 5 ? "m\'" .. v:count .. "gkm\'" .. (v:count1 > 20 ? "zz" : "") : "gk"', { expr = true, silent = true })
 
 -- don't add '{' or '}' to jumplist.
 -- https://superuser.com/questions/836784/in-vim-dont-store-motions-in-jumplist
