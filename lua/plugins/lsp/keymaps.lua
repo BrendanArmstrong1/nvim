@@ -36,6 +36,8 @@ function M.on_attach(client, buffer)
 	self:map("<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help", mode = { "i" }, has = "signatureHelp" })
 	self:map("<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", mode = { "n", "v" }, has = "codeAction" })
 	self:map("<leader>cf", "ALEFix", { desc = "Format Document", has = "documentFormatting" })
+	self:map("[<CR>", vim.diagnostic.goto_prev, { desc = "goto previous diagnostic", mode = { "n" } })
+
 
 	-- -- THIS IS FOR COMPLETION LATER
 	-- ---Utility for keymap creation.
