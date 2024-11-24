@@ -58,7 +58,9 @@ return {
           vim.b.miniindentscope_disable = true
         end
       end
-      vim.keymap.set("n", "<leader>ti", toggle_indent_scope, { desc = "toggle indent scope" })
+      vim.api.nvim_create_user_command("ToggleIndentScope", function ()
+        toggle_indent_scope()
+      end, {})
       vim.api.nvim_create_autocmd("FileType", {
         pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
         callback = function()
