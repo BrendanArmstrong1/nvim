@@ -1,6 +1,16 @@
 -- better up/down, Add jumps 5 and greater to the jump list
-vim.keymap.set("n", "j", 'v:count1 > 5 ? "m\'" .. v:count .. "gjm\'" .. (v:count1 > 20 ? "zz" : "") : "gj"', { expr = true, silent = true })
-vim.keymap.set("n", "k", 'v:count1 > 5 ? "m\'" .. v:count .. "gkm\'" .. (v:count1 > 20 ? "zz" : "") : "gk"', { expr = true, silent = true })
+vim.keymap.set(
+	"n",
+	"j",
+	'v:count1 > 5 ? "m\'" .. v:count .. "gjm\'" .. (v:count1 > 20 ? "zz" : "") : "gj"',
+	{ expr = true, silent = true }
+)
+vim.keymap.set(
+	"n",
+	"k",
+	'v:count1 > 5 ? "m\'" .. v:count .. "gkm\'" .. (v:count1 > 20 ? "zz" : "") : "gk"',
+	{ expr = true, silent = true }
+)
 
 -- don't add '{' or '}' to jumplist.
 -- https://superuser.com/questions/836784/in-vim-dont-store-motions-in-jumplist
@@ -77,7 +87,6 @@ vim.keymap.set("n", "<S-Up>", "<cmd>resize +2<CR>", { silent = true })
 vim.keymap.set("n", "<S-Down>", "<cmd>resize -2<CR>", { silent = true })
 vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -2<CR>", { silent = true })
 vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +2<CR>", { silent = true })
-
 
 -- Easier pasting(with auto-indent)
 vim.keymap.set("n", "gp", "`[v`]")
