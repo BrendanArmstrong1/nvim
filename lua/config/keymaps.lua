@@ -157,20 +157,7 @@ function Toggle_diagnostics()
 	end
 end
 
-local fmt_enabled = false
-function Toggle_formatting()
-	fmt_enabled = not fmt_enabled
-	if fmt_enabled then
-		Util.info("Enabled format on save", { title = "Format" })
-		vim.g.ale_fix_on_save = 1
-	else
-		Util.info("Disabled format on save", { title = "Format" })
-		vim.g.ale_fix_on_save = 0
-	end
-end
-
 -- toggle options
 -- stylua: ignore start
-vim.keymap.set("n", "<leader>tf", Toggle_formatting, { desc = "Format on Save" })
 vim.keymap.set("n", "<leader>td", Toggle_diagnostics, { desc = "Diagnostics" })
 -- stylua: ignore end
