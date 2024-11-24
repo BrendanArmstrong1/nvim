@@ -78,13 +78,6 @@ vim.keymap.set("n", "<S-Down>", "<cmd>resize -2<CR>", { silent = true })
 vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -2<CR>", { silent = true })
 vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +2<CR>", { silent = true })
 
--- Switch buffers with <ctrl>
-vim.keymap.set("n", "<C-b>", "<nop>")
-vim.keymap.set("n", "<C-f>", "<nop>")
-vim.keymap.set("n", "<C-b>", "<cmd>bprevious<cr>")
-vim.keymap.set("n", "<C-f>", "<cmd>bnext<cr>")
-vim.keymap.set({ "n", "x", "o" }, "L", "$")
-vim.keymap.set({ "n", "x", "o" }, "H", "^")
 
 -- Easier pasting(with auto-indent)
 vim.keymap.set("n", "gp", "`[v`]")
