@@ -33,9 +33,9 @@ o.splitbelow = true
 o.undodir = fn.stdpath("data") .. "/undodir" -- set undo directory
 o.undolevels = 10000
 if vim.opt_local.binary:get() then
-  o.undofile = false -- enable/disable undo file creation
+	o.undofile = false -- enable/disable undo file creation
 else
-  o.undofile = true -- enable/disable undo file creation
+	o.undofile = true -- enable/disable undo file creation
 end
 o.shadafile = fn.stdpath("data") .. "/viminfo"
 o.shada = "<800,'100,/50,:100,h"
@@ -98,6 +98,17 @@ local function add(value, str, sep)
 	return str ~= "" and table.concat({ value, str }, sep) or value
 end
 
+opt.cpoptions = table.concat({
+  "a", -- on read, set alternate filename for window
+  "A", -- on write, set alternate filename for window
+  "F", -- on write, change the filename for buffer
+  "B", -- allows for use of \ in mappings, eg. \<esc>
+  "c", -- search continues at the end of match on cursor
+  "e", -- put <CR> at the end of ":@r" register executions
+  "s", -- set buffer options when entering buffer for first time
+  "_", -- include whitespace after word on "cw"
+})
+
 opt.formatoptions = table.concat({
 	"1",
 	"q", -- continue comments with gq"
@@ -148,22 +159,22 @@ vim.cmd("set wildcharm=<C-Z>")
 vim.o.wildmenu = true
 vim.o.wildignorecase = true -- Ignore case when completing file names and directories
 -- Binary
-vim.o.wildignore = add {
-  '*.aux,*.out,*.toc',
-  '*.o,*.obj,*.dll,*.jar,*.pyc,*.rbc,*.class',
-  '*.ai,*.bmp,*.gif,*.ico,*.jpg,*.jpeg,*.png,*.psd,*.webp',
-  '*.avi,*.m4a,*.mp3,*.oga,*.ogg,*.wav,*.webm',
-  '*.eot,*.otf,*.ttf,*.woff',
-  '*.doc,*.pdf',
-  '*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz',
-  -- Cache
-  '.sass-cache',
-  '*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*.gem',
-  -- Temp/System
-  '*.*~,*~ ',
-  '*.swp,.lock,.DS_Store,._*,tags.lock'
-}
-vim.o.wildoptions = 'pum'
+vim.o.wildignore = add({
+	"*.aux,*.out,*.toc",
+	"*.o,*.obj,*.dll,*.jar,*.pyc,*.rbc,*.class",
+	"*.ai,*.bmp,*.gif,*.ico,*.jpg,*.jpeg,*.png,*.psd,*.webp",
+	"*.avi,*.m4a,*.mp3,*.oga,*.ogg,*.wav,*.webm",
+	"*.eot,*.otf,*.ttf,*.woff",
+	"*.doc,*.pdf",
+	"*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz",
+	-- Cache
+	".sass-cache",
+	"*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*.gem",
+	-- Temp/System
+	"*.*~,*~ ",
+	"*.swp,.lock,.DS_Store,._*,tags.lock",
+})
+vim.o.wildoptions = "pum"
 
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
