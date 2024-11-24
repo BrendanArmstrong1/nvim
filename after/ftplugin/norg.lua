@@ -1,4 +1,5 @@
 vim.opt.textwidth = 80
+vim.opt.autoindent = false
 
 
 vim.keymap.set({"o", "x"}, "ih", "<Plug>(neorg.text-objects.textobject.heading.inner)", { buffer = true })
