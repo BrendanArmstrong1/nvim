@@ -128,8 +128,8 @@ return {
           view = {
             -- The `view` bindings are active in the diff buffers, only when the current
             -- tabpage is a Diffview.
-            { "n", "<tab>", actions.select_next_entry, { desc = "Open the diff for the next file" } },
-            { "n", "<s-tab>", actions.select_prev_entry, { desc = "Open the diff for the previous file" } },
+            { "n", "<C-j>", actions.select_next_entry, { desc = "Open the diff for the next file" } },
+            { "n", "<C-k>", actions.select_prev_entry, { desc = "Open the diff for the previous file" } },
             { "n", "gf", actions.goto_file_edit, { desc = "Open the file in the previous tabpage" } },
             { "n", "<C-w><C-f>", actions.goto_file_split, { desc = "Open the file in a new split" } },
             { "n", "<C-w>gf", actions.goto_file_tab, { desc = "Open the file in a new tabpage" } },
@@ -198,8 +198,8 @@ return {
             { "n", "zm", actions.close_fold, { desc = "Collapse fold" } },
             { "n", "<c-b>", actions.scroll_view(-0.25), { desc = "Scroll the view up" } },
             { "n", "<c-f>", actions.scroll_view(0.25), { desc = "Scroll the view down" } },
-            { "n", "<tab>", actions.select_next_entry, { desc = "Open the diff for the next file" } },
-            { "n", "<s-tab>", actions.select_prev_entry, { desc = "Open the diff for the previous file" } },
+            { "n", "<C-j>", actions.select_next_entry, { desc = "Open the diff for the next file" } },
+            { "n", "<C-k>", actions.select_prev_entry, { desc = "Open the diff for the previous file" } },
             { "n", "gf", actions.goto_file_edit, { desc = "Open the file in the previous tabpage" } },
             { "n", "gq", "<CMD>DiffviewClose<cr>", { desc = "close diffview" } },
             { "n", "<C-w><C-f>", actions.goto_file_split, { desc = "Open the file in a new split" } },
@@ -236,8 +236,8 @@ return {
             { "n", "<2-LeftMouse>", actions.select_entry, { desc = "Open the diff for the selected entry." } },
             { "n", "<c-b>", actions.scroll_view(-0.25), { desc = "Scroll the view up" } },
             { "n", "<c-f>", actions.scroll_view(0.25), { desc = "Scroll the view down" } },
-            { "n", "<tab>", actions.select_next_entry, { desc = "Open the diff for the next file" } },
-            { "n", "<s-tab>", actions.select_prev_entry, { desc = "Open the diff for the previous file" } },
+            { "n", "<C-j>", actions.select_next_entry, { desc = "Open the diff for the next file" } },
+            { "n", "<C-k>", actions.select_prev_entry, { desc = "Open the diff for the previous file" } },
             { "n", "gf", actions.goto_file_edit, { desc = "Open the file in the previous tabpage" } },
             { "n", "gq", "<CMD>DiffviewClose<cr>", { desc = "close diffview" } },
             { "n", "<C-w><C-f>", actions.goto_file_split, { desc = "Open the file in a new split" } },
@@ -313,9 +313,9 @@ return {
 					end
 
 					-- Navigation
-					map("n", "]@", function()
+					map("n", "]h", function()
 						if vim.wo.diff then
-							return "]@"
+							return "]h"
 						end
 						vim.schedule(function()
 							gs.next_hunk()
@@ -324,9 +324,9 @@ return {
 						return "<Ignore>"
 					end, { expr = true })
 
-					map("n", "[@", function()
+					map("n", "[h", function()
 						if vim.wo.diff then
-							return "[@"
+							return "[h"
 						end
 						vim.schedule(function()
 							gs.prev_hunk()
