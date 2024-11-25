@@ -139,23 +139,6 @@ end
 vim.keymap.set("n", "gy", Print_tmux_panes)
 vim.keymap.set("n", "g.", Test_function)
 
-local enabled = true
-function Toggle_diagnostics()
-	enabled = not enabled
-	if enabled then
-		vim.diagnostic.enable(0)
-    print("Diagnostics on")
-	else
-		vim.diagnostic.disable(0)
-    print("Diagnostics off")
-	end
-end
-
--- toggle options
--- stylua: ignore start
-vim.keymap.set("n", "<leader>ld", Toggle_diagnostics, { desc = "Diagnostics" })
--- stylua: ignore end
-
 -- Application Specific keymapings
 --Neorg
 vim.api.nvim_create_autocmd("FileType", {

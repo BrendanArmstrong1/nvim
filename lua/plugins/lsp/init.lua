@@ -1,8 +1,24 @@
+
 local function on_attach(on_attach)
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(args)
 			local buffer = args.buf
 			local client = vim.lsp.get_client_by_id(args.data.client_id)
+      -- toggle options
+      local enabled = true
+      function Toggle_diagnostics()
+        enabled = not enabled
+        if enabled then
+          vim.diagnostic.enable(0)
+          print("Diagnostics on")
+        else
+          vim.diagnostic.disable(0)
+          print("Diagnostics off")
+        end
+      end
+      -- stylua: ignore start
+      vim.keymap.set("n", "<leader>ld", Toggle_diagnostics, { desc = "Diagnostics" })
+      -- stylua: ignore end
 			on_attach(client, buffer)
 		end,
 	})
