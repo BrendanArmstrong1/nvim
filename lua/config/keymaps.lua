@@ -139,22 +139,21 @@ end
 vim.keymap.set("n", "gy", Print_tmux_panes)
 vim.keymap.set("n", "g.", Test_function)
 
-local Util = require("lazy.core.util")
 local enabled = true
 function Toggle_diagnostics()
 	enabled = not enabled
 	if enabled then
 		vim.diagnostic.enable(0)
-		Util.info("Diagnostics on", { title = "Diagnostics" })
+    print("Diagnostics on")
 	else
 		vim.diagnostic.disable(0)
-		Util.info("Diagnostics off", { title = "Diagnostics" })
+    print("Diagnostics off")
 	end
 end
 
 -- toggle options
 -- stylua: ignore start
-vim.keymap.set("n", "<leader>td", Toggle_diagnostics, { desc = "Diagnostics" })
+vim.keymap.set("n", "<leader>ld", Toggle_diagnostics, { desc = "Diagnostics" })
 -- stylua: ignore end
 
 -- Application Specific keymapings
