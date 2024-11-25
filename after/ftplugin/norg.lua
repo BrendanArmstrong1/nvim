@@ -1,6 +1,7 @@
 vim.opt.textwidth = 80
 vim.opt.autoindent = false
 
-
-vim.keymap.set({"o", "x"}, "ih", "<Plug>(neorg.text-objects.textobject.heading.inner)", { buffer = true })
-vim.keymap.set({"o", "x"}, "ah", "<Plug>(neorg.text-objects.textobject.heading.outer)", { buffer = true })
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+  pattern = {"*.norg"},
+  command = "set conceallevel=3"
+})
