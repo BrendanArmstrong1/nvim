@@ -65,7 +65,7 @@ vim.keymap.set("n", "<C-s>", "<cmd>w<cr><esc>")
 
 -- fast quit
 vim.keymap.set("n", "<c-w><c-t>", "<cmd>tabclose!<CR>", { silent = true })
-vim.keymap.set("n", "<c-w><c-d>", "<cmd>x!<CR>", { silent = true })
+vim.keymap.set("n", "<c-w><c-d>", "<cmd>wq!<CR>", { silent = true })
 vim.keymap.set("n", "<c-w><c-q>", "<cmd>q!<CR>", { silent = true })
 vim.keymap.set("n", "<c-w><c-b>", "<cmd>bd!<CR>", { silent = true })
 vim.keymap.set("n", "<c-w><c-m>", "<cmd>bd!<CR>", { silent = true })
