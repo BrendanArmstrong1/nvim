@@ -48,8 +48,6 @@ vim.keymap.set({ "n", "x" }, "<C-e>", "repeat('<C-e>', 5)", { noremap = true, ex
 vim.keymap.set({ "n", "x" }, "<C-y>", "repeat('<C-y>', 5)", { noremap = true, expr = true })
 vim.keymap.set({ "n", "x" }, "<C-d>", "<C-d>zz", { noremap = true })
 vim.keymap.set({ "n", "x" }, "<C-u>", "<C-u>zz", { noremap = true })
-vim.keymap.set({ "n", "x" }, "n", "nzz", { noremap = true })
-vim.keymap.set({ "n", "x" }, "N", "Nzz", { noremap = true })
 
 -- command line help
 -- stylua: ignore start
@@ -101,11 +99,9 @@ vim.keymap.set("n", "<leader>gw", function()
 end, { noremap = true, desc = "Git diff (w)indows" })
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-vim.keymap.set("n", "n", "'Nn'[v:searchforward] .. 'zz'", { expr = true })
-vim.keymap.set("x", "n", "'Nn'[v:searchforward] .. 'zz'", { expr = true })
+vim.keymap.set({ "n", "x" }, "n", "'Nn'[v:searchforward] .. 'zz'", { expr = true })
+vim.keymap.set({ "n", "x" }, "N", "'nN'[v:searchforward] .. 'zz'", { expr = true })
 vim.keymap.set("o", "n", "'Nn'[v:searchforward]", { expr = true })
-vim.keymap.set("n", "N", "'nN'[v:searchforward] .. 'zz'", { expr = true })
-vim.keymap.set("x", "N", "'nN'[v:searchforward] .. 'zz'", { expr = true })
 vim.keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true })
 
 -- Add undo break-points
