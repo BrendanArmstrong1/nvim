@@ -156,3 +156,14 @@ end
 -- stylua: ignore start
 vim.keymap.set("n", "<leader>td", Toggle_diagnostics, { desc = "Diagnostics" })
 -- stylua: ignore end
+
+-- Application Specific keymapings
+--Neorg
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "norg",
+	callback = function()
+		vim.keymap.set( "i" , "<M-CR>", "<Plug>(neorg.itero.next-iteration)", { buffer = true })
+		vim.keymap.set({ "o", "x" }, "ih", "<Plug>(neorg.text-objects.textobject.heading.inner)", { buffer = true })
+		vim.keymap.set({ "o", "x" }, "ah", "<Plug>(neorg.text-objects.textobject.heading.outer)", { buffer = true })
+	end,
+})
