@@ -8,15 +8,15 @@ return {
 		config = function()
 			vim.g.skip_ts_context_commentstring_module = true
 			require("ts_context_commentstring").setup({
-			     enable_autocmd = false
-			   })
+				enable_autocmd = false,
+			})
 			local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 			vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
 			vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
-			vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, {expr = true})
-			vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, {expr = true})
-			vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, {expr = true})
-			vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, {expr = true})
+			vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
+			vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
+			vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
+			vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
 			require("nvim-treesitter.configs").setup({
 				textobjects = {
 					select = { enable = false },
@@ -28,7 +28,7 @@ return {
 							["]]"] = { query = "@class.outer", desc = "Next class start" },
 						},
 						goto_next_end = {
-              ["]+"] = "@function.outer",
+							["]+"] = "@function.outer",
 							["]["] = "@class.outer",
 						},
 						goto_previous_start = {
@@ -49,7 +49,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		event = "BufReadPost",
-    -- commit = "aa0c7dd29631ee8c2df738d99bd33b762b3a6e22",
+		-- commit = "aa0c7dd29631ee8c2df738d99bd33b762b3a6e22",
 		dependencies = {
 			{
 				"nvim-treesitter/nvim-treesitter-context",
