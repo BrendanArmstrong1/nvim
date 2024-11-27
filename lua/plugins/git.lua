@@ -6,11 +6,6 @@ return {
 			"tpope/vim-rhubarb",
 		},
 		cmd = { "G", "Gedit", "Gvsplit", "GBrowse" },
-		init = function()
-			vim.api.nvim_set_keymap("n", "<leader>gs", "<CMD>Gdiffsplit!<CR>", {})
-			-- vim.api.nvim_set_keymap("n", "<leader>ga", "<CMD>diffget //2<CR>", {})
-			-- vim.api.nvim_set_keymap("n", "<leader>gi", "<CMD>diffget //3<CR>", {})
-		end,
 		keys = {
 			{ "<leader>gp", "<CMD>Git push<CR>" },
 			{ "<leader>gr", ":GBrowse!<CR>", mode = "x" },
@@ -136,19 +131,19 @@ return {
             { "n", "<leader>e", actions.focus_files, { desc = "Bring focus to the file panel" } },
             { "n", "<leader>b", actions.toggle_files, { desc = "Toggle the file panel." } },
             { "n", "g<C-x>", actions.cycle_layout, { desc = "Cycle through available layouts." } },
-            { "n", "[x", actions.prev_conflict, { desc = "In the merge-tool: jump to the previous conflict" } },
-            { "n", "]x", actions.next_conflict, { desc = "In the merge-tool: jump to the next conflict" } },
+            { "n", "[c", actions.prev_conflict, { desc = "In the merge-tool: jump to the previous conflict" } },
+            { "n", "]c", actions.next_conflict, { desc = "In the merge-tool: jump to the next conflict" } },
             { "n", "gq", "<CMD>DiffviewClose<cr>", { desc = "close diffview" } },
             { "n", "<leader>ce", actions.conflict_choose("ours"), { desc = "Choose the OURS version of a conflict" } },
             { "n", "<leader>ci", actions.conflict_choose("theirs"), { desc = "Choose the THEIRS version of a conflict" } },
             { "n", "<leader>cu", actions.conflict_choose("base"), { desc = "Choose the BASE version of a conflict" } },
             { "n", "<leader>ca", actions.conflict_choose("all"), { desc = "Choose all the versions of a conflict" } },
-            { "n", "dx", actions.conflict_choose("none"), { desc = "Delete the conflict region" } },
+            { "n", "dc", actions.conflict_choose("none"), { desc = "Delete the conflict region" } },
             { "n", "<leader>cO", actions.conflict_choose_all("ours"), { desc = "Choose OURS" } },
             { "n", "<leader>cT", actions.conflict_choose_all("theirs"), { desc = "Choose THEIRS" } },
             { "n", "<leader>cB", actions.conflict_choose_all("base"), { desc = "Choose BASE" } },
             { "n", "<leader>cA", actions.conflict_choose_all("all"), { desc = "Choose all the versions" } },
-            { "n", "dX", actions.conflict_choose_all("none"), { desc = "Delete the conflict region for the whole file" } },
+            { "n", "dC", actions.conflict_choose_all("none"), { desc = "Delete the conflict region for the whole file" } },
           },
           --stylua: ignore
           diff1 = {
@@ -210,14 +205,14 @@ return {
             { "n", "<leader>e", actions.focus_files, { desc = "Bring focus to the file panel" } },
             { "n", "<leader>b", actions.toggle_files, { desc = "Toggle the file panel" } },
             { "n", "g<C-x>", actions.cycle_layout, { desc = "Cycle available layouts" } },
-            { "n", "[x", actions.prev_conflict, { desc = "Go to the previous conflict" } },
-            { "n", "]x", actions.next_conflict, { desc = "Go to the next conflict" } },
+            { "n", "[c", actions.prev_conflict, { desc = "Go to the previous conflict" } },
+            { "n", "]c", actions.next_conflict, { desc = "Go to the next conflict" } },
             { "n", "g?", actions.help("file_panel"), { desc = "Open the help panel" } },
             { "n", "<leader>cO", actions.conflict_choose_all("ours"), { desc = "Choose OURS" } },
             { "n", "<leader>cT", actions.conflict_choose_all("theirs"), { desc = "Choose THEIRS" } },
             { "n", "<leader>cB", actions.conflict_choose_all("base"), { desc = "Choose BASE" } },
             { "n", "<leader>cA", actions.conflict_choose_all("all"), { desc = "Choose all the versions" } },
-            { "n", "dX", actions.conflict_choose_all("none"), { desc = "Delete the conflict region for the whole file" } },
+            { "n", "dC", actions.conflict_choose_all("none"), { desc = "Delete the conflict region for the whole file" } },
           },
           --stylua: ignore
           file_history_panel = {
