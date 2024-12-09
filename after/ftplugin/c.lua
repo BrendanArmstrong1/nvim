@@ -13,7 +13,7 @@ vim.o.shiftwidth = 2 -- Size of an indent
 vim.g.ale_c_clangformat_style_option = [[
 {
 BasedOnStyle: LLVM,
-ColumnLimit: 80,
+ColumnLimit: 100,
 IndentWidth: 2,
 
 AlignAfterOpenBracket: Align,
@@ -26,10 +26,10 @@ AlignTrailingComments: true,
 
 AllowAllArgumentsOnNextLine: true,
 AllowAllParametersOfDeclarationOnNextLine: true,
-AllowShortBlocksOnASingleLine: true,
-AllowShortFunctionsOnASingleLine: All,
-AllowShortIfStatementsOnASingleLine: Always,
-AllowShortLoopsOnASingleLine: true,
+AllowShortBlocksOnASingleLine: false,
+AllowShortFunctionsOnASingleLine: Empty,
+AllowShortIfStatementsOnASingleLine: Never,
+AllowShortLoopsOnASingleLine: false,
 
 AlwaysBreakAfterReturnType: None,
 
@@ -44,8 +44,9 @@ ReflowComments: true,
 SpaceAfterCStyleCast: false,
 SpaceAfterLogicalNot: false,
 SpaceBeforeAssignmentOperators: true,
-SpaceBeforeParens: Never,
+SpaceBeforeParens: ControlStatementsExceptControlMacros,
 SpaceBeforeRangeBasedForLoopColon: true,
+SpaceBeforeSquareBrackets: false,
 SpaceInEmptyParentheses: false,
 SpacesInCStyleCastParentheses: false,
 SpacesInParentheses: false,
