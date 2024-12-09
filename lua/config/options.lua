@@ -15,7 +15,6 @@ local opt = setmetatable({}, {
 	end,
 })
 
-o.completeopt = "menu,menuone" -- A comma separated list of options for Insert mode completion
 o.mouse = "a"
 o.number = true -- show line numbers (or only the current one)
 o.relativenumber = true -- line numbers
@@ -98,15 +97,24 @@ local function add(value, str, sep)
 	return str ~= "" and table.concat({ value, str }, sep) or value
 end
 
+-- A comma separated list of options for Insert mode completion
+o.completeopt = add({
+	"menu",
+	"menuone",
+  "noinsert",
+  "noselect",
+  "popup",
+})
+
 opt.cpoptions = table.concat({
-  "a", -- on read, set alternate filename for window
-  "A", -- on write, set alternate filename for window
-  "F", -- on write, change the filename for buffer
-  "B", -- allows for use of \ in mappings, eg. \<esc>
-  "c", -- search continues at the end of match on cursor
-  "e", -- put <CR> at the end of ":@r" register executions
-  "s", -- set buffer options when entering buffer for first time
-  "_", -- include whitespace after word on "cw"
+	"a", -- on read, set alternate filename for window
+	"A", -- on write, set alternate filename for window
+	"F", -- on write, change the filename for buffer
+	"B", -- allows for use of \ in mappings, eg. \<esc>
+	"c", -- search continues at the end of match on cursor
+	"e", -- put <CR> at the end of ":@r" register executions
+	"s", -- set buffer options when entering buffer for first time
+	"_", -- include whitespace after word on "cw"
 })
 
 opt.formatoptions = table.concat({
@@ -146,11 +154,23 @@ vim.o.fillchars = add({
 	"foldclose:▸",
 })
 
-vim.o.foldtext = "v:lua.folds()"
-vim.o.foldopen = add(vim.o.foldopen, "search")
-vim.o.foldlevel = 99
-vim.o.foldlevelstart = 10
-opt.foldmethod = "syntax"
+-- when to open folds
+vim.o.foldopen = add({
+	"block", -- (, {, [[, [{, etc.
+	-- "hor", -- horizontal movements: "l", "w", "fx", etc.
+	"mark", -- jumping to a mark: "'m", CTRL-O, etc.
+	"percent", -- "%"
+	"quickfix", -- ":cn", ":crew", ":make", etc.
+	"search", -- search for a pattern: "/", "n", "*", "gd", etc.
+	"tag", -- jumping to a tag: ":ta", CTRL-T, etc.
+	"undo", -- undo or redo: "u" and CTRL-R
+})
+
+o.foldlevel = 99
+o.foldlevelstart = 10
+o.foldmethod = "expr"
+o.foldexpr = "nvim_treesitter#foldexpr()"
+o.foldtext = "v:lua.folds()"
 
 vim.o.wildmode = "longest:full,full" -- Command-line completion mode
 -- vim.o.wildcharm = api.nvim_eval([[char2nr("\<C-Z>")]]) -- FIXME: what's the correct way to do this?
