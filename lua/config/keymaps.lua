@@ -33,6 +33,8 @@ vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>")
 -- disable troublesome keys
 vim.keymap.set("n", "<C-z>", "<nop>")
 vim.keymap.set("i", "<C-z>", "<nop>")
+vim.keymap.set("i", "<C-k>", "<nop>")
+vim.keymap.set("i", "<C-j>", "<nop>")
 
 -- nice replace macro, works with counts now
 -- "https://github.com/community/community/discussions/29817"

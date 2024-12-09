@@ -1,20 +1,24 @@
 return {
 	{
 		"hrsh7th/nvim-cmp",
-		event = {
-			"InsertEnter",
-			"CmdlineEnter",
+		cmd = {
+			"CompletionON",
+			"CompletionOFF",
 		},
-		keys = {
-			{
-				"<c-x><c-o>",
-				function()
-					require("cmp").complete()
-				end,
-				desc = "completion remap",
-				mode = { "i" },
-			},
-		},
+		-- event = {
+		-- 	"InsertEnter",
+		-- 	"CmdlineEnter",
+		-- },
+		-- keys = {
+		-- 	{
+		-- 		"<c-x><c-o>",
+		-- 		function()
+		-- 			require("cmp").complete()
+		-- 		end,
+		-- 		desc = "completion remap",
+		-- 		mode = { "i" },
+		-- 	},
+		-- },
 		dependencies = {
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-nvim-lsp",
@@ -27,7 +31,6 @@ return {
 			},
 		},
 		config = function()
-
 			function SetAutoCmp(mode)
 				local cmp = require("cmp")
 				if mode then
@@ -44,8 +47,8 @@ return {
 					})
 				end
 			end
-      vim.cmd('command AutoCmpOn lua SetAutoCmp(true)')
-      vim.cmd('command AutoCmpOff lua SetAutoCmp(false)')
+			vim.cmd("command CompletionON lua SetAutoCmp(true)")
+			vim.cmd("command CompletionOFF lua SetAutoCmp(false)")
 
 			local types = require("cmp.types")
 			---@type table<integer, integer>
@@ -101,7 +104,7 @@ return {
 			end)
 			cmp.setup({
 				completion = {
-					autocomplete = { require("cmp.types").cmp.TriggerEvent.TextChanged },
+					autocomplete = { false },
 				},
 				snippet = {
 					expand = function(args)
