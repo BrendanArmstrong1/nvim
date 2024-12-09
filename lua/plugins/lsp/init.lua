@@ -1,24 +1,24 @@
-
 local function on_attach(on_attach)
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(args)
 			local buffer = args.buf
 			local client = vim.lsp.get_client_by_id(args.data.client_id)
-      -- toggle options
-      local enabled = true
-      function Toggle_diagnostics()
-        enabled = not enabled
-        if enabled then
-          vim.diagnostic.enable(0)
-          print("Diagnostics on")
-        else
-          vim.diagnostic.disable(0)
-          print("Diagnostics off")
-        end
-      end
+			-- toggle options
+			local enabled = true
+			function Toggle_diagnostics()
+				enabled = not enabled
+				if enabled then
+					vim.diagnostic.enable(0)
+					print("Diagnostics on")
+				else
+					vim.diagnostic.disable(0)
+					print("Diagnostics off")
+				end
+			end
       -- stylua: ignore start
       vim.keymap.set("n", "<leader>ld", Toggle_diagnostics, { desc = "Diagnostics" })
-      -- stylua: ignore end
+			-- stylua: ignore end
+			vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", {})
 			on_attach(client, buffer)
 		end,
 	})
@@ -33,6 +33,7 @@ return {
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
+			"L3MON4D3/LuaSnip",
 		},
 		---@class PluginLspOpts
 		opts = {
@@ -170,6 +171,44 @@ return {
 			on_attach(function(client, buffer)
 				require("plugins.lsp.keymaps").on_attach(client, buffer)
 			end)
+
+			-- local luasnip = require("luasnip")
+			-- -- snippet expansion autocommand portion
+			-- vim.api.nvim_create_augroup("my-luasnip", {})
+			-- vim.api.nvim_create_autocmd("CompleteDone", {
+			-- 	group = "my-luasnip",
+			-- 	desc = "Expand LSP snippet",
+			-- 	pattern = "*",
+			-- 	callback = function(_)
+			-- 		local comp = vim.v.completed_item
+			--
+			-- 		-- check that this is an lsp completion
+			-- 		if not vim.tbl_get(comp, "user_data", "nvim", "lsp") then
+			-- 			return
+			-- 		end
+			--
+			-- 		-- check that we were given a snippet
+			-- 		local complete_info = comp.user_data.nvim.lsp.completion_item
+			-- 		if not complete_info.insertTextFormat or complete_info.insertTextFormat == 1 then
+			-- 			return
+			-- 		end
+			--
+			-- 		-- remove the inserted text
+			-- 		local start_col = complete_info.textEdit.range.start.character + 1
+			-- 		vim.fn.cursor(vim.fn.line("."), start_col)
+			-- 		vim.cmd.normal({ args = { "d" .. #comp.word .. "l" } })
+			--
+			-- 		-- if the inserted text was the last text on the line, the deletion command will leave the cursor 1 column left
+			-- 		-- of where we need to insert the snippet (because insert mode can put the cursor 1 position ahead of the last column)
+			-- 		-- move the cursor back over 1
+			-- 		vim.fn.cursor(vim.fn.line("."), start_col)
+			--
+			-- 		-- insert snippet
+			-- 		local snip_text = vim.tbl_get(complete_info, "textEdit", "newText") or comp.insertText
+			-- 		assert(snip_text, "Language server indicated it had a snippet, but no snippet text could be found!")
+			--        luasnip.lsp_expand(snip_text)
+			-- 	end,
+			-- })
 
 			-- diagnostics
 			for name, icon in pairs(require("config.settings").icons.diagnostics) do
