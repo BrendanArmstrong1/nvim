@@ -24,20 +24,20 @@ return {
 						enable = true,
 						set_jumps = true, -- whether to set jumps in the jumplist
 						goto_next_start = {
-							["]-"] = "@function.outer",
-							["]]"] = { query = "@class.outer", desc = "Next class start" },
+							["]]"] = "@function.outer",
+							["]m"] = { query = "@class.outer", desc = "Next class start" },
 						},
 						goto_next_end = {
-							["]+"] = "@function.outer",
-							["]["] = "@class.outer",
+							["]["] = "@function.outer",
+							["]M"] = "@class.outer",
 						},
 						goto_previous_start = {
-							["[-"] = "@function.outer",
-							["[["] = "@class.outer",
+							["[["] = "@function.outer",
+							["[m"] = "@class.outer",
 						},
 						goto_previous_end = {
-							["[+"] = "@function.outer",
-							["[]"] = "@class.outer",
+							["[]"] = "@function.outer",
+							["[M"] = "@class.outer",
 						},
 					},
 				},
