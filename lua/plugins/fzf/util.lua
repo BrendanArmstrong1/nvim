@@ -132,20 +132,20 @@ M.git_pickaxe = function()
 				end,
 				["ctrl-y"] = { fn = actions.git_yank_commit, exec_silent = true },
 				["ctrl-n"] = {
-					fn = function(selected, opts)
+					fn = function(_, _)
 						index_choice = index_choice + 1
-						print("hello " .. index_choice)
 					end,
-					reload = true,
+					exec_silent = true,
+          reload = true,
 				},
 				["ctrl-p"] = {
 					fn = function(_, _)
 						if index_choice >= 0 then
 							index_choice = index_choice - 1
 						end
-						print(index_choice)
 					end,
-					reload = true,
+					exec_silent = true,
+          reload = true,
 				},
 			},
 		}
