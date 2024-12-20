@@ -4,13 +4,17 @@ return {
 		cmd = { "Oil" },
 		keys = {
 			{
-				"<leader>-",
+				"<C-p>",
 				function()
 					require("oil").open()
 				end,
 				desc = "Oil",
 			},
 		},
+    init = function ()
+      local oil_open_folder = function(path) require("oil").open(path) end
+      require("config.util").attach_file_browser("oil", oil_open_folder)
+    end,
 		dependencies = { "kyazdani42/nvim-web-devicons" },
 		config = function()
 			local column_toggle = true
