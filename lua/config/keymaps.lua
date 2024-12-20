@@ -290,7 +290,6 @@ local function load_snippets()
 
 	return snippets
 end
-
 CUSTOM_SELECTED_TEXT = ""
 vim.keymap.set("x", "<C-s>", function()
 	local previous_s_register = vim.fn.getreg("s")
