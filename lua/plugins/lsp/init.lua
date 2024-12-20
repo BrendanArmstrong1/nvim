@@ -30,7 +30,6 @@ return {
 		dependencies = {
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
-			"hrsh7th/cmp-nvim-lsp",
 			"L3MON4D3/LuaSnip",
 		},
 		---@class PluginLspOpts
@@ -229,12 +228,9 @@ return {
 			vim.diagnostic.config(opts.diagnostics)
 
 			local servers = opts.servers
-			local capabilities =
-				require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
 			local function setup(server)
 				local server_opts = vim.tbl_deep_extend("force", {
-					capabilities = vim.deepcopy(capabilities),
+					capabilities = vim.deepcopy(), -- took out cmp capabilities
 				}, servers[server] or {})
 
 				if opts.setup[server] then
