@@ -271,7 +271,8 @@ local function load_snippets()
 
 	local all_snippets_path = vim.fn.stdpath("config") .. "/snippets/all.lua"
 	local all_snippets = loadfile(all_snippets_path) or {}
-	if all_snippets then
+  local t = type(all_snippets)
+	if t == "function" then
 		for k, v in pairs(all_snippets()) do
 			snippets[k] = v
 		end
@@ -281,7 +282,8 @@ local function load_snippets()
 	if filetype then
 		local ft_snippets_path = vim.fn.stdpath("config") .. "/snippets/" .. filetype .. ".lua"
 		local ft_snippets = loadfile(ft_snippets_path) or {}
-		if ft_snippets then
+    t = type(ft_snippets)
+		if t == "function" then
 			for k, v in pairs(ft_snippets()) do
 				snippets[k] = v
 			end
@@ -291,12 +293,12 @@ local function load_snippets()
 	return snippets
 end
 CUSTOM_SELECTED_TEXT = ""
-vim.keymap.set("x", "<C-s>", function()
+vim.keymap.set("x", "<C-n>", function()
 	local previous_s_register = vim.fn.getreg("s")
-  vim.cmd('normal! "sy') -- pull text to "s" register
-  CUSTOM_SELECTED_TEXT = vim.fn.getreg("s")
-  vim.fn.setreg("s", previous_s_register)
-  feedkeys_cmd('gvc') -- gv(get visual mode back) and then change
+	vim.cmd('normal! "sy') -- pull text to "s" register
+	CUSTOM_SELECTED_TEXT = vim.fn.getreg("s")
+	vim.fn.setreg("s", previous_s_register)
+	feedkeys_cmd("gvc") -- gv(get visual mode back) and then change
 end, { silent = true })
 
 vim.keymap.set("i", "<C-y>", function()
@@ -313,6 +315,7 @@ vim.keymap.set("i", "<C-y>", function()
 	if snippet then
 		if type(snippet) == "function" then
 			snippet = snippet(CUSTOM_SELECTED_TEXT)
+      CUSTOM_SELECTED_TEXT = ""
 		end
 
 		local start_col = cursor_pos - #trigger

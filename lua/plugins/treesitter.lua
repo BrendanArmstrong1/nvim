@@ -104,7 +104,7 @@ return {
 				},
 				indent = {
 					enable = true,
-					disable = { "python" },
+					disable = { "python", "markdown" },
 				},
 				playground = {
 					enable = true,
