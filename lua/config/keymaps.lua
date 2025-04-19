@@ -271,7 +271,7 @@ local function load_snippets()
 
 	local all_snippets_path = vim.fn.stdpath("config") .. "/snippets/all.lua"
 	local all_snippets = loadfile(all_snippets_path) or {}
-  local t = type(all_snippets)
+	local t = type(all_snippets)
 	if t == "function" then
 		for k, v in pairs(all_snippets()) do
 			snippets[k] = v
@@ -282,7 +282,7 @@ local function load_snippets()
 	if filetype then
 		local ft_snippets_path = vim.fn.stdpath("config") .. "/snippets/" .. filetype .. ".lua"
 		local ft_snippets = loadfile(ft_snippets_path) or {}
-    t = type(ft_snippets)
+		t = type(ft_snippets)
 		if t == "function" then
 			for k, v in pairs(ft_snippets()) do
 				snippets[k] = v
@@ -292,6 +292,7 @@ local function load_snippets()
 
 	return snippets
 end
+
 CUSTOM_SELECTED_TEXT = ""
 vim.keymap.set("x", "<C-n>", function()
 	local previous_s_register = vim.fn.getreg("s")
@@ -315,7 +316,7 @@ vim.keymap.set("i", "<C-y>", function()
 	if snippet then
 		if type(snippet) == "function" then
 			snippet = snippet(CUSTOM_SELECTED_TEXT)
-      CUSTOM_SELECTED_TEXT = ""
+			CUSTOM_SELECTED_TEXT = ""
 		end
 
 		local start_col = cursor_pos - #trigger

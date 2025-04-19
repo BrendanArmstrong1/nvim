@@ -40,6 +40,7 @@ return {
 				update_in_insert = false,
 				virtual_text = { spacing = 4, source = "if_many", prefix = "●" },
 				severity_sort = true,
+        -- virtual_lines = {current_line = true}
 			},
 			-- Automatically format on save
 			autoformat = true,
@@ -93,14 +94,11 @@ return {
 								vim.fn.getcwd()
 							end,
 							typeCheckingMode = "basic",
+              reportUnusedImport = "error",
 							autoSearchPaths = true,
 							autoImportCompletions = true,
 							diagnosticMode = "openFilesOnly",
 							useLibraryCodeForTypes = true,
-							-- error, warning, information, true, false, none
-							diagnosticSeverityOverrides = {
-								reportUnusedImport = "none",
-							},
 						},
 					},
 				},
@@ -124,7 +122,11 @@ return {
 				-- 						"E742",
 				-- 						"W503",
 				-- 						"W504",
+				--                 "E402",
 				-- 					},
+				--               perFileIgnores = {
+				--                 ["__init__.py"] = "F01",
+				--               },
 				-- 					maxLineLength = 100,
 				-- 				},
 				-- 				pyflakes = {

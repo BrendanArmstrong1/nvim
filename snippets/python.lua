@@ -8,7 +8,7 @@ return {
   ["for"] = function()
     return [[
 for ${1:i} in ${2:iterable}:
-    ${0:block}
+    ${3:block}
     ]]
   end,
 
