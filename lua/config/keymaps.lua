@@ -187,9 +187,6 @@ end, { expr = true })
 vim.keymap.set({ "i", "c" }, "<C-k>", function()
 	if pumvisible() then
 		feedkeys("<C-p>")
-	elseif vim.lsp.buf_get_clients(0) ~= nil then
-		vim.lsp.buf.signature_help()
-		return ""
 	else
 		feedkeys("<C-k>")
 	end
