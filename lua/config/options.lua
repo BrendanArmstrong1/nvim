@@ -32,9 +32,9 @@ o.splitbelow = true
 o.undodir = fn.stdpath("data") .. "/undodir" -- set undo directory
 o.undolevels = 1000
 if vim.opt_local.binary:get() then
-	o.undofile = false -- enable/disable undo file creation
+	o.undofile = false -- undo files create huge lag in binary files
 else
-	o.undofile = true -- enable/disable undo file creation
+	o.undofile = true
 end
 o.shadafile = fn.stdpath("data") .. "/viminfo"
 o.shada = "<800,'100,/50,:100,h"
