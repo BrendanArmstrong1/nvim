@@ -233,17 +233,6 @@ return {
 	},
 
 	{
-		"tpope/vim-unimpaired",
-		event = {
-			"InsertEnter",
-			"CmdlineEnter",
-		},
-		keys = {
-			{ "[<Space>" },
-			{ "]<Space>" },
-		},
-	},
-	{
 		"tpope/vim-repeat",
 		event = "VeryLazy",
 	},
