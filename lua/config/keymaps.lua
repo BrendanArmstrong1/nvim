@@ -324,3 +324,63 @@ vim.keymap.set("i", "<C-y>", function()
 		feedkeys("<C-y>")
 	end
 end, { silent = true })
+
+vim.o.completefunc = "v:lua.vim_snippet_complete"
+_G.vim_snippet_complete_items = {} -- global state for tracking snippet completions
+
+function _G.vim_snippet_complete(findstart, base)
+	if findstart == 1 then
+		local line = vim.fn.getline(".")
+		local col = vim.fn.col(".") - 1
+		local start = col
+		while start > 0 and line:sub(start, start):match("[%w_]") do
+			start = start - 1
+		end
+		return start
+	else
+		local items = {}
+		local snippets = load_snippets()
+		for key, val in pairs(snippets) do
+			if key:match("^" .. vim.pesc(base)) then
+				local entry = {
+					word = key,
+					abbr = key .. " ⎋",
+					kind = "Snippet",
+					menu = "[Snippet]",
+					info = type(val) == "function" and val("") or val,
+				}
+				items[#items + 1] = entry
+				_G.vim_snippet_complete_items[key] = val
+			end
+		end
+		return items
+	end
+end
+
+vim.api.nvim_create_autocmd("CompleteDone", {
+  callback = function()
+    local completed_item = vim.v.completed_item
+    if not completed_item or not completed_item.word then return end
+
+    local snippet = _G.vim_snippet_complete_items and _G.vim_snippet_complete_items[completed_item.word]
+    if snippet then
+      -- If it's a function, evaluate with selected text (optional)
+      if type(snippet) == "function" then
+        snippet = snippet(CUSTOM_SELECTED_TEXT or "")
+        CUSTOM_SELECTED_TEXT = ""
+      end
+      -- Schedule to avoid conflict with insertion
+      vim.schedule(function()
+        -- Get cursor position
+        local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+        local start_col = col - #completed_item.word
+
+        -- Delete the trigger word
+        vim.api.nvim_buf_set_text(0, row - 1, start_col, row - 1, col, {})
+
+        -- Expand the snippet
+        vim.snippet.expand(snippet)
+      end)
+    end
+  end
+})

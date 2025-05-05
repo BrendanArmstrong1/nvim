@@ -30,13 +30,13 @@ function M.rename()
 end
 
 function M.on_attach(client, buffer)
-	local self = M.new(client, buffer)
-	self:map("<leader>vd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-	self:map("<leader>li", "LspInfo", { desc = "Lsp Info" })
-	self:map("<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", mode = { "n", "v" }, has = "codeAction" })
-	self:map("<leader>cf", "ALEFix", { desc = "Format Document", has = "documentFormatting" })
-	self:map("[<CR>", vim.diagnostic.goto_prev, { desc = "goto previous diagnostic", mode = { "n" } })
-	self:map("]<CR>", vim.diagnostic.goto_next, { desc = "goto next diagnostic", mode = { "n" } })
+  local self = M.new(client, buffer)
+  self:map("<leader>vd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+  self:map("<leader>li", "LspInfo", { desc = "Lsp Info" })
+  self:map("<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", mode = { "n", "v" }, has = "codeAction" })
+  self:map("<leader>cf", "ALEFix", { desc = "Format Document", has = "documentFormatting" })
+  self:map("[<CR>", vim.diagnostic.goto_prev, { desc = "goto previous diagnostic", mode = { "n" } })
+  self:map("]<CR>", vim.diagnostic.goto_next, { desc = "goto next diagnostic", mode = { "n" } })
 end
 
 return M

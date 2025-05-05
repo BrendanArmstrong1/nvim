@@ -1,13 +1,37 @@
-local function on_attach(on_attach)
+local function on_attach(on_attach_again)
 	vim.api.nvim_create_autocmd("LspAttach", {
+		group = vim.api.nvim_create_augroup("my.lsp", {}),
 		callback = function(args)
 			local buffer = args.buf
-			local client = vim.lsp.get_client_by_id(args.data.client_id)
+			local diagnostics_enabled = true
+			local completion_enabled = true -- start with completion off
+			local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+
+			if client:supports_method("textDocument/completion") then
+				-- Optional: trigger autocompletion on EVERY keypress. May be slow!
+				local chars = {}
+				for i = 32, 126 do
+					table.insert(chars, string.char(i))
+				end
+				client.server_capabilities.completionProvider.triggerCharacters = chars
+
+				vim.lsp.completion.enable(completion_enabled, client.id, buffer, { autotrigger = true })
+			end
+
 			-- toggle options
-			local enabled = true
+			function Toggle_completion()
+				completion_enabled = not completion_enabled
+				vim.lsp.completion.enable(completion_enabled, client.id, buffer, { autotrigger = true })
+				if completion_enabled then
+					print("Completion on")
+				else
+					print("Completion off")
+				end
+			end
+
 			function Toggle_diagnostics()
-				enabled = not enabled
-				if enabled then
+				diagnostics_enabled = not diagnostics_enabled
+				if diagnostics_enabled then
 					vim.diagnostic.enable(0)
 					print("Diagnostics on")
 				else
@@ -16,8 +40,9 @@ local function on_attach(on_attach)
 				end
 			end
 			vim.keymap.set("n", "<leader>ld", Toggle_diagnostics, { desc = "Diagnostics" })
-			vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", {})
-			on_attach(client, buffer)
+			vim.keymap.set("n", "<leader>lc", Toggle_completion, { desc = "Completion" })
+
+			on_attach_again(client, buffer)
 		end,
 	})
 end
@@ -40,7 +65,7 @@ return {
 				update_in_insert = false,
 				virtual_text = { spacing = 4, source = "if_many", prefix = "●" },
 				severity_sort = true,
-        -- virtual_lines = {current_line = true}
+				-- virtual_lines = {current_line = true}
 			},
 			-- Automatically format on save
 			autoformat = true,
@@ -93,8 +118,8 @@ return {
 							include = function()
 								vim.fn.getcwd()
 							end,
-							typeCheckingMode = "basic",
-              reportUnusedImport = "error",
+							typeCheckingMode = "standard",
+							reportUnusedImport = false,
 							autoSearchPaths = true,
 							autoImportCompletions = true,
 							diagnosticMode = "openFilesOnly",
@@ -166,7 +191,6 @@ return {
 		},
 		---@param opts PluginLspOpts
 		config = function(_, opts)
-			-- setup formatting and keymaps
 			on_attach(function(client, buffer)
 				require("plugins.lsp.keymaps").on_attach(client, buffer)
 			end)

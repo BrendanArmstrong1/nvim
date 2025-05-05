@@ -104,7 +104,7 @@ o.completeopt = add({
 	"noinsert",
 	"noselect",
 	"popup",
-  "fuzzy",
+	 "fuzzy",
 })
 
 opt.cpoptions = table.concat({
@@ -203,35 +203,3 @@ vim.g.markdown_fenced_languages = { "html", "js=javascript", "ruby", "python", "
 
 -- fix auto rust stuff
 vim.g.rust_recommended_style = false
-
--- -- Mouse support for lazy browsing
--- vim.cmd([[
--- aunmenu PopUp
--- anoremenu PopUp.Definition <cmd>lua vim.lsp.buf.definition()<CR>
--- anoremenu PopUp.References <cmd>lua vim.lsp.buf.references()<CR>
--- anoremenu PopUp.Inspect <cmd>lua vim.lsp.buf.hover()<CR>
--- anoremenu PopUp.-1- <NOP>
--- anoremenu PopUp.Node_type <cmd>Inspect<CR>
--- anoremenu PopUp.Back <C-t>
--- ]])
---
--- local group = vim.api.nvim_create_augroup("nvim_popupmenu", { clear = true })
--- vim.api.nvim_create_autocmd("MenuPopup", {
--- 	pattern = "*",
--- 	group = group,
--- 	desc = "Custom PopUp Setup",
--- 	callback = function()
--- 		vim.cmd([[
---     amenu disable PopUp.Definition
---     amenu disable PopUp.References
---     amenu disable PopUp.Inspect
---     ]])
--- 		if vim.lsp.get_clients({ bufnr = 0 })[1] then
--- 			vim.cmd([[
--- 			   amenu enable PopUp.Definition
--- 			   amenu enable PopUp.References
--- 			   amenu enable PopUp.Inspect
--- 			   ]])
--- 		end
--- 	end,
--- })
