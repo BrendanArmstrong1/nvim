@@ -195,57 +195,6 @@ return {
 				require("plugins.lsp.keymaps").on_attach(client, buffer)
 			end)
 
-			-- local luasnip = require("luasnip")
-			-- snippet expansion autocommand portion
-			vim.api.nvim_create_augroup("my-luasnip", {})
-			vim.api.nvim_create_autocmd("CompleteDone", {
-				group = "my-luasnip",
-				desc = "Expand LSP snippet",
-				pattern = "*",
-				callback = function(_)
-					local comp = vim.v.completed_item
-
-					-- check that this is an lsp completion
-					if not vim.tbl_get(comp, "user_data", "nvim", "lsp") then
-						return
-					end
-
-					-- check that we were given a snippet
-					local complete_info = comp.user_data.nvim.lsp.completion_item
-					if not complete_info.insertTextFormat or complete_info.insertTextFormat == 1 then
-						return
-					end
-
-					if vim.snippet.active() then
-						return
-					end
-
-					-- Retrieve the snippet text
-					local snip_text = complete_info.insertText
-					if complete_info.textEdit and complete_info.textEdit.newText then
-						snip_text = complete_info.textEdit.newText
-					end
-
-					if not snip_text then
-						return
-					end
-
-					-- remove the inserted text
-					local cursor_col = vim.fn.col(".")
-					local start_col = cursor_col - #comp.word
-					vim.fn.cursor(vim.fn.line("."), start_col)
-					vim.cmd.normal({ args = { "d" .. #comp.word .. "l" }, bang = true })
-
-					-- if the inserted text was the last text on the line, the deletion command will leave the cursor 1 column left
-					-- of where we need to insert the snippet (because insert mode can put the cursor 1 position ahead of the last column)
-					-- move the cursor back over 1
-					vim.fn.cursor(vim.fn.line("."), start_col)
-
-					-- luasnip.lsp_expand(snip_text)
-					vim.snippet.expand(snip_text)
-				end,
-			})
-
 			-- diagnostics
 			for name, icon in pairs(require("config.settings").icons.diagnostics) do
 				name = "DiagnosticSign" .. name
