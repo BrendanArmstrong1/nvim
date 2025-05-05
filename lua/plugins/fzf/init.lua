@@ -27,8 +27,6 @@ M.keys = {
 	{ "<leader>/", function() require("fzf-lua").live_grep() end, mode = { "n" } },
 	{ "<leader>?", function() require("fzf-lua").grep_cword() end, mode = "n" },
 	{ "<leader>?", function() require("fzf-lua").xgrep_visual() end, mode = "x" },
-	{ "<c-x><c-l>", function() require("fzf-lua").complete_line() end, mode = "i" },
-  { "<c-x><c-f>", function() require("fzf-lua").complete_path({ cmd = "rg --files", winopts = { preview = { hidden = "nohidden" } } }) end, mode = "i" },
 }
 
 M.config = function()
