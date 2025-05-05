@@ -21,9 +21,10 @@ M3.keys = {
 	},
 }
 
-local M4 = { "BrendanArmstrong1/visual_transpose.nvim" }
-M4.cmd = "VisTranspose"
-M4.dev = true
-M4.config = true
+-- local M4 = { "BrendanArmstrong1/visual_transpose.nvim" }
+-- M4.cmd = "VisTranspose"
+-- M4.dev = true
+-- M4.config = true
 
-return { M1, M2, M3, M4 }
+-- return { M1, M2, M3, M4 }
+return { M1, M2, M3 }
