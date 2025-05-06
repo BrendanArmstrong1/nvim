@@ -80,6 +80,7 @@ return {
 					"c",
 					"rust",
 					"latex",
+          "typst",
 					"markdown",
 					"markdown_inline",
 					"python",
