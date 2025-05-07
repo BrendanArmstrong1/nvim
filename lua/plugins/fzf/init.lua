@@ -5,7 +5,7 @@ M.keys = {
 	{ "<leader>:", function() require("fzf-lua").commands() end, mode = { "n" } },
 	{ "gT", function() require("fzf-lua").lsp_typedefs({jump1 = true}) end, mode = { "n" } },
 	{ "gI", function() require("fzf-lua").lsp_implementations({jump1 = true}) end, mode = { "n" } },
-	{ "gR", function() require("fzf-lua").lsp_references({jump1 = true}) end, mode = { "n" } },
+	{ "gr", function() require("fzf-lua").lsp_references({jump1 = true}) end, mode = { "n" } },
 	{ "gd", function() require("fzf-lua").lsp_definitions({jump1 = true}) end, mode = { "n" } },
   { "<leader>gi", function() require("plugins.fzf.util").git_pickaxe() end, mode = "n" },
 	{ "<leader>fi", function() require("fzf-lua").lsp_document_symbols() end, mode = { "n" } },
@@ -63,6 +63,7 @@ M.config = function()
 		},
 	})
 	require("fzf-lua").register_ui_select()
+  require("plugins.fzf.setup").setup()
 end
 
 return M
