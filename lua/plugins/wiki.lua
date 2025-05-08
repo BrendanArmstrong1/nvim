@@ -8,8 +8,8 @@ return {
 		},
 		ft = { "markdown" },
 		config = function()
-      vim.g.wiki_index_name = "_index.md"
-      vim.g.wiki_root = vim.fn.expand("~/notes/")
+			vim.g.wiki_index_name = "_index.md"
+			vim.g.wiki_root = vim.fn.expand("~/notes/")
 			vim.g.wiki_link_creation = {
 				md = {
 					link_type = "md",
@@ -28,25 +28,25 @@ return {
 					match_func = function(_)
 						return true
 					end,
-	         source_func = function (ctx)
-	           vim.fn.append(0, '+++')
-	           vim.fn.append(1, "title = '" .. ctx["name"] .. "'")
-	           vim.fn.append(2, 'date = ' .. ctx["date"])
-	           vim.fn.append(3, 'math = false')
-	           vim.fn.append(4, '+++')
-	         end
+					source_func = function(ctx)
+						vim.fn.append(0, "+++")
+						vim.fn.append(1, "title = '" .. ctx["name"] .. "'")
+						vim.fn.append(2, "date = " .. ctx["date"])
+						vim.fn.append(3, "math = false")
+						vim.fn.append(4, "+++")
+					end,
 				},
 			}
-	     vim.g.wiki_journal = {
-	       name = "journal",
-	       root = vim.fn.expand("~/journal/"),
-	       frequency = 'daily',
-	       date_format = {
-	         daily = '%Y/%m/%d',
-	         weekly = '%Y_w%V',
-	         monthly = '%Y_m%m',
-	       }
-	     }
+			vim.g.wiki_journal = {
+				name = "journal",
+				root = vim.fn.expand("~/journal/"),
+				frequency = "daily",
+				date_format = {
+					daily = "%Y/%m/%d",
+					weekly = "%Y_w%V",
+					monthly = "%Y_m%m",
+				},
+			}
 		end,
 	},
 }
