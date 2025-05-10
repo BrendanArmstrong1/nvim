@@ -87,6 +87,10 @@ vim.keymap.set("n", "<S-Down>", "<cmd>resize -2<CR>", { silent = true })
 vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -2<CR>", { silent = true })
 vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +2<CR>", { silent = true })
 
+-- Capital C and D in visual mode will delete/change without overwriting paste
+vim.keymap.set("x", "C", '"_c')
+vim.keymap.set("x", "D", '"_d')
+
 -- Easier pasting(with auto-indent)
 vim.keymap.set("n", "gp", "`[v`]")
 vim.keymap.set("n", "[p", ":pu!<cr>`[v`]=", { silent = true })
